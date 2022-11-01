@@ -1,0 +1,15 @@
+{
+  "short_name": "CSB",
+  "name": "CSB - Complete sua Banda",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#DA6031",
+  "background_color": "#191818"
+}
