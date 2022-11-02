@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ModalPadrao = styled.div`
+export const ModalDefault = styled.div`
   position: fixed;
   inset: 0;
   width: 100%;

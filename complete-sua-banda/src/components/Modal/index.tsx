@@ -19,7 +19,7 @@ export const Modal = ({children, setOpenModal}: iModalProps) => {
     }
 
   return (
-    <styled.ModalPadrao>
+    <styled.ModalDefault>
       <div className="overlay">
         <div className="content" ref={modalRef}>
           <button className="btn" onClick={closeModal}>
@@ -28,6 +28,6 @@ export const Modal = ({children, setOpenModal}: iModalProps) => {
           {children}
         </div>
       </div>
-    </styled.ModalPadrao>
+    </styled.ModalDefault>
   )
 }
