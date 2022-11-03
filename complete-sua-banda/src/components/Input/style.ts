@@ -11,6 +11,7 @@ export const InputDiv = styled.div`
     border: 1px solid var(--color-brand);
     background-color: var(--color-grey-4);
     outline: none;
+    font-size: var(--text-size-1);
     transition: 0.4s;
   }
 
@@ -20,7 +21,7 @@ export const InputDiv = styled.div`
     top: 10px;
     left: 28px;
     cursor: text;
-    font-size: 12px;
+    font-size: var(--text-size-1);
     transition: 0.4s;
   }
 
@@ -33,11 +34,9 @@ export const InputDiv = styled.div`
 
   & > input:valid ~ label,
   input:focus ~ label {
-    padding: 0 4px;
     color: var(--color-brand);
-    background-color: transparent;
-    text-align: center;
-    transform: translateX(-6px) translateY(-26px);
+    font-size: var(--text-size-2);
+    transform: translateX(-22px) translateY(-22px);
     transition: 0.4s;
   }
 
