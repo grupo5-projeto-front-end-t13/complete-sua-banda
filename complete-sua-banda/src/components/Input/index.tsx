@@ -3,7 +3,7 @@ import * as styled from "./style";
 interface iInputProps {
   name: string;
   register: Function;
-  type: string;
+  type: "email" | "text" | "password";
   icon: any;
 }
 
