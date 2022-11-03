@@ -36,9 +36,7 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
         return css`
           color: var(--color-grey-1);
           font-size: var(--text-size-2);
-          background-color: black;
           font-weight: 400;
-          padding: 5px;
           width: 90px;
 
           &:hover {
