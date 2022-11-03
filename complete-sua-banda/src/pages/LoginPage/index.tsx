@@ -31,6 +31,7 @@ export const LoginPage = () => {
       <div className="divRight">
         <Form>
           <h1>Login</h1>
+
           <Input
             name="email"
             title="Email"
