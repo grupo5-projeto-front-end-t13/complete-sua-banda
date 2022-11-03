@@ -4,7 +4,7 @@ import * as styled from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormSchemaLogin } from "./formSchema";
-// import {AiOutlineMail, AiOutlineLock} from "react-icons/ai"
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 
@@ -15,8 +15,8 @@ export const LoginPage = () => {
   }
 
   const {
-    // register,
-    // handleSubmit,
+    register,
+    handleSubmit,
     formState: { errors },
   } = useForm<iFormLoginProps>({
     resolver: yupResolver(FormSchemaLogin),
@@ -31,9 +31,22 @@ export const LoginPage = () => {
       <div className="divRight">
         <Form>
           <h1>Login</h1>
-          {/* <Input name="email" isPassword={false} register={register} /> */}
+
+          <Input
+            name="email"
+            title="Email"
+            type="email"
+            register={register}
+            icon={<AiOutlineMail />}
+          />
           {errors.email && <Error>{errors.email.message}</Error>}
-          {/* <Input name="senha" isPassword={false} register={register} /> */}
+          <Input
+            name="password"
+            title="Senha"
+            type="password"
+            register={register}
+            icon={<AiOutlineLock />}
+          />
           <p>
             Ainda não possui cadastro?<br></br>
             <styled.LinkStyled to="/signup">Cadastre-se</styled.LinkStyled>
