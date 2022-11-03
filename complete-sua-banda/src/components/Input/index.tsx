@@ -16,7 +16,7 @@ export const Input = ({ name, register, type, icon }: iInputProps) => {
 
   return (
     <styled.InputDiv>
-      <input {...register(name)} type={type} required />
+      <input id={name} {...register(name)} type={type} required />
       {icon}
       <label htmlFor={name}>{firstUpper(name)}</label>
     </styled.InputDiv>
