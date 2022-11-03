@@ -5,17 +5,10 @@ interface iStyledLinkProps {
   type: string;
 }
 
-export const DivTeste = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 10%;
-`;
-
-export const StyledLink = styled(Link)<iStyledLinkProps>`
+export const LinkTypes = styled(Link)<iStyledLinkProps>`
   ${(props) => {
     switch (props.type) {
-      case "button":
+      case "styledA":
         return css`
           display: flex;
           justify-content: center;
@@ -39,11 +32,13 @@ export const StyledLink = styled(Link)<iStyledLinkProps>`
             min-width: 120px;
           }
         `;
-      case "string":
+      case "styledB":
         return css`
           color: var(--color-grey-1);
           font-size: var(--text-size-2);
+          background-color: black;
           font-weight: 400;
+          padding: 5px;
           width: 90px;
 
           &:hover {
