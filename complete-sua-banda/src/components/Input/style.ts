@@ -5,7 +5,7 @@ export const InputDiv = styled.div`
   position: relative;
 
   & > input {
-    padding: 9px;
+    padding: 9px 0 9px 30px;
     width: 80%;
     border-radius: 4px;
     border: 1px solid var(--color-grey-1);
@@ -18,7 +18,7 @@ export const InputDiv = styled.div`
     color: var(--color-brand);
     position: absolute;
     top: 9px;
-    left: 9px;
+    left: 35px;
     cursor: text;
     transition: 0.4s;
   }
@@ -38,5 +38,13 @@ export const InputDiv = styled.div`
     text-align: center;
     transform: translateX(-6px) translateY(-23px);
     transition: 0.4s;
+  }
+
+  & > svg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    fill: var(--color-brand);
+    font-size: 24px;
   }
 `;

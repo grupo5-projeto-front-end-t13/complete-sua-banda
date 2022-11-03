@@ -1,12 +1,13 @@
 import * as styled from "./style";
 
 interface iInputProps {
-  isPassword?: boolean;
   name: string;
-  register: any;
+  register: Function;
+  type: "email" | "text" | "password";
+  icon: any;
 }
 
-export const Input = ({ isPassword, name, register }: iInputProps) => {
+export const Input = ({ name, register, type, icon }: iInputProps) => {
   const firstUpper = (str: string) => {
     const strArr = str.split("");
     strArr[0] = strArr[0].toUpperCase();
@@ -15,11 +16,8 @@ export const Input = ({ isPassword, name, register }: iInputProps) => {
 
   return (
     <styled.InputDiv>
-      <input
-        {...register(name)}
-        type={isPassword ? "password" : "text"}
-        required
-      />
+      <input {...register(name)} type={type} required />
+      {icon}
       <label htmlFor={name}>{firstUpper(name)}</label>
     </styled.InputDiv>
   );
