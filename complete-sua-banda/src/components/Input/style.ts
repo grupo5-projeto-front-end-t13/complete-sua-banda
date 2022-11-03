@@ -8,7 +8,7 @@ export const InputDiv = styled.div`
     padding: 9px 0 9px 30px;
     width: 80%;
     border-radius: 4px;
-    border: 1px solid var(--color-grey-1);
+    border: 1px solid var(--color-brand);
     background-color: var(--color-grey-4);
     outline: none;
     transition: 0.4s;
@@ -34,9 +34,9 @@ export const InputDiv = styled.div`
   input:focus ~ label {
     padding: 0 4px;
     color: var(--color-brand);
-    background-color: var(--color-grey-4);
+    background-color: transparent;
     text-align: center;
-    transform: translateX(-6px) translateY(-23px);
+    transform: translateX(-6px) translateY(-26px);
     transition: 0.4s;
   }
 
