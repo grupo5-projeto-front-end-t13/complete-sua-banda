@@ -172,11 +172,12 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
 
     try {
       const { data } = await api.post<iDataMusician>("/users", dataMusician);
-      console.log(data.user);
-      // navigate("/login")
+      toast.success("Cadastro realizado com sucesso!");
+      navigate("/login");
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
+      toast.error("Cadastro não realizado");
     }
   };
 

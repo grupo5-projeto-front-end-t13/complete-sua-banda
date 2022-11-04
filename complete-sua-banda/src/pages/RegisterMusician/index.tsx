@@ -10,6 +10,8 @@ import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import * as styled from "./style";
 import { Select } from "../../components/Select";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 interface iFormRegisterMusician {
   name: string;
@@ -20,22 +22,25 @@ interface iFormRegisterMusician {
 }
 
 export const RegisterMusician = () => {
+  const { submitRegisterMusicians } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<iFormRegisterMusician>({
     resolver: yupResolver(formSchemaMusician),
   });
 
+  const handleForm = handleSubmit((data) => submitRegisterMusicians(data));
+
   return (
     <styled.DivMainContainer>
       <div className="divFormMusic">
-        <Form>
+        <Form onSubmit={handleForm}>
           <h1>Sou Um Músico</h1>
           <Input
-            title="Banda"
+            title="Nome"
             register={register}
             type="text"
             name="name"
@@ -81,7 +86,8 @@ export const RegisterMusician = () => {
           </Select>
           <p>Já possui cadastro?</p>
           <p>
-            Vá para o <LinkComponent type="styledB" link="/" name={"Login"} />
+            Vá para o{" "}
+            <LinkComponent type="styledB" link="/login" name={"Login"} />
           </p>
           <button>Cadastre-se</button>
         </Form>
@@ -89,7 +95,11 @@ export const RegisterMusician = () => {
       <div className="divLogo">
         <img src={Logo} alt="Logo CSB" />
         <div className="divLink">
-          <LinkComponent type="styledA" link="/" name={"Sou uma banda"} />
+          <LinkComponent
+            type="styledA"
+            link="/registerBand"
+            name={"Sou uma banda"}
+          />
           <LinkComponent type="styledA" link="/" name={"Voltar"} />
         </div>
       </div>

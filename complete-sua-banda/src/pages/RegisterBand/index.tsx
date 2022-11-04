@@ -79,7 +79,11 @@ export const RegisterBand = () => {
       <div className="divLogo">
         <img src={Logo} alt="Logo CSB" />
         <div className="divLink">
-          <LinkComponent type="styledA" link="/" name={"Sou um músico"} />
+          <LinkComponent
+            type="styledA"
+            link="/registerMusician"
+            name={"Sou um músico"}
+          />
           <LinkComponent type="styledA" link="/" name={"Voltar"} />
         </div>
       </div>

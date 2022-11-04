@@ -13,7 +13,8 @@ export const DivMainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  justify-content: center;
+  gap: 2rem;
 
   @media (min-width: 768px) {
     flex-direction: row-reverse;
@@ -21,18 +22,23 @@ export const DivMainContainer = styled.div`
   }
 
   .divLogo {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+
+    @media (min-width: 768px) {
+      height: 100%;
+    }
   }
+
   .divLink {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
   img {
     display: none;
     @media (min-width: 768px) {
@@ -41,14 +47,19 @@ export const DivMainContainer = styled.div`
       height: 300px;
     }
   }
+
   .divFormMusic {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 110px;
+
+    @media (min-width: 768px) {
+      padding-top: 0;
+      height: 100%;
+    }
   }
+
   h1 {
     color: var(--color-brand);
     font-size: var(--title-size-1);
