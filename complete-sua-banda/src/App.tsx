@@ -1,11 +1,11 @@
-import { LoginPage } from "./pages/LoginPage";
+import { RegisterBand } from "./pages/RegisterBand";
 import { GlobalStyle } from "./styles/GlobalStyles";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <LoginPage />
+      <RegisterBand />
     </>
   );
 };
