@@ -3,23 +3,28 @@ import styled from "styled-components";
 export const InputDiv = styled.div`
   width: 100%;
   position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 240px;
 
-  & > input {
-    padding: 9px 0 9px 30px;
+  & > input {  
+    padding: 7px 0 6px 30px;
     width: 80%;
     border-radius: 4px;
-    border: 1px solid var(--color-grey-1);
+    border: 1px solid var(--color-brand);
     background-color: var(--color-grey-4);
     outline: none;
+    font-size: var(--text-size-1);
     transition: 0.4s;
   }
 
   & > label {
     color: var(--color-brand);
     position: absolute;
-    top: 9px;
-    left: 35px;
+    top: 10px;
+    left: 48px;
     cursor: text;
+    font-size: var(--text-size-1);
     transition: 0.4s;
   }
 
@@ -32,19 +37,17 @@ export const InputDiv = styled.div`
 
   & > input:valid ~ label,
   input:focus ~ label {
-    padding: 0 4px;
     color: var(--color-brand);
-    background-color: var(--color-grey-4);
-    text-align: center;
-    transform: translateX(-6px) translateY(-23px);
+    font-size: var(--text-size-2);
+    transform: translateX(-22px) translateY(-22px);
     transition: 0.4s;
   }
 
   & > svg {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 6px;
+    left: 15px;
     fill: var(--color-brand);
-    font-size: 24px;
+    font-size: 18px;
   }
 `;
