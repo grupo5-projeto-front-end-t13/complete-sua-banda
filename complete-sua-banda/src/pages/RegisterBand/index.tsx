@@ -10,6 +10,7 @@ import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Button } from "../../components/Button";
 
 interface iFormRegisterBand {
   name: string;
@@ -73,13 +74,17 @@ export const RegisterBand = () => {
             Vá para o{" "}
             <LinkComponent type="styledB" link="/login" name={"Login"} />
           </p>
-          <button type="submit">Cadastre-se</button>
+          <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
       <div className="divLogo">
         <img src={Logo} alt="Logo CSB" />
         <div className="divLink">
-          <LinkComponent type="styledA" link="/" name={"Sou um músico"} />
+          <LinkComponent
+            type="styledA"
+            link="/registerMusician"
+            name={"Sou um músico"}
+          />
           <LinkComponent type="styledA" link="/" name={"Voltar"} />
         </div>
       </div>

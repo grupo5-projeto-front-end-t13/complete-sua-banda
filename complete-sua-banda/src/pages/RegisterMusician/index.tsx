@@ -10,6 +10,7 @@ import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import * as styled from "./style";
 import { Select } from "../../components/Select";
+import { Button } from "../../components/Button";
 
 interface iFormRegisterMusician {
   name: string;
@@ -83,13 +84,17 @@ export const RegisterMusician = () => {
           <p>
             Vá para o <LinkComponent type="styledB" link="/" name={"Login"} />
           </p>
-          <button>Cadastre-se</button>
+          <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
       <div className="divLogo">
         <img src={Logo} alt="Logo CSB" />
         <div className="divLink">
-          <LinkComponent type="styledA" link="/" name={"Sou uma banda"} />
+          <LinkComponent
+            type="styledA"
+            link="/registerBand"
+            name={"Sou uma banda"}
+          />
           <LinkComponent type="styledA" link="/" name={"Voltar"} />
         </div>
       </div>
