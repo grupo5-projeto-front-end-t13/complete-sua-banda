@@ -3,8 +3,11 @@ import styled from "styled-components";
 export const InputDiv = styled.div`
   width: 100%;
   position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 240px;
 
-  & > input {
+  & > input {  
     padding: 7px 0 6px 30px;
     width: 80%;
     border-radius: 4px;
@@ -19,7 +22,7 @@ export const InputDiv = styled.div`
     color: var(--color-brand);
     position: absolute;
     top: 10px;
-    left: 28px;
+    left: 48px;
     cursor: text;
     font-size: var(--text-size-1);
     transition: 0.4s;
@@ -43,7 +46,7 @@ export const InputDiv = styled.div`
   & > svg {
     position: absolute;
     top: 6px;
-    left: 5px;
+    left: 15px;
     fill: var(--color-brand);
     font-size: 18px;
   }

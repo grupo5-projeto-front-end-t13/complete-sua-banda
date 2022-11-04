@@ -43,6 +43,15 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
             text-decoration: underline;
           }
         `;
+      case "styledC":
+        return css`
+          color: var(--color-grey-1);
+          font-size: var(--text-size-2);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        `;
       default:
         return false;
     }

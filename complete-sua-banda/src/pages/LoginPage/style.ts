@@ -66,22 +66,10 @@ export const DivContainer = styled.div`
       background: var(--color-brand);
       border: none;
       border-radius: 4px;
-      width: 240px;
+      width: 230px;
       height: 30px;
+      cursor: pointer;
     }
   }
-
 `;
 
-export const LinkStyled = styled(Link)`
-  color: var(--color-grey-1);
-  font-size: var(--text-size-2);
-`;
-
-export const LinkBtn = styled(Link)`
-  color: var(--color-brand);
-  font-size: var(--text-size-1);
-  border: 1px solid #da6031;
-  border-radius: 8px;
-  padding: 9px 43px;
-`;

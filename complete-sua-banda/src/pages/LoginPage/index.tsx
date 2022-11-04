@@ -7,6 +7,7 @@ import { FormSchemaLogin } from "./formSchema";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
+import { LinkComponent } from "../../components/Links";
 
 export const LoginPage = () => {
   interface iFormLoginProps {
@@ -26,7 +27,7 @@ export const LoginPage = () => {
     <styled.DivContainer>
       <div className="divLeft">
         <img src={Logo} alt="Logo CSB" />
-        <styled.LinkBtn to="/">Voltar</styled.LinkBtn>
+        <LinkComponent link="/" name="Voltar" type="styledA" />
       </div>
       <div className="divRight">
         <Form>
@@ -49,10 +50,10 @@ export const LoginPage = () => {
           />
           <p>
             Ainda não possui cadastro?<br></br>
-            <styled.LinkStyled to="/signup">Cadastre-se</styled.LinkStyled>
+            <LinkComponent link="/signup" name="Cadastre-se" type="styledC" />
           </p>
           <button type="submit">Entrar</button>
-          <styled.LinkBtn to="/">Voltar</styled.LinkBtn>
+          <LinkComponent link="/" name="Voltar" type="styledA" />
         </Form>
       </div>
     </styled.DivContainer>
