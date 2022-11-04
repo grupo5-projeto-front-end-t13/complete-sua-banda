@@ -1,3 +1,4 @@
+import { RegisterBand } from "./pages/RegisterBand";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./context/AuthContext";
@@ -8,7 +9,6 @@ const App = () => {
     <>
       <GlobalStyle />
       <ToastContainer />
-      
       <AuthProvider>
         <AllRoutes />
       </AuthProvider>
