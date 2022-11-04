@@ -64,7 +64,11 @@ export const LandingPage = () => {
         </styled.DivLogo1>
         <styled.DivLinks>
           <LinkComponent type={"styledA"} name={"Entrar"} link={"/login"} />
-          <LinkComponent type={"styledA"} name={"Cadastrar"} link={"/"} />
+          <LinkComponent
+            type={"styledA"}
+            name={"Cadastrar"}
+            link={"/registerBand"}
+          />
         </styled.DivLinks>
       </styled.HeaderLandingPage>
       <styled.Bcg />

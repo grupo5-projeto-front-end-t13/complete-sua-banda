@@ -16,8 +16,7 @@ interface iFormLoginProps {
   password: string;
 }
 export const LoginPage = () => {
-
-  const {submitLogin} = useContext(AuthContext)
+  const { submitLogin } = useContext(AuthContext);
 
   const {
     register,
@@ -27,7 +26,7 @@ export const LoginPage = () => {
     resolver: yupResolver(FormSchemaLogin),
   });
 
-  const handleForm = handleSubmit(data => submitLogin(data))
+  const handleForm = handleSubmit((data) => submitLogin(data));
 
   return (
     <styled.DivContainer>
@@ -56,7 +55,11 @@ export const LoginPage = () => {
           />
           <p>
             Ainda não possui cadastro?<br></br>
-            <LinkComponent link="/login" name="Cadastre-se" type="styledB" />
+            <LinkComponent
+              link="/registerBand"
+              name="Cadastre-se"
+              type="styledB"
+            />
           </p>
           <button type="submit">Entrar</button>
           <div className="divLink">
