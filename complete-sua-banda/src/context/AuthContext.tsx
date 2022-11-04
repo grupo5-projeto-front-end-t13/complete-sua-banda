@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AxiosError } from "axios";
 import React, { ReactNode, useEffect, useState, createContext } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { api } from "../services/ApiRequest";
+import { toast } from "react-toastify";
 
 interface iUserContext {
   user: iUser | null;
@@ -116,14 +117,12 @@ export interface iApiError {
   message?: string;
 }
 
-export const AuthContext = createContext<iUserContext>(
-  {} as iUserContext
-);
+export const AuthContext = createContext<iUserContext>({} as iUserContext);
 
 export const AuthProvider = ({ children }: iAuthContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUser() {
@@ -134,13 +133,11 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
-        
         } catch (error) {
           const requestError = error as AxiosError<iApiError>;
           console.error(requestError.response?.data.message);
           clearStorage();
-        }
-        finally{
+        } finally {
           setLoading(false);
         }
       }
@@ -203,11 +200,13 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
 
     try {
       const { data } = await api.post<iDataBand>("/users", dataBand);
-      console.log(data.user);
-      // navigate("/login")
+      toast.success("Cadastro realizado com sucesso!");
+
+      navigate("/login");
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
+      toast.error("Cadastro não realizado");
     }
   };
 
@@ -223,7 +222,7 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
 
       localStorage.setItem("@token_CSB", data.accessToken);
       localStorage.setItem("@id_CSB", data.user.id);
-      console.log(data)
+      console.log(data);
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);

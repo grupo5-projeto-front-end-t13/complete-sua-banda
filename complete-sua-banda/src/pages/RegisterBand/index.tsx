@@ -8,6 +8,8 @@ import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 interface iFormRegisterBand {
   name: string;
@@ -17,17 +19,21 @@ interface iFormRegisterBand {
 }
 
 export const RegisterBand = () => {
+  const { submitRegisterBand } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<iFormRegisterBand>({ resolver: yupResolver(formSchemaBand) });
+
+  const handleForm = handleSubmit((data) => submitRegisterBand(data));
+
   return (
     <styled.DivContainer>
       <div className="divForm">
-        <h1>Somos Uma Banda</h1>
-        <Form>
+        <Form onSubmit={handleForm}>
+          <h1>Somos Uma Banda</h1>
           <Input
             title="Banda"
             register={register}
@@ -64,9 +70,10 @@ export const RegisterBand = () => {
           )}
           <p>Já possui cadastro?</p>
           <p>
-            Vá para o <LinkComponent type="styledB" link="/" name={"Login"} />
+            Vá para o{" "}
+            <LinkComponent type="styledB" link="/login" name={"Login"} />
           </p>
-          <button>Cadastre-se</button>
+          <button type="submit">Cadastre-se</button>
         </Form>
       </div>
       <div className="divLogo">

@@ -13,7 +13,8 @@ export const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  justify-content: center;
+  gap: 2rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -21,14 +22,15 @@ export const DivContainer = styled.div`
   }
 
   .divForm {
-    height: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding-top: 110px;
+    @media (min-width: 768px) {
+      padding-top: 0;
+      height: 100%;
+    }
   }
 
   h1 {
@@ -54,13 +56,15 @@ export const DivContainer = styled.div`
   }
 
   .divLogo {
-    height: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+
+    @media (min-width: 768px) {
+      height: 100%;
+    }
   }
 
   .divLink {
