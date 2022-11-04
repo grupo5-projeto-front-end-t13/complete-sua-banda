@@ -44,6 +44,9 @@ export const DivContainer = styled.div`
 
     @media (min-width: 768px) {
       margin-top: 0px;
+      .divLink{
+        display: none;
+      }
     }
 
     h1 {
@@ -70,6 +73,8 @@ export const DivContainer = styled.div`
       height: 30px;
       cursor: pointer;
     }
+
+   
   }
 `;
 

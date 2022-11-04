@@ -50,10 +50,12 @@ export const LoginPage = () => {
           />
           <p>
             Ainda não possui cadastro?<br></br>
-            <LinkComponent link="/signup" name="Cadastre-se" type="styledC" />
+            <LinkComponent link="/signup" name="Cadastre-se" type="styledB" />
           </p>
           <button type="submit">Entrar</button>
-          <LinkComponent link="/" name="Voltar" type="styledA" />
+          <div className="divLink">
+            <LinkComponent link="/" name="Voltar" type="styledA" />
+          </div>
         </Form>
       </div>
     </styled.DivContainer>
