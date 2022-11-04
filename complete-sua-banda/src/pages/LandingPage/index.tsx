@@ -132,8 +132,8 @@ export const LandingPage = () => {
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
           <styled.UlFooter>
-            {devs.map((dev) => (
-              <li>
+            {devs.map((dev, index) => (
+              <li key={index}>
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
                 <span>
                   {dev.name} -{" "}
