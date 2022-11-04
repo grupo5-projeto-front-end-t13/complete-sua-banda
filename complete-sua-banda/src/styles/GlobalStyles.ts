@@ -28,7 +28,7 @@ body {
 	line-height: 1;
     font-family: 'Inter', sans-serif;
 }
-ul {
+ul,li {
 	list-style: none;
 }
 
