@@ -59,7 +59,7 @@ export const LandingPage = () => {
     <>
       <styled.HeaderLandingPage>
         <styled.DivLogo1>
-          <img src={logo} alt="Imahgem logo" />
+          <img src={logo} alt="Imagem logo" />
           <h1>Complete sua Banda</h1>
         </styled.DivLogo1>
         <styled.DivLinks>
