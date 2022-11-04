@@ -10,6 +10,7 @@ import { Error } from "../../components/Error";
 import { LinkComponent } from "../../components/Links";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Button } from "../../components/Button";
 
 interface iFormLoginProps {
   email: string;
@@ -61,7 +62,7 @@ export const LoginPage = () => {
               type="styledB"
             />
           </p>
-          <button type="submit">Entrar</button>
+          <Button type="submit">Entrar</Button>
           <div className="divLink">
             <LinkComponent link="/" name="Voltar" type="styledA" />
           </div>

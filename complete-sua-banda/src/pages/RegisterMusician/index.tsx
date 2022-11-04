@@ -10,6 +10,8 @@ import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import * as styled from "./style";
 import { Select } from "../../components/Select";
+import { Button } from "../../components/Button";
+
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -89,7 +91,7 @@ export const RegisterMusician = () => {
             Vá para o{" "}
             <LinkComponent type="styledB" link="/login" name={"Login"} />
           </p>
-          <button>Cadastre-se</button>
+          <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
       <div className="divLogo">
