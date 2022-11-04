@@ -1,11 +1,17 @@
-import { LoginPage } from "./pages/LoginPage";
 import { GlobalStyle } from "./styles/GlobalStyles";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./context/AuthContext";
+import { AllRoutes } from "./routes/AllRoutes";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <LoginPage />
+      <ToastContainer />
+      
+      <AuthProvider>
+        <AllRoutes />
+      </AuthProvider>
     </>
   );
 };

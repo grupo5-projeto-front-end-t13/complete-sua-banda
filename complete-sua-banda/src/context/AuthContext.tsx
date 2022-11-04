@@ -1,29 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AxiosError } from "axios";
 import React, { ReactNode, useEffect, useState, createContext } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { api } from "../services/ApiRequest";
 
-interface iUserContextProps {
-  user: iUserProps | null;
-  setUser: React.Dispatch<React.SetStateAction<iUserProps | null>>;
+interface iUserContext {
+  user: iUser | null;
+  setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
   loading: boolean;
   clearStorage: () => void;
-  submitCadastroMusicos({
+  submitRegisterMusicians({
     name,
     email,
     password,
     skill,
-  }: iCadastroMusicoProps): void;
-  submitCadastroBanda({ name, email, password }: iCadastroBandaProps): void;
-  submitLogin({ email, password }: iLoginProps): void;
+  }: iRegisterMusician): void;
+  submitRegisterBand({ name, email, password }: iRegisterBand): void;
+  submitLogin({ email, password }: iLogin): void;
 }
 
 interface iAuthContextProps {
   children: ReactNode;
 }
 
-interface iBandsInvitesProps {
+interface iBandsInvites {
   bio: string;
   state: string;
   social_media: string;
@@ -34,7 +34,7 @@ interface iBandsInvitesProps {
   id: number;
 }
 
-interface iMemberInvitesProps {
+interface iMemberInvites {
   id: number;
   userId: number;
   email: string;
@@ -48,7 +48,7 @@ interface iMemberInvitesProps {
   skill_level: string;
 }
 
-interface iUserProps {
+interface iUser {
   id: string;
   email: string;
   password: string;
@@ -63,11 +63,11 @@ interface iUserProps {
   skill_level?: string;
   genre?: string;
   requirement?: string[];
-  bands_invites?: iBandsInvitesProps[];
-  member_invites?: iMemberInvitesProps[];
+  bands_invites?: iBandsInvites[];
+  member_invites?: iMemberInvites[];
 }
 
-export interface iCadastroMusicoProps {
+export interface iRegisterMusician {
   email: string;
   password: string;
   bio?: string;
@@ -80,11 +80,11 @@ export interface iCadastroMusicoProps {
   skill: string;
   skill_level?: string;
 }
-interface iDataMusicoProps {
-  user: iCadastroMusicoProps;
+interface iDataMusician {
+  user: iRegisterMusician;
 }
 
-export interface iCadastroBandaProps {
+export interface iRegisterBand {
   email: string;
   password: string;
   bio?: string;
@@ -97,33 +97,33 @@ export interface iCadastroBandaProps {
   requirement?: string[];
 }
 
-interface iDataBandaProps {
-  user: iCadastroBandaProps;
+interface iDataBand {
+  user: iRegisterBand;
 }
 
-interface iLoginProps {
+interface iLogin {
   email: string;
   password: string;
 }
 
-interface iDataLoginProps {
-  user: iUserProps;
-  token: string;
+interface iDataLogin {
+  user: iUser;
+  accessToken: string;
 }
 
-export interface iApiErrorProps {
+export interface iApiError {
   status: string;
   message?: string;
 }
 
-export const AuthContext = createContext<iUserContextProps>(
-  {} as iUserContextProps
+export const AuthContext = createContext<iUserContext>(
+  {} as iUserContext
 );
 
 export const AuthProvider = ({ children }: iAuthContextProps) => {
-  const [user, setUser] = useState<iUserProps | null>(null);
+  const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUser() {
@@ -132,20 +132,18 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
       if (id && token) {
         try {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
-          const { data } = await api.get<iUserProps>(`/users/${id}`);
+          const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
-          // if(data.type === 'musico'){
-          //     navigate('/musico')
-          // }else{
-          //     navigate('/banda')
-          // }
+        
         } catch (error) {
-          const requestError = error as AxiosError<iApiErrorProps>;
+          const requestError = error as AxiosError<iApiError>;
           console.error(requestError.response?.data.message);
           clearStorage();
         }
+        finally{
+          setLoading(false);
+        }
       }
-      setLoading(false);
     }
     loadUser();
   }, []);
@@ -155,13 +153,13 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
     setUser(null);
   };
 
-  const submitCadastroMusicos = async ({
+  const submitRegisterMusicians = async ({
     name,
     email,
     password,
     skill,
-  }: iCadastroMusicoProps) => {
-    const dataMusico = {
+  }: iRegisterMusician) => {
+    const dataMusician = {
       name,
       email,
       password,
@@ -176,21 +174,21 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
     };
 
     try {
-      const { data } = await api.post<iDataMusicoProps>("/user", dataMusico);
+      const { data } = await api.post<iDataMusician>("/users", dataMusician);
       console.log(data.user);
-      // navigate("/")
+      // navigate("/login")
     } catch (error) {
-      const requestError = error as AxiosError<iApiErrorProps>;
+      const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
     }
   };
 
-  const submitCadastroBanda = async ({
+  const submitRegisterBand = async ({
     name,
     email,
     password,
-  }: iCadastroBandaProps) => {
-    const dataBanda = {
+  }: iRegisterBand) => {
+    const dataBand = {
       name,
       email,
       password,
@@ -199,33 +197,35 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
       social_media: "",
       image: "",
       genre: "",
-      requirement: [""],
+      requirement: [],
       type: "banda",
     };
 
     try {
-      const { data } = await api.post<iDataBandaProps>("/user", dataBanda);
+      const { data } = await api.post<iDataBand>("/users", dataBand);
       console.log(data.user);
+      // navigate("/login")
     } catch (error) {
-      const requestError = error as AxiosError<iApiErrorProps>;
+      const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
     }
   };
 
-  const submitLogin = async ({ email, password }: iLoginProps) => {
+  const submitLogin = async ({ email, password }: iLogin) => {
     const userLogin = { email, password };
 
     try {
-      const { data } = await api.post<iDataLoginProps>("/login", userLogin);
+      const { data } = await api.post<iDataLogin>("/login", userLogin);
 
       setUser(data.user);
 
-      api.defaults.headers.common.authorization = `Bearer ${data.token}`;
+      api.defaults.headers.common.authorization = `Bearer ${data.accessToken}`;
 
-      localStorage.setItem("@token_CSB", data.token);
+      localStorage.setItem("@token_CSB", data.accessToken);
       localStorage.setItem("@id_CSB", data.user.id);
+      console.log(data)
     } catch (error) {
-      const requestError = error as AxiosError<iApiErrorProps>;
+      const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
     }
   };
@@ -237,8 +237,8 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
         setUser,
         loading,
         clearStorage,
-        submitCadastroMusicos,
-        submitCadastroBanda,
+        submitRegisterMusicians,
+        submitRegisterBand,
         submitLogin,
       }}
     >
