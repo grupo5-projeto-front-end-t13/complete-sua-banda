@@ -37,12 +37,12 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
           color: var(--color-grey-1);
           font-size: var(--text-size-2);
           font-weight: 400;
-          width: 90px;
 
           &:hover {
             text-decoration: underline;
           }
         `;
+     
       default:
         return false;
     }
