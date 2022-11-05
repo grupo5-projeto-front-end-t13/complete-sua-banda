@@ -199,11 +199,17 @@ export const LandingPage = () => {
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
           <styled.UlFooter>
+<<<<<<< HEAD
             {devs.map((dev, index) => (
               <li key={index}>
 <<<<<<< HEAD
                 <img src={dev.img} alt={`Foto de ${dev.name}`} />
 =======
+=======
+            {devs.map((dev) => (
+              <li key={dev.name}>
+
+>>>>>>> 2904fdd482d35f6b206bd4efe16c6037fe7d457d
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
 >>>>>>> 4e2016f6945c2c2779ef1c5dfe954ccf776ef541
                 <span>
