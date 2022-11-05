@@ -86,11 +86,13 @@ export const RegisterMusician = () => {
             <option value="Vocal">Vocal</option>
             <option value="Outro">Outro</option>
           </Select>
-          <p>Já possui cadastro?</p>
-          <p>
-            Vá para o{" "}
-            <LinkComponent type="styledB" link="/login" name={"Login"} />
-          </p>
+          <div className="redirect">
+            <p>Já possui cadastro?</p>
+            <p>
+              Vá para o{" "}
+              <LinkComponent type="styledB" link="/login" name={"Login"} />
+            </p>
+          </div>
           <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
