@@ -68,7 +68,7 @@ export const Bcg = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: row;
   z-index: 99;
   background-color: var(--color-grey-4);
@@ -142,7 +142,7 @@ export const DivText = styled.div`
 
 export const Container2 = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   gap: 1rem;
   z-index: 99;
@@ -155,7 +155,7 @@ export const Container2 = styled.div`
   max-width: 875px;
   padding: 25px 20px;
   border-radius: 6px;
-  box-shadow: 5px 4px 0px var(--color-brand);
+  box-shadow: 4px 4px 0px var(--color-brand);
 
   img {
     display: none;
@@ -234,7 +234,7 @@ export const Ul = styled.ul`
 
 export const Footer = styled.footer`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   z-index: 99;
   background-color: var(--color-grey-4);
@@ -277,7 +277,7 @@ export const DivDevs = styled.div`
 export const UlFooter = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
 
