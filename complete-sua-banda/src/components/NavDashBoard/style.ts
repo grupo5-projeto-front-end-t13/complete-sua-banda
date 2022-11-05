@@ -31,7 +31,7 @@ export const Container1 = styled.div`
   }
 `;
 
-export const ImgPerfil = styled.div`
+export const ImgProfile = styled.div`
   width: 72px;
   img {
     cursor: pointer;
@@ -57,7 +57,7 @@ export const Icons = styled.div`
   }
 `;
 
-export const InputPesquisa = styled.div`
+export const InputSearch = styled.div`
   @media (min-width: 768px) {
     width: 50%;
   }
@@ -94,13 +94,13 @@ export const NavFooter = styled.nav`
   }
 `;
 
-export const Icone1 = styled(BsHouseDoor)`
+export const Icon1 = styled(BsHouseDoor)`
   color: var(--color-brand);
   font-size: 35px;
   cursor: pointer;
 `;
 
-export const Icone2 = styled(FiBell)`
+export const Icon2 = styled(FiBell)`
   color: var(--color-brand);
   font-size: 35px;
   cursor: pointer;

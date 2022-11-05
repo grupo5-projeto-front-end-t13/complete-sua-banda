@@ -1,7 +1,6 @@
 import { Input } from "../Input";
 import { CiSearch } from "react-icons/ci";
 import * as styled from "./style";
-import img from "../../assets/matheus.jpg";
 import logo from "../../assets/Logo-CSB.png";
 
 export const NavDashBoard = () => {
@@ -9,14 +8,14 @@ export const NavDashBoard = () => {
     <>
       <styled.Nav>
         <styled.Container1>
-          <styled.ImgPerfil>
-            <img src={img} alt="Perfil" />
-          </styled.ImgPerfil>
+          <styled.ImgProfile>
+            <img src={logo} alt={"a"} />
+          </styled.ImgProfile>
           <styled.Icons>
-            <styled.Icone1 />
-            <styled.Icone2 />
+            <styled.Icon1 />
+            <styled.Icon2 />
           </styled.Icons>
-          <styled.InputPesquisa>
+          <styled.InputSearch>
             <Input
               name="Pesquisa"
               type="text"
@@ -24,17 +23,17 @@ export const NavDashBoard = () => {
               title="Pesquisar"
               register={() => {}}
             />
-          </styled.InputPesquisa>
+          </styled.InputSearch>
         </styled.Container1>
         <styled.ImgLogo>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="Logo CSB" />
         </styled.ImgLogo>
       </styled.Nav>
 
       <styled.NavFooter>
-        <styled.Icone1 />
-        <img src={logo} alt="Imagem logo" />
-        <styled.Icone2 />
+        <styled.Icon1 />
+        <img src={logo} alt="Logo CSB" />
+        <styled.Icon2 />
       </styled.NavFooter>
     </>
   );

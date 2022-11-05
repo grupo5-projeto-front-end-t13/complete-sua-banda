@@ -1,12 +1,12 @@
 // import { RegisterBand } from "./pages/RegisterBand";
-import { NavDashBoard } from "./components/NavDashBoard";
+import { AllRoutes } from "./routes/AllRoutes";
 import { GlobalStyle } from "./styles/GlobalStyles";
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <NavDashBoard />
+      <AllRoutes />
     </>
   );
 };
