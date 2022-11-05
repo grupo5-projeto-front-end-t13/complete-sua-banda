@@ -63,6 +63,7 @@ export const DashboardBand = () => {
       toast.success("Convite enviado");
       setOpenModal(false);
     } catch (error) {
+      toast.error("Ops... tente novamente!")
       console.log(error);
     }
   };

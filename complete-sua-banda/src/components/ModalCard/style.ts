@@ -55,12 +55,12 @@ export const DivInfo = styled.div`
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
-    color: #fff5f1;
+    color: var(--color-grey-1);
   }
   p {
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
-    color: #fff5f1;
+    color: var(--color-grey-1);
   }
 `;
