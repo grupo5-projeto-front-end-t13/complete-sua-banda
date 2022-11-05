@@ -6,7 +6,8 @@ export const DivMainContainer = styled.div`
   height: 100vh;
   margin: 0 auto;
 
-  background-image: linear-gradient(black, black), url(${Musician});
+  background-image: linear-gradient(rgba(0, 0, 0), rgba(0, 0, 0)),
+    url(${Musician});
   background-size: cover;
   background-blend-mode: saturation;
 

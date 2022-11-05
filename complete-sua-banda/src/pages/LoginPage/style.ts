@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import LoginBackground from "../../assets/pessoas-em-um-festival.svg";
 
 export const DivContainer = styled.div`
@@ -44,7 +43,7 @@ export const DivContainer = styled.div`
 
     @media (min-width: 768px) {
       margin-top: 0px;
-      .divLink{
+      .divLink {
         display: none;
       }
     }
@@ -73,8 +72,5 @@ export const DivContainer = styled.div`
       height: 30px;
       cursor: pointer;
     }
-
-   
   }
 `;
-

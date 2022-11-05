@@ -11,6 +11,10 @@ import { LinkComponent } from "../../components/Links";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Button } from "../../components/Button";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntrancePopIn,
+} from "../../routes/AnimatedTransition";
 
 interface iFormLoginProps {
   email: string;
@@ -30,44 +34,50 @@ export const LoginPage = () => {
   const handleForm = handleSubmit((data) => submitLogin(data));
 
   return (
-    <styled.DivContainer>
-      <div className="divLeft">
-        <img src={Logo} alt="Logo CSB" />
-        <LinkComponent link="/" name="Voltar" type="styledA" />
-      </div>
-      <div className="divRight">
-        <Form onSubmit={handleForm}>
-          <h1>Login</h1>
-
-          <Input
-            name="email"
-            title="Email"
-            type="email"
-            register={register}
-            icon={<AiOutlineMail />}
-          />
-          {errors.email && <Error>{errors.email.message}</Error>}
-          <Input
-            name="password"
-            title="Senha"
-            type="password"
-            register={register}
-            icon={<AiOutlineLock />}
-          />
-          <p>
-            Ainda não possui cadastro?<br></br>
-            <LinkComponent
-              link="/registerBand"
-              name="Cadastre-se"
-              type="styledB"
-            />
-          </p>
-          <Button type="submit">Entrar</Button>
-          <div className="divLink">
+    <>
+      <styled.DivContainer>
+        <AnimatedEntrancePopIn>
+          <div className="divLeft">
+            <img src={Logo} alt="Logo CSB" />
             <LinkComponent link="/" name="Voltar" type="styledA" />
           </div>
-        </Form>
-      </div>
-    </styled.DivContainer>
+        </AnimatedEntrancePopIn>
+        <div className="divRight">
+          <AnimatedEntranceBottom>
+            <Form onSubmit={handleForm}>
+              <h1>Login</h1>
+
+              <Input
+                name="email"
+                title="Email"
+                type="email"
+                register={register}
+                icon={<AiOutlineMail />}
+              />
+              {errors.email && <Error>{errors.email.message}</Error>}
+              <Input
+                name="password"
+                title="Senha"
+                type="password"
+                register={register}
+                icon={<AiOutlineLock />}
+              />
+              <p>
+                Ainda não possui cadastro?<br></br>
+                <LinkComponent
+                  link="/registerBand"
+                  name="Cadastre-se"
+                  type="styledB"
+                />
+              </p>
+              <Button type="submit">Entrar</Button>
+              <div className="divLink">
+                <LinkComponent link="/" name="Voltar" type="styledA" />
+              </div>
+            </Form>
+          </AnimatedEntranceBottom>
+        </div>
+      </styled.DivContainer>
+    </>
   );
 };
