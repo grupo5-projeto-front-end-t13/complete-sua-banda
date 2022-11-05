@@ -24,8 +24,7 @@ export const Card = ({name, image, state, skill, type, genre, requirement, getCa
         </div>
         <figure>
             <img src={image} alt="foto perfil" />
-            <CgAdd/>
-                     
+            <CgAdd/>            
         </figure>
     </styled.Card>
   )

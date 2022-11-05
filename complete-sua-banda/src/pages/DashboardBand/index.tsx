@@ -37,7 +37,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   }
-
+  
   const invite = async () => {
     const info = {
       userId: cardMusician.id,

@@ -1,5 +1,4 @@
 import Logo from "../../assets/Logo-CSB.png";
-import { Button } from "../Button";
 import * as styled from "./style"
 
 interface iModalProps{
