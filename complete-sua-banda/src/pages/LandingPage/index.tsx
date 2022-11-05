@@ -7,7 +7,7 @@ import juliaImg from "../../assets/julia.jpg";
 import matheusImg from "../../assets/matheus.jpg";
 import rogerImg from "../../assets/roger.jpg";
 import { LinkComponent } from "../../components/Links";
-import * as styled from "./styled";
+import * as styled from "./style";
 import { useState } from "react";
 
 interface iDevs {
@@ -129,7 +129,7 @@ export const LandingPage = () => {
           <h3>Equipe de desenvolvimento</h3>
           <styled.UlFooter>
             {devs.map((dev) => (
-              <li>
+              <li key={dev.name}>
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
                 <span>
                   {dev.name} -{" "}
