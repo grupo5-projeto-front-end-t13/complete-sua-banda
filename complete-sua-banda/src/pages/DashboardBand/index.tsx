@@ -8,8 +8,7 @@ import { Card } from "../../components/Card";
 import { toast } from "react-toastify";
 
 export const DashboardBand = () => {
-  const { user } = useContext(AuthContext);
-  const [openModal, setOpenModal] = useState(false);
+  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } = useContext(AuthContext);
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -70,6 +69,7 @@ export const DashboardBand = () => {
 
   return (
     <div>
+
       {openModal && (
         <Modal setOpenModal={setOpenModal}>
           <ModalCard

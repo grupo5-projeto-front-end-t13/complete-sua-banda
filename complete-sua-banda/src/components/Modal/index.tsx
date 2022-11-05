@@ -6,15 +6,24 @@ import {AiOutlineCloseCircle} from 'react-icons/ai'
 interface iModalProps {
   children: ReactNode;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal = ({ children, setOpenModal }: iModalProps) => {
+export const Modal = ({
+  children,
+  setOpenModal,
+  setOpenModalRemove,
+}: iModalProps) => {
   const modalRef = useOutsideClick(() => {
     setOpenModal(false);
+    setOpenModalRemove(false);
+
   });
 
   const closeModal = () => {
     setOpenModal(false);
+    setOpenModalRemove(false);
+
   };
 
   return (
