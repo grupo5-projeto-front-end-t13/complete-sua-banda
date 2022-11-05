@@ -16,7 +16,7 @@ interface iCardProps{
 
 export const Card = ({name, image, state, skill, type, genre, requirement, getCardProps, id }: iCardProps) => {
   return (
-    <styled.Card>
+    <styled.Card onClick={()=>getCardProps(id)}>
         <div>
             <h2>{name}</h2>
             {type === "musico"? <h2>{state}</h2> : requirement && <h2>Procura-se um {requirement[0]}</h2>  }
@@ -24,8 +24,7 @@ export const Card = ({name, image, state, skill, type, genre, requirement, getCa
         </div>
         <figure>
             <img src={image} alt="foto perfil" />
-            <button onClick={()=>getCardProps(id)}> <CgAdd/> </button>
-                     
+            <CgAdd/>            
         </figure>
     </styled.Card>
   )
