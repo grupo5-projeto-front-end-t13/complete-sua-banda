@@ -16,9 +16,8 @@ export const ModalDefault = styled.div`
     background: rgba(0, 0, 0, 0.7);
   }
   .content {
-    background: #212529;
-    width: 369px;
-    height: 342px;
+    display: flex;
+    justify-content: center;
     padding: 0px 0;
     position: relative;
     
