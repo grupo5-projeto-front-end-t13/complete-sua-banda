@@ -69,11 +69,13 @@ export const RegisterBand = () => {
           {errors.passwordConfirm && (
             <Error>{errors.passwordConfirm.message}</Error>
           )}
-          <p>Já possui cadastro?</p>
-          <p>
-            Vá para o{" "}
-            <LinkComponent type="styledB" link="/login" name={"Login"} />
-          </p>
+          <div className="redirect">
+            <p>Já possui cadastro?</p>
+            <p>
+              Vá para o{" "}
+              <LinkComponent type="styledB" link="/login" name={"Login"} />
+            </p>
+          </div>
           <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
