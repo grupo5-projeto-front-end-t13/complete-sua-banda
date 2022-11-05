@@ -57,7 +57,7 @@ interface iUser {
   state: string;
   social_media: string;
   image: string;
-  type: string;
+  type: "musico" | "banda";
   name: string;
   username?: string;
   skill?: string;
@@ -69,13 +69,14 @@ interface iUser {
 }
 
 export interface iRegisterMusician {
+  id?: number | undefined;
   email: string;
   password: string;
   bio?: string;
   state?: string;
   social_media?: string;
   image?: string;
-  type?: string;
+  type?: "musico" | "banda";
   name: string;
   username?: string;
   skill: string;
@@ -86,6 +87,7 @@ interface iDataMusician {
 }
 
 export interface iRegisterBand {
+  id?: number | undefined;
   email: string;
   password: string;
   bio?: string;
@@ -93,7 +95,7 @@ export interface iRegisterBand {
   social_media?: string;
   genre?: string;
   image?: string;
-  type?: string;
+  type?: "musico" | "banda";
   name: string;
   requirement?: string[];
 }
@@ -223,7 +225,13 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
 
       localStorage.setItem("@token_CSB", data.accessToken);
       localStorage.setItem("@id_CSB", data.user.id);
-      console.log(data);
+      
+      if(data.user.type === "musico"){
+        navigate("/dashboardMusician")
+      }else{
+        navigate("/dashboardBand")
+      }
+
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
