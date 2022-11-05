@@ -8,12 +8,16 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { LinkComponent } from "../../components/Links";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Button } from "../../components/Button";
 
+interface iFormLoginProps {
+  email: string;
+  password: string;
+}
 export const LoginPage = () => {
-  interface iFormLoginProps {
-    email: string;
-    password: string;
-  }
+  const { submitLogin } = useContext(AuthContext);
 
   const {
     register,
@@ -23,6 +27,8 @@ export const LoginPage = () => {
     resolver: yupResolver(FormSchemaLogin),
   });
 
+  const handleForm = handleSubmit((data) => submitLogin(data));
+
   return (
     <styled.DivContainer>
       <div className="divLeft">
@@ -30,7 +36,7 @@ export const LoginPage = () => {
         <LinkComponent link="/" name="Voltar" type="styledA" />
       </div>
       <div className="divRight">
-        <Form>
+        <Form onSubmit={handleForm}>
           <h1>Login</h1>
 
           <Input
@@ -50,9 +56,13 @@ export const LoginPage = () => {
           />
           <p>
             Ainda não possui cadastro?<br></br>
-            <LinkComponent link="/signup" name="Cadastre-se" type="styledB" />
+            <LinkComponent
+              link="/registerBand"
+              name="Cadastre-se"
+              type="styledB"
+            />
           </p>
-          <button type="submit">Entrar</button>
+          <Button type="submit">Entrar</Button>
           <div className="divLink">
             <LinkComponent link="/" name="Voltar" type="styledA" />
           </div>

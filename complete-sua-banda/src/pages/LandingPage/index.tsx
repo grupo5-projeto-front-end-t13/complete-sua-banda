@@ -63,8 +63,12 @@ export const LandingPage = () => {
           <h1>Complete sua Banda</h1>
         </styled.DivLogo1>
         <styled.DivLinks>
-          <LinkComponent type={"styledA"} name={"Entrar"} link={"/"} />
-          <LinkComponent type={"styledA"} name={"Cadastrar"} link={"/"} />
+          <LinkComponent type={"styledA"} name={"Entrar"} link={"/login"} />
+          <LinkComponent
+            type={"styledA"}
+            name={"Cadastrar"}
+            link={"/registerBand"}
+          />
         </styled.DivLinks>
       </styled.HeaderLandingPage>
       <styled.Bcg />
@@ -130,6 +134,7 @@ export const LandingPage = () => {
           <styled.UlFooter>
             {devs.map((dev) => (
               <li key={dev.name}>
+
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
                 <span>
                   {dev.name} -{" "}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const pError = styled.p`
-    color: red !important;
+    color: #ff2e2e !important;
     font-size: 12px;
-    margin-top: -17px;
+    margin-top: -12px;
 `

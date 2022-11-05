@@ -1,42 +1,48 @@
 import Logo from "../../assets/Logo-CSB.png";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { LinkComponent } from "../../components/Links";
-import * as styled from "./style";
-import { formSchemaBand } from "./schemaBand";
+import { formSchemaMusician } from "./schemaMusician";
 import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { GiGuitar } from "react-icons/gi";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import * as styled from "./style";
+import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 
-interface iFormRegisterBand {
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+
+interface iFormRegisterMusician {
   name: string;
   email: string;
   password: string;
   passwordConfirm: string;
+  skill: string;
 }
 
-export const RegisterBand = () => {
-  const { submitRegisterBand } = useContext(AuthContext);
+export const RegisterMusician = () => {
+  const { submitRegisterMusicians } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iFormRegisterBand>({ resolver: yupResolver(formSchemaBand) });
+  } = useForm<iFormRegisterMusician>({
+    resolver: yupResolver(formSchemaMusician),
+  });
 
-  const handleForm = handleSubmit((data) => submitRegisterBand(data));
+  const handleForm = handleSubmit((data) => submitRegisterMusicians(data));
 
   return (
-    <styled.DivContainer>
-      <div className="divForm">
+    <styled.DivMainContainer>
+      <div className="divFormMusic">
         <Form onSubmit={handleForm}>
-          <h1>Somos Uma Banda</h1>
+          <h1>Sou Um Músico</h1>
           <Input
-            title="Banda"
+            title="Nome"
             register={register}
             type="text"
             name="name"
@@ -69,6 +75,17 @@ export const RegisterBand = () => {
           {errors.passwordConfirm && (
             <Error>{errors.passwordConfirm.message}</Error>
           )}
+          <Select name="skill" register={register} icon={GiGuitar}>
+            <option value="">Selecione um instrumento</option>
+            <option value="Guitarra">Guitarra</option>
+            <option value="Baixo">Baixo</option>
+            <option value="Violão">Violão</option>
+            <option value="Piano">Piano</option>
+            <option value="Teclado">Teclado</option>
+            <option value="Bateria">Bateria</option>
+            <option value="Vocal">Vocal</option>
+            <option value="Outro">Outro</option>
+          </Select>
           <p>Já possui cadastro?</p>
           <p>
             Vá para o{" "}
@@ -82,12 +99,12 @@ export const RegisterBand = () => {
         <div className="divLink">
           <LinkComponent
             type="styledA"
-            link="/registerMusician"
-            name={"Sou um músico"}
+            link="/registerBand"
+            name={"Sou uma banda"}
           />
           <LinkComponent type="styledA" link="/" name={"Voltar"} />
         </div>
       </div>
-    </styled.DivContainer>
+    </styled.DivMainContainer>
   );
 };
