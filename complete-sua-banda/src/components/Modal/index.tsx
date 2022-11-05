@@ -1,22 +1,27 @@
-import { ReactNode } from "react"
-import { useOutsideClick } from "../../hooks/useOutsideClick"
-import * as styled from "./style"
+import { ReactNode } from "react";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
+import * as styled from "./style";
 
-
-interface iModalProps{
-    children: ReactNode
-    setOpenModal : React.Dispatch<React.SetStateAction<boolean>>
+interface iModalProps {
+  children: ReactNode;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal = ({children, setOpenModal}: iModalProps) => {
+export const Modal = ({
+  children,
+  setOpenModal,
+  setOpenModalRemove,
+}: iModalProps) => {
+  const modalRef = useOutsideClick(() => {
+    setOpenModal(false);
+    setOpenModalRemove(false);
+  });
 
-    const modalRef = useOutsideClick(()=>{
-        setOpenModal(false)
-    })
-
-    const closeModal = () => {
-        setOpenModal(false)
-    }
+  const closeModal = () => {
+    setOpenModal(false);
+    setOpenModalRemove(false);
+  };
 
   return (
     <styled.ModalDefault>
@@ -29,5 +34,5 @@ export const Modal = ({children, setOpenModal}: iModalProps) => {
         </div>
       </div>
     </styled.ModalDefault>
-  )
-}
+  );
+};

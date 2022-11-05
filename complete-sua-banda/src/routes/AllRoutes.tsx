@@ -15,8 +15,8 @@ export const AllRoutes = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registerBand" element={<RegisterBand />} />
         <Route path="/registerMusician" element={<RegisterMusician />} />
-        {/* <Route path="/dashboardBand" element={<DashboardBand />} />
-      <Route path="/dashboardMusician" element={<DashboardMusician />} /> */}
+        <Route path="/dashboardBand" element={<DashboardBand />} />
+        <Route path="/dashboardMusician" element={<DashboardMusician />} />
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </AnimatePresence>

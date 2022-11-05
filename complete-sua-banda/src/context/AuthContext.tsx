@@ -18,6 +18,11 @@ interface iUserContext {
   }: iRegisterMusician): void;
   submitRegisterBand({ name, email, password }: iRegisterBand): void;
   submitLogin({ email, password }: iLogin): void;
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalRemove: boolean;
+  setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 interface iAuthContextProps {
@@ -50,7 +55,7 @@ interface iMemberInvites {
 }
 
 interface iUser {
-  id: string;
+  id: any;
   email: string;
   password: string;
   bio: string;
@@ -69,7 +74,7 @@ interface iUser {
 }
 
 export interface iRegisterMusician {
-  id?: number | undefined;
+  id?: number;
   email: string;
   password: string;
   bio?: string;
@@ -124,6 +129,9 @@ export const AuthContext = createContext<iUserContext>({} as iUserContext);
 export const AuthProvider = ({ children }: iAuthContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalRemove, setOpenModalRemove] = useState(false)
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -233,6 +241,7 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
       }
 
     } catch (error) {
+      toast.error("Usuário inválido! Faça seu cadastro.")
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
     }
@@ -248,6 +257,11 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
         submitRegisterMusicians,
         submitRegisterBand,
         submitLogin,
+        openModal,
+        setOpenModal,
+        openModalRemove,
+        setOpenModalRemove,
+
       }}
     >
       {children}
