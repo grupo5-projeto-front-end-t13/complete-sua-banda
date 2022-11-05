@@ -40,19 +40,26 @@ export const DashboardBand = () => {
 
   const invite = async () => {
     const info = {
-      userId: user?.id,
-      email: cardMusician.email,
-      bio: cardMusician.bio,
-      state: cardMusician.state,
-      social_media: cardMusician.social_media,
-      image: cardMusician.image,
-      name: cardMusician.name,
-      username: cardMusician.username,
-      skill: cardMusician.skill,
-      skill_level: cardMusician.skill_level,
+      userId: cardMusician.id,
+      bio: user?.bio,
+      state: user?.state,
+      social_media: user?.social_media,
+      genre: user?.genre,
+      image: user?.image,
+      name: user?.name,
+      // userId: cardBand.id
+      // email: cardBand.email,
+      // bio: cardBand.bio,
+      // state: cardBand.state,
+      // social_media: cardBand.social_media,
+      // image: cardBand.image,
+      // name: cardBand.name,
+      // username: cardBand.username,
+      // skill: cardBand.skill,
+      // skill_level: cardBand.skill_level,
     };
     try {
-      await api.post("/members_invites", info);
+      await api.post("/bands_invites", info);
       toast.success("Convite enviado");
       setOpenModal(false);
     } catch (error) {
