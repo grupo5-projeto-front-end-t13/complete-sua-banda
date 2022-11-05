@@ -11,6 +11,10 @@ import { Error } from "../../components/Error";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Button } from "../../components/Button";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntrancePopIn,
+} from "../../routes/AnimatedTransition";
 
 interface iFormRegisterBand {
   name: string;
@@ -31,63 +35,71 @@ export const RegisterBand = () => {
   const handleForm = handleSubmit((data) => submitRegisterBand(data));
 
   return (
-    <styled.DivContainer>
-      <div className="divForm">
-        <Form onSubmit={handleForm}>
-          <h1>Somos Uma Banda</h1>
-          <Input
-            title="Banda"
-            register={register}
-            type="text"
-            name="name"
-            icon={<AiOutlineUser />}
-          />
-          {errors.name && <Error>{errors.name.message}</Error>}
-          <Input
-            title="Email"
-            register={register}
-            type="email"
-            name="email"
-            icon={<AiOutlineMail />}
-          />
-          {errors.email && <Error>{errors.email.message}</Error>}
-          <Input
-            title="Senha"
-            register={register}
-            type="password"
-            name="password"
-            icon={<AiOutlineLock />}
-          />
-          {errors.password && <Error>{errors.password.message}</Error>}
-          <Input
-            title="Repita a senha"
-            register={register}
-            type="password"
-            name="passwordConfirm"
-            icon={<AiOutlineLock />}
-          />
-          {errors.passwordConfirm && (
-            <Error>{errors.passwordConfirm.message}</Error>
-          )}
-          <p>Já possui cadastro?</p>
-          <p>
-            Vá para o{" "}
-            <LinkComponent type="styledB" link="/login" name={"Login"} />
-          </p>
-          <Button type="submit">Cadastre-se</Button>
-        </Form>
-      </div>
-      <div className="divLogo">
-        <img src={Logo} alt="Logo CSB" />
-        <div className="divLink">
-          <LinkComponent
-            type="styledA"
-            link="/registerMusician"
-            name={"Sou um músico"}
-          />
-          <LinkComponent type="styledA" link="/" name={"Voltar"} />
+    <>
+      <styled.DivContainer>
+        <div className="divForm">
+          <AnimatedEntranceBottom>
+            <Form onSubmit={handleForm}>
+              <h1>Somos Uma Banda</h1>
+              <Input
+                title="Banda"
+                register={register}
+                type="text"
+                name="name"
+                icon={<AiOutlineUser />}
+              />
+              {errors.name && <Error>{errors.name.message}</Error>}
+              <Input
+                title="Email"
+                register={register}
+                type="email"
+                name="email"
+                icon={<AiOutlineMail />}
+              />
+              {errors.email && <Error>{errors.email.message}</Error>}
+              <Input
+                title="Senha"
+                register={register}
+                type="password"
+                name="password"
+                icon={<AiOutlineLock />}
+              />
+              {errors.password && <Error>{errors.password.message}</Error>}
+              <Input
+                title="Repita a senha"
+                register={register}
+                type="password"
+                name="passwordConfirm"
+                icon={<AiOutlineLock />}
+              />
+              {errors.passwordConfirm && (
+                <Error>{errors.passwordConfirm.message}</Error>
+              )}
+              <div className="redirect">
+                <p>Já possui cadastro?</p>
+                <p>
+                  Vá para o{" "}
+                  <LinkComponent type="styledB" link="/login" name={"Login"} />
+                </p>
+              </div>
+              <Button type="submit">Cadastre-se</Button>
+            </Form>
+          </AnimatedEntranceBottom>
         </div>
-      </div>
-    </styled.DivContainer>
+        <AnimatedEntrancePopIn>
+          <div className="divLogo">
+            <img src={Logo} alt="Logo CSB" />
+            <div className="divLink">
+              <LinkComponent
+                type="styledA"
+                link="/registerMusician"
+                name={"Sou um músico"}
+              />
+              <LinkComponent type="styledA" link="/" name={"Voltar"} />
+            </div>
+          </div>
+        </AnimatedEntrancePopIn>
+      </styled.DivContainer>
+    </>
   );
 };

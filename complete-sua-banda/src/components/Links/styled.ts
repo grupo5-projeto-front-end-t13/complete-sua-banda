@@ -21,6 +21,7 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
           padding: 8px 13px;
           min-width: 80px;
           white-space: nowrap;
+          transition: 800ms;
 
           &:hover {
             background-color: var(--color-brand);
@@ -42,7 +43,7 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
             text-decoration: underline;
           }
         `;
-     
+
       default:
         return false;
     }
