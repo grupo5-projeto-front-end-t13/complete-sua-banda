@@ -1,4 +1,4 @@
-import * as styled from "./styled";
+import * as styled from "./style";
 
 interface iProps {
   name: string;

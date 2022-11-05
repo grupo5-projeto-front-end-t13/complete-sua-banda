@@ -7,7 +7,7 @@ import juliaImg from "../../assets/julia.jpg";
 import matheusImg from "../../assets/matheus.jpg";
 import rogerImg from "../../assets/roger.jpg";
 import { LinkComponent } from "../../components/Links";
-import * as styled from "./styled";
+import * as styled from "./style";
 import { useState } from "react";
 import {
   AnimatedEntranceBottom,
@@ -63,7 +63,7 @@ export const LandingPage = () => {
     <>
       <styled.HeaderLandingPage>
         <styled.DivLogo1>
-          <img src={logo} alt="Imagem logo" />
+          <img src={logo} alt="Logo CSB" />
           <h1>Complete sua Banda</h1>
         </styled.DivLogo1>
         <styled.DivLinks>
@@ -76,6 +76,64 @@ export const LandingPage = () => {
         </styled.DivLinks>
       </styled.HeaderLandingPage>
       <styled.Bcg />
+<<<<<<< HEAD
+      <styled.Container>
+        <styled.DivLogo2>
+          <img src={logo} alt="Logo CSB" />
+        </styled.DivLogo2>
+        <styled.DivText>
+          <h2>Complete sua Banda</h2>
+          <p>
+            O Complete sua Banda é um site onde você músico, que está procurando
+            um novo integrante pra sua banda, ou está atrás de uma banda para
+            fazer parte, consegue encontrá-los!
+          </p>
+          <span>
+            O Complete sua Banda é um projeto de final de módulo realizado
+            apenas com finalidades acadêmicas.
+          </span>
+        </styled.DivText>
+      </styled.Container>
+      <styled.Container2>
+        <styled.DivList>
+          <h3>Como Banda</h3>
+          <styled.Ul>
+            <li>
+              <span>1</span>
+              <p>Cadastre-se fácil e rápido</p>
+            </li>
+            <li>
+              <span>2</span>
+              <p>Procure músicos e os convide</p>
+            </li>
+            <li>
+              <span>3</span>
+              <p>Pronto! Aguarde o músico aceitar o convite</p>
+            </li>
+          </styled.Ul>
+        </styled.DivList>
+        <div>
+          <img src={logo} alt="Logo CSB" />
+        </div>
+        <styled.DivList>
+          <h3>Como Músico</h3>
+          <styled.Ul>
+            <li>
+              <span>1</span>
+              <p>Cadastre-se fácil e rápido</p>
+            </li>
+            <li>
+              <span>2</span>
+              <p>Procure por uma banda e se inscreva</p>
+            </li>
+            <li>
+              <span>3</span>
+              <p>Pronto! Aguarde a banda aceitar o convite</p>
+            </li>
+          </styled.Ul>
+        </styled.DivList>
+      </styled.Container2>
+=======
       <AnimatedEntranceBottom>
         <styled.Container>
           <styled.DivLogo2>
@@ -136,13 +194,24 @@ export const LandingPage = () => {
           </styled.DivList>
         </styled.Container2>
       </AnimatedEntranceTop>
+>>>>>>> 4e2016f6945c2c2779ef1c5dfe954ccf776ef541
       <styled.Footer>
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
           <styled.UlFooter>
+<<<<<<< HEAD
             {devs.map((dev, index) => (
               <li key={index}>
+<<<<<<< HEAD
+                <img src={dev.img} alt={`Foto de ${dev.name}`} />
+=======
+=======
+            {devs.map((dev) => (
+              <li key={dev.name}>
+
+>>>>>>> 2904fdd482d35f6b206bd4efe16c6037fe7d457d
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
+>>>>>>> 4e2016f6945c2c2779ef1c5dfe954ccf776ef541
                 <span>
                   {dev.name} -{" "}
                   <a href={dev.link} target={"_blank"} rel="noreferrer">
@@ -154,7 +223,7 @@ export const LandingPage = () => {
           </styled.UlFooter>
         </styled.DivDevs>
         <styled.DivLogo2>
-          <img src={logo} alt="Imagem logo" />
+          <img src={logo} alt="Logo CSB" />
         </styled.DivLogo2>
       </styled.Footer>
     </>
