@@ -11,7 +11,10 @@ import { LinkComponent } from "../../components/Links";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Button } from "../../components/Button";
-import { AnimatedTransition } from "../../routes/AnimatedTransition";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntrancePopIn,
+} from "../../routes/AnimatedTransition";
 
 interface iFormLoginProps {
   email: string;
@@ -33,14 +36,14 @@ export const LoginPage = () => {
   return (
     <>
       <styled.DivContainer>
-        <AnimatedTransition>
+        <AnimatedEntrancePopIn>
           <div className="divLeft">
             <img src={Logo} alt="Logo CSB" />
             <LinkComponent link="/" name="Voltar" type="styledA" />
           </div>
-        </AnimatedTransition>
+        </AnimatedEntrancePopIn>
         <div className="divRight">
-          <AnimatedTransition>
+          <AnimatedEntranceBottom>
             <Form onSubmit={handleForm}>
               <h1>Login</h1>
 
@@ -72,7 +75,7 @@ export const LoginPage = () => {
                 <LinkComponent link="/" name="Voltar" type="styledA" />
               </div>
             </Form>
-          </AnimatedTransition>
+          </AnimatedEntranceBottom>
         </div>
       </styled.DivContainer>
     </>

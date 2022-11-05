@@ -11,7 +11,10 @@ import { Error } from "../../components/Error";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Button } from "../../components/Button";
-import { AnimatedTransition } from "../../routes/AnimatedTransition";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntrancePopIn,
+} from "../../routes/AnimatedTransition";
 
 interface iFormRegisterBand {
   name: string;
@@ -35,7 +38,7 @@ export const RegisterBand = () => {
     <>
       <styled.DivContainer>
         <div className="divForm">
-          <AnimatedTransition>
+          <AnimatedEntranceBottom>
             <Form onSubmit={handleForm}>
               <h1>Somos Uma Banda</h1>
               <Input
@@ -81,9 +84,9 @@ export const RegisterBand = () => {
               </div>
               <Button type="submit">Cadastre-se</Button>
             </Form>
-          </AnimatedTransition>
+          </AnimatedEntranceBottom>
         </div>
-        <AnimatedTransition>
+        <AnimatedEntrancePopIn>
           <div className="divLogo">
             <img src={Logo} alt="Logo CSB" />
             <div className="divLink">
@@ -95,7 +98,7 @@ export const RegisterBand = () => {
               <LinkComponent type="styledA" link="/" name={"Voltar"} />
             </div>
           </div>
-        </AnimatedTransition>
+        </AnimatedEntrancePopIn>
       </styled.DivContainer>
     </>
   );

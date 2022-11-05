@@ -13,7 +13,10 @@ import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { AnimatedTransition } from "../../routes/AnimatedTransition";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntrancePopIn,
+} from "../../routes/AnimatedTransition";
 
 interface iFormRegisterMusician {
   name: string;
@@ -40,7 +43,7 @@ export const RegisterMusician = () => {
     <>
       <styled.DivMainContainer>
         <div className="divFormMusic">
-          <AnimatedTransition>
+          <AnimatedEntranceBottom>
             <Form onSubmit={handleForm}>
               <h1>Sou Um Músico</h1>
               <Input
@@ -97,9 +100,9 @@ export const RegisterMusician = () => {
               </div>
               <Button type="submit">Cadastre-se</Button>
             </Form>
-          </AnimatedTransition>
+          </AnimatedEntranceBottom>
         </div>
-        <AnimatedTransition>
+        <AnimatedEntrancePopIn>
           <div className="divLogo">
             <img src={Logo} alt="Logo CSB" />
             <div className="divLink">
@@ -111,7 +114,7 @@ export const RegisterMusician = () => {
               <LinkComponent type="styledA" link="/" name={"Voltar"} />
             </div>
           </div>
-        </AnimatedTransition>
+        </AnimatedEntrancePopIn>
       </styled.DivMainContainer>
     </>
   );

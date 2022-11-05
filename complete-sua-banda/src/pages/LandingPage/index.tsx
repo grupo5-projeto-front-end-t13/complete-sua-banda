@@ -9,7 +9,10 @@ import rogerImg from "../../assets/roger.jpg";
 import { LinkComponent } from "../../components/Links";
 import * as styled from "./styled";
 import { useState } from "react";
-import { AnimatedTransition } from "../../routes/AnimatedTransition";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntranceTop,
+} from "../../routes/AnimatedTransition";
 
 interface iDevs {
   name: string;
@@ -73,7 +76,7 @@ export const LandingPage = () => {
         </styled.DivLinks>
       </styled.HeaderLandingPage>
       <styled.Bcg />
-      <AnimatedTransition>
+      <AnimatedEntranceBottom>
         <styled.Container>
           <styled.DivLogo2>
             <img src={logo} alt="Imagem logo" />
@@ -91,8 +94,8 @@ export const LandingPage = () => {
             </span>
           </styled.DivText>
         </styled.Container>
-      </AnimatedTransition>
-      <AnimatedTransition>
+      </AnimatedEntranceBottom>
+      <AnimatedEntranceTop>
         <styled.Container2>
           <styled.DivList>
             <h3>Como Banda</h3>
@@ -132,7 +135,7 @@ export const LandingPage = () => {
             </styled.Ul>
           </styled.DivList>
         </styled.Container2>
-      </AnimatedTransition>
+      </AnimatedEntranceTop>
       <styled.Footer>
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
