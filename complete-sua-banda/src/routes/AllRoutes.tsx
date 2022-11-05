@@ -5,7 +5,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { RegisterBand } from "../pages/RegisterBand";
 import { RegisterMusician } from "../pages/RegisterMusician";
 import { DashboardBand } from "../pages/DashboardBand";
-// // import { DashboardMusician } from "../pages/DashboardMusician";
+import { DashboardMusician } from "../pages/DashboardMusician";
 
 export const AllRoutes = () => {
   return (

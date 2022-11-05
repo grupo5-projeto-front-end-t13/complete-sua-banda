@@ -87,6 +87,7 @@ interface iDataMusician {
 }
 
 export interface iRegisterBand {
+  id?: number | undefined;
   email: string;
   password: string;
   bio?: string;
