@@ -7,9 +7,13 @@ import juliaImg from "../../assets/julia.jpg";
 import matheusImg from "../../assets/matheus.jpg";
 import rogerImg from "../../assets/roger.jpg";
 import { LinkComponent } from "../../components/Links";
-import * as styled from "./styled";
-import { FiChevronsDown } from "react-icons/fi";
+import * as styled from "./style";
 import { useState } from "react";
+import {
+  AnimatedEntranceBottom,
+  AnimatedEntranceTop,
+} from "../../routes/AnimatedTransition";
+import { FiChevronsDown } from "react-icons/fi";
 
 interface iDevs {
   name: string;
@@ -60,7 +64,7 @@ export const LandingPage = () => {
     <>
       <styled.HeaderLandingPage>
         <styled.DivLogo1>
-          <img src={logo} alt="Imagem logo" />
+          <img src={logo} alt="Logo CSB" />
           <h1>Complete sua Banda</h1>
         </styled.DivLogo1>
         <styled.DivLinks>
@@ -73,9 +77,10 @@ export const LandingPage = () => {
         </styled.DivLinks>
       </styled.HeaderLandingPage>
       <styled.Bcg />
+
       <styled.Container>
         <styled.DivLogo2>
-          <img src={logo} alt="Imagem logo" />
+          <img src={logo} alt="Logo CSB" />
         </styled.DivLogo2>
         <styled.DivText>
           <h2>Complete sua Banda</h2>
@@ -112,7 +117,7 @@ export const LandingPage = () => {
           </styled.Ul>
         </styled.DivList>
         <div>
-          <img src={logo} alt="Imagem Logo" />
+          <img src={logo} alt="Logo CSB" />
         </div>
         <styled.DivList>
           <h3>Como Músico</h3>
@@ -132,15 +137,12 @@ export const LandingPage = () => {
           </styled.Ul>
         </styled.DivList>
       </styled.Container2>
-      <styled.ScrollDown2>
-        <FiChevronsDown />
-      </styled.ScrollDown2>
       <styled.Footer>
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
           <styled.UlFooter>
-            {devs.map((dev, index) => (
-              <li key={index}>
+            {devs.map((dev) => (
+              <li key={dev.name}>
                 <img src={dev.img} alt={`Imagem ${dev.name}`} />
                 <span>
                   {dev.name} -{" "}
@@ -153,7 +155,7 @@ export const LandingPage = () => {
           </styled.UlFooter>
         </styled.DivDevs>
         <styled.DivLogo2>
-          <img src={logo} alt="Imagem logo" />
+          <img src={logo} alt="Logo CSB" />
         </styled.DivLogo2>
       </styled.Footer>
     </>

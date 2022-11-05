@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ModalDefault = styled.div`
   position: fixed;
@@ -16,28 +16,38 @@ export const ModalDefault = styled.div`
     background: rgba(0, 0, 0, 0.7);
   }
   .content {
-    background: #212529;
-    width: 369px;
-    height: 342px;
+    display: flex;
+    justify-content: center;
     padding: 0px 0;
     position: relative;
-    
-    @media (max-width: 400px) {
-    width: 300px;
-  }
 
+    @media (max-width: 400px) {
+      width: 300px;
+    }
   }
   .btn {
     font-weight: 600;
     font-size: 16px;
     line-height: 26px;
-    color: #868e96;
+    color: var(--color-grey-1);
     border: none;
     background: transparent;
     cursor: pointer;
     position: absolute;
-    right: 20px;
-    top: 12px;
+    right: 40px;
+    top: 8px;
+
+    @media (min-width: 440px) {
+      right: 50px;
+      top: 8px;
+    }
+    @media (min-width: 540px) {
+      right: 60px;
+      top: 8px;
+    }
+    @media (min-width: 768px) {
+      display:none;
+    }
+   
   }
-  
 `;

@@ -43,11 +43,6 @@ export const Card = styled.li`
     width: 32px;
     height: 32px;
 
-    @media (width > 768px){
-        &{
-            display: none;
-        }
-    }
    }
 
    img{
