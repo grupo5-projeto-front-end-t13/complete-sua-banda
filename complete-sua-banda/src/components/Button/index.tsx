@@ -6,7 +6,7 @@ interface iButtonProps {
   children: ReactNode;
 }
 
-export const Button = ({ type, children }: iButtonProps) => {
+export const Button = ({ children, ...rest }: iButtonProps) => {
   return (
     <styled.Button>
       <span>{children}</span>

@@ -5,6 +5,7 @@ import { ModalCard } from "../../components/ModalCard";
 import { Modal } from "../../components/Modal";
 import { api } from "../../services/ApiRequest";
 import { Card } from "../../components/Card";
+import { toast } from "react-toastify";
 
 export const DashboardBand = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } = useContext(AuthContext);
@@ -30,21 +31,56 @@ export const DashboardBand = () => {
     try {
       const { data } = await api.get<iRegisterMusician>(`/users/${idMusician}`);
       setCardMusicians(data);
-      setOpenModal(true)
+      setOpenModal(true);
     } catch (error) {
       console.log(error);
     }
   }
-
-  console.log(cardMusician);
+  
+  const invite = async () => {
+    const info = {
+      userId: cardMusician.id,
+      bio: user?.bio,
+      state: user?.state,
+      social_media: user?.social_media,
+      genre: user?.genre,
+      image: user?.image,
+      name: user?.name,
+      // userId: cardBand.id
+      // email: cardBand.email,
+      // bio: cardBand.bio,
+      // state: cardBand.state,
+      // social_media: cardBand.social_media,
+      // image: cardBand.image,
+      // name: cardBand.name,
+      // username: cardBand.username,
+      // skill: cardBand.skill,
+      // skill_level: cardBand.skill_level,
+    };
+    try {
+      await api.post("/bands_invites", info);
+      toast.success("Convite enviado");
+      setOpenModal(false);
+    } catch (error) {
+      toast.error("Ops... tente novamente!")
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-        {openModal && 
-            <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove}>
-                <ModalCard imagePerfil={cardMusician?.image} name={cardMusician.name}></ModalCard>
-            </Modal>
-        }
+
+      {openModal && (
+        <Modal setOpenModal={setOpenModal}>
+          <ModalCard
+            imagePerfil={cardMusician?.image}
+            name={cardMusician.name}
+            email={cardMusician.email}
+            bio={cardMusician.bio}
+            invite={invite}
+          ></ModalCard>
+        </Modal>
+      )}
       <ul>
         {musicians &&
           musicians.map((musician) => (
