@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { keyframes } from "styled-components";
 import img from "../../assets/background.jpg";
 
 export const HeaderLandingPage = styled.header`
@@ -10,6 +11,7 @@ export const HeaderLandingPage = styled.header`
   background-color: var(--color-grey-4);
   justify-content: space-around;
   width: 100%;
+  border-bottom: 1px solid var(--color-brand);
 `;
 
 export const DivLogo1 = styled.div`
@@ -74,7 +76,7 @@ export const Container = styled.div`
   background-color: var(--color-grey-4);
   position: absolute;
   left: 50%;
-  top: 18rem;
+  top: 22rem;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 875px;
@@ -140,6 +142,48 @@ export const DivText = styled.div`
   }
 `;
 
+const scrollDownRotate = keyframes`
+  0% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+`;
+
+export const ScrollDown1 = styled.div`
+  position: absolute;
+  top: 35rem;
+  left: 50%;
+  font-size: 26px;
+  margin: 0 auto;
+  color: var(--color-brand);
+  animation: ${scrollDownRotate} 1s infinite;
+
+  @media (min-width: 768px) {
+    font-size: 30px;
+    top: 38rem;
+  }
+`;
+
+export const ScrollDown2 = styled.div`
+  position: absolute;
+  top: 65rem;
+  left: 50%;
+  font-size: 26px;
+  margin: 0 auto;
+  color: var(--color-brand);
+  animation: ${scrollDownRotate} 1s infinite;
+
+  @media (min-width: 768px) {
+    font-size: 30px;
+    top: 68rem;
+  }
+`;
+
 export const Container2 = styled.div`
   display: flex;
   justify-content: space-around;
@@ -149,7 +193,7 @@ export const Container2 = styled.div`
   background-color: var(--color-grey-4);
   position: absolute;
   left: 50%;
-  top: 47rem;
+  top: 51rem;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 875px;
@@ -162,7 +206,7 @@ export const Container2 = styled.div`
   }
 
   @media (min-width: 768px) {
-    top: 42.2rem;
+    top: 51rem;
     flex-direction: row;
     gap: unset;
 
@@ -240,11 +284,12 @@ export const Footer = styled.footer`
   background-color: var(--color-grey-4);
   position: absolute;
   left: 50%;
-  top: 84rem;
+  top: 85rem;
   transform: translate(-50%, -50%);
   width: 100%;
   padding: 25px 20px;
   gap: 2rem;
+  border-top: 1px solid var(--color-brand);
 
   h3 {
     text-align: center;
@@ -258,7 +303,7 @@ export const Footer = styled.footer`
   }
 
   @media (min-width: 768px) {
-    top: 70rem;
+    top: 85rem;
     flex-direction: row;
     align-items: center;
   }

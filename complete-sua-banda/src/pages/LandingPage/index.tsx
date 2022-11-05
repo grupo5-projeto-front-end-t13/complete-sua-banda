@@ -8,6 +8,7 @@ import matheusImg from "../../assets/matheus.jpg";
 import rogerImg from "../../assets/roger.jpg";
 import { LinkComponent } from "../../components/Links";
 import * as styled from "./styled";
+import { FiChevronsDown } from "react-icons/fi";
 import { useState } from "react";
 
 interface iDevs {
@@ -89,6 +90,9 @@ export const LandingPage = () => {
           </span>
         </styled.DivText>
       </styled.Container>
+      <styled.ScrollDown1>
+        <FiChevronsDown />
+      </styled.ScrollDown1>
       <styled.Container2>
         <styled.DivList>
           <h3>Como Banda</h3>
@@ -128,6 +132,9 @@ export const LandingPage = () => {
           </styled.Ul>
         </styled.DivList>
       </styled.Container2>
+      <styled.ScrollDown2>
+        <FiChevronsDown />
+      </styled.ScrollDown2>
       <styled.Footer>
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
