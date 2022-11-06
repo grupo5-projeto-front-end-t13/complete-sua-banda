@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const DashboardMusician = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } = useContext(AuthContext);
+  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
+    useContext(AuthContext);
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getBands() {
@@ -37,29 +38,40 @@ export const DashboardMusician = () => {
     }
   }
 
-  const remove = async(idUser: number): Promise<void> => {
-    try{
-      await api.delete(`/users/${idUser}`)
-      toast.success("Cadastro removido!")
-      setTimeout(()=>{
-        navigate("/")
-      }, 2000)
-    }catch(error){
-      console.log(error)
+  const remove = async (idUser: number): Promise<void> => {
+    try {
+      await api.delete(`/users/${idUser}`);
+      toast.success("Cadastro removido!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div>
-      <button onClick={()=> setOpenModalRemove(true)}>Abrir Modal</button>
+      <button onClick={() => setOpenModalRemove(true)}>Abrir Modal</button>
       {openModalRemove && (
-        <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove}>
-          <ModalRemove image={user?.image} name={user?.name} id={user?.id} remove={remove} />
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+        >
+          <ModalRemove
+            image={user?.image}
+            name={user?.name}
+            id={user?.id}
+            remove={remove}
+          />
         </Modal>
       )}
       {openModal && (
-        <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove}>
-          <ModalCard imagePerfil="" name={cardBand.name} />
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+        >
+          {/* <ModalCard imagePerfil="" name={cardBand.name} /> */}
         </Modal>
       )}
       <ul>
