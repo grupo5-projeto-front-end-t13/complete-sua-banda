@@ -13,6 +13,7 @@ import {
   AnimatedEntranceBottom,
   AnimatedEntranceTop,
 } from "../../routes/AnimatedTransition";
+import { FiChevronsDown } from "react-icons/fi";
 
 interface iDevs {
   name: string;
