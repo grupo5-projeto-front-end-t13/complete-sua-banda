@@ -10,7 +10,8 @@ import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style"
 
 export const DashboardBand = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } = useContext(AuthContext);
+  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
+    useContext(AuthContext);
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -38,7 +39,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   }
-  
+
   const invite = async () => {
     const info = {
       userId: cardMusician.id,
@@ -64,14 +65,13 @@ export const DashboardBand = () => {
       toast.success("Convite enviado");
       setOpenModal(false);
     } catch (error) {
-      toast.error("Ops... tente novamente!")
+      toast.error("Ops... tente novamente!");
       console.log(error);
     }
   };
 
   return (
     <div>
-
       {/* {openModal && (
         <Modal setOpenModal={setOpenModal}>
           <ModalCard

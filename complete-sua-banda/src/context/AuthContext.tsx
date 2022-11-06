@@ -22,7 +22,6 @@ interface iUserContext {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openModalRemove: boolean;
   setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
-
 }
 
 interface iAuthContextProps {
@@ -130,7 +129,7 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
-  const [openModalRemove, setOpenModalRemove] = useState(false)
+  const [openModalRemove, setOpenModalRemove] = useState(false);
 
   const navigate = useNavigate();
 
@@ -233,15 +232,14 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
 
       localStorage.setItem("@token_CSB", data.accessToken);
       localStorage.setItem("@id_CSB", data.user.id);
-      
-      if(data.user.type === "musico"){
-        navigate("/dashboardMusician")
-      }else{
-        navigate("/dashboardBand")
-      }
 
+      if (data.user.type === "musico") {
+        navigate("/dashboardMusician", { replace: true });
+      } else {
+        navigate("/dashboardBand", { replace: true });
+      }
     } catch (error) {
-      toast.error("Usuário inválido! Faça seu cadastro.")
+      toast.error("Usuário inválido! Faça seu cadastro.");
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
     }
@@ -261,7 +259,6 @@ export const AuthProvider = ({ children }: iAuthContextProps) => {
         setOpenModal,
         openModalRemove,
         setOpenModalRemove,
-
       }}
     >
       {children}
