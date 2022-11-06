@@ -142,7 +142,7 @@ export const DivText = styled.div`
   }
 `;
 
-const scrollDownRotate = keyframes`
+const scrollDownAtention = keyframes`
   0% {
     transform: translateY(10px);
   }
@@ -161,7 +161,7 @@ export const ScrollDown1 = styled.div`
   font-size: 26px;
   margin: 0 auto;
   color: var(--color-brand);
-  animation: ${scrollDownRotate} 1s infinite;
+  animation: ${scrollDownAtention} 1s infinite;
 
   @media (min-width: 768px) {
     font-size: 30px;
@@ -176,7 +176,7 @@ export const ScrollDown2 = styled.div`
   font-size: 26px;
   margin: 0 auto;
   color: var(--color-brand);
-  animation: ${scrollDownRotate} 1s infinite;
+  animation: ${scrollDownAtention} 1s infinite;
 
   @media (min-width: 768px) {
     font-size: 30px;
