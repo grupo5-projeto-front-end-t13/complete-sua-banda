@@ -6,6 +6,8 @@ import { Modal } from "../../components/Modal";
 import { api } from "../../services/ApiRequest";
 import { Card } from "../../components/Card";
 import { toast } from "react-toastify";
+import { NavDashBoard } from "../../components/NavDashBoard";
+import * as styled from "./style"
 
 export const DashboardBand = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } = useContext(AuthContext);
@@ -70,7 +72,7 @@ export const DashboardBand = () => {
   return (
     <div>
 
-      {openModal && (
+      {/* {openModal && (
         <Modal setOpenModal={setOpenModal}>
           <ModalCard
             imagePerfil={cardMusician?.image}
@@ -80,22 +82,26 @@ export const DashboardBand = () => {
             invite={invite}
           ></ModalCard>
         </Modal>
-      )}
-      <ul>
-        {musicians &&
-          musicians.map((musician) => (
-            <Card
-              id={musician.id}
-              getCardProps={getCardProps}
-              key={musician.id}
-              name={musician.name}
-              image={musician?.image}
-              type="musico"
-              state={musician.state}
-              skill={musician.skill}
-            />
-          ))}
-      </ul>
+      )} */}
+      <NavDashBoard>
+        <styled.ContainerUl>
+          <ul>
+          {musicians &&
+            musicians.map((musician) => (
+                <Card
+                  id={musician.id}
+                  getCardProps={getCardProps}
+                  key={musician.id}
+                  name={musician.name}
+                  image={musician?.image}
+                  type="musico"
+                  state={musician.state}
+                  skill={musician.skill}
+                />
+              ))}
+          </ul>
+        </styled.ContainerUl>
+      </NavDashBoard>
     </div>
   );
 };
