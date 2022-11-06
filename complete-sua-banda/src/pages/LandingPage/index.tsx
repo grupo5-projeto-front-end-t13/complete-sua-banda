@@ -96,6 +96,9 @@ export const LandingPage = () => {
           </styled.DivText>
         </styled.Container>
       </AnimatedEntranceBottom>
+      <styled.ScrollDown1>
+        <FiChevronsDown />
+      </styled.ScrollDown1>
       <AnimatedEntranceTop>
         <styled.Container2>
           <styled.DivList>
@@ -137,6 +140,9 @@ export const LandingPage = () => {
           </styled.DivList>
         </styled.Container2>
       </AnimatedEntranceTop>
+      <styled.ScrollDown2>
+        <FiChevronsDown />
+      </styled.ScrollDown2>
       <styled.Footer>
         <styled.DivDevs>
           <h3>Equipe de desenvolvimento</h3>
