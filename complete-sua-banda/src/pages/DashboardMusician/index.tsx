@@ -7,6 +7,8 @@ import { Card } from "../../components/Card";
 import { ModalRemove } from "../../components/ModalRemove";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { NavDashBoard } from "../../components/NavDashBoard";
+import * as styled from "./style"
 
 export const DashboardMusician = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
@@ -74,22 +76,26 @@ export const DashboardMusician = () => {
           {/* <ModalCard imagePerfil="" name={cardBand.name} /> */}
         </Modal>
       )}
-      <ul>
-        {bands &&
-          bands.map((band) => (
-            <Card
-              id={band.id}
-              getCardProps={getCardProps}
-              key={band.id}
-              name={band.name}
-              image={band?.image}
-              type="banda"
-              state={band.state}
-              genre={band.genre}
-              requirement={band.requirement}
-            />
-          ))}
-      </ul>
+      <NavDashBoard>
+        <styled.ContainerUlMusician>
+          <ul>
+            {bands &&
+              bands.map((band) => (
+                <Card
+                  id={band.id}
+                  getCardProps={getCardProps}
+                  key={band.id}
+                  name={band.name}
+                  image={band?.image}
+                  type="banda"
+                  state={band.state}
+                  genre={band.genre}
+                  requirement={band.requirement}
+                />
+              ))}
+          </ul>
+        </styled.ContainerUlMusician>
+      </NavDashBoard>
     </div>
   );
 };

@@ -5,7 +5,7 @@ export const Card = styled.li`
 
    cursor: pointer;
  
-   max-width: 240px;
+   width: 240px;
    height: 146px;
    
    color: #fff;
@@ -19,6 +19,11 @@ export const Card = styled.li`
     background-color: rgba(25, 24, 24, 0.7);
        
     transition: 0.5s;
+   }
+
+   button{
+    background: transparent;
+    border: none;
    }
 
    figure{

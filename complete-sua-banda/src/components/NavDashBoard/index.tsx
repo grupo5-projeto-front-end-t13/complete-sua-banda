@@ -2,8 +2,13 @@ import { Input } from "../Input";
 import { CiSearch } from "react-icons/ci";
 import * as styled from "./style";
 import logo from "../../assets/Logo-CSB.png";
+import { ReactNode } from "react";
 
-export const NavDashBoard = () => {
+interface iNavDashBoard{
+  children: ReactNode;
+}
+
+export const NavDashBoard = ({children}:iNavDashBoard) => {
   return (
     <>
       <styled.Nav>
@@ -29,7 +34,7 @@ export const NavDashBoard = () => {
           <img src={logo} alt="Logo CSB" />
         </styled.ImgLogo>
       </styled.Nav>
-
+      {children}
       <styled.NavFooter>
         <styled.Icon1 />
         <img src={logo} alt="Logo CSB" />
