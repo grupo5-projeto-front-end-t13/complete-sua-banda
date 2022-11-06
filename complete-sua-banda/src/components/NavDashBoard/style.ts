@@ -3,14 +3,14 @@ import { FiBell } from "react-icons/fi";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  z-index: 101;
+  /* z-index: 101; */
   background-color: var(--color-grey-4);
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 5%;
-  position: fixed;
+  /* position: fixed; */
 
   @media (min-width: 768px) {
     flex-direction: row-reverse;
