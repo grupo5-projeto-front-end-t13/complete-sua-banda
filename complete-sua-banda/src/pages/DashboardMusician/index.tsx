@@ -1,18 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext, iRegisterBand } from "../../context/AuthContext";
+import React, { useEffect, useState } from "react";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { iRegisterBand } from "../../services/RegisterBand";
 import { ModalCard } from "../../components/ModalCard";
 import { Modal } from "../../components/Modal";
+import { ModalUpdateMusician } from "../../components/ModalUpdateMusician";
 import { api } from "../../services/ApiRequest";
 import { Card } from "../../components/Card";
 import { ModalRemove } from "../../components/ModalRemove";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
-import * as styled from "./style"
+import * as styled from "./style";
 
 export const DashboardMusician = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
-    useContext(AuthContext);
+  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM } =
+    useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
@@ -40,6 +42,29 @@ export const DashboardMusician = () => {
     }
   }
 
+  const invite = async () => {
+    const info = {
+      userId: cardBand.id,
+      email: user?.email,
+      bio: user?.bio,
+      state: user?.state,
+      social_media: user?.social_media,
+      image: user?.image,
+      name: user?.name,
+      username: user?.username,
+      skill: user?.skill,
+      skill_level: user?.skill_level,
+    };
+    try {
+      await api.post("/members_invites", info);
+      toast.success("Convite enviado");
+      setOpenModal(false);
+    } catch (error) {
+      toast.error("Ops... tente novamente!");
+      console.log(error);
+    }
+  };
+
   const remove = async (idUser: number): Promise<void> => {
     try {
       await api.delete(`/users/${idUser}`);
@@ -54,11 +79,11 @@ export const DashboardMusician = () => {
 
   return (
     <div>
-      <button onClick={() => setOpenModalRemove(true)}>Abrir Modal</button>
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
         >
           <ModalRemove
             image={user?.image}
@@ -72,12 +97,29 @@ export const DashboardMusician = () => {
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
         >
-          {/* <ModalCard imagePerfil="" name={cardBand.name} /> */}
+          <ModalCard
+            imagePerfil={cardBand.image}
+            name={cardBand.name}
+            email={cardBand.email}
+            bio={cardBand.bio}
+            invite={invite}
+            type={cardBand.type}
+          />
         </Modal>
       )}
-      <NavDashBoard>
+      {
+        openModalUpdateM && (
+          <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove} setOpenModalUpdateM={setOpenModalUpdateM}>
+              <ModalUpdateMusician setUser={setUser} />
+          </Modal>
+        )
+      }
+
+      <NavDashBoard image={user?.image}>
         <styled.ContainerUlMusician>
+          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
           <ul>
             {bands &&
               bands.map((band) => (
@@ -86,7 +128,7 @@ export const DashboardMusician = () => {
                   getCardProps={getCardProps}
                   key={band.id}
                   name={band.name}
-                  image={band?.image}
+                  image={band.image}
                   type="banda"
                   state={band.state}
                   genre={band.genre}

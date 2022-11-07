@@ -5,11 +5,12 @@ export const Container = styled.div`
   color: var(--color-brand);
   border: 1px solid var(--color-brand);
   border-radius: 4px;
-  padding: 8px 7px;
-  width: 220px;
+  padding: 8px 0px 8px 8px;
+  width: 225px;
   height: 30px;
   display: flex;
   align-items: center;
+  margin-left: 8px;
 
   select {
     margin-left: 10px;

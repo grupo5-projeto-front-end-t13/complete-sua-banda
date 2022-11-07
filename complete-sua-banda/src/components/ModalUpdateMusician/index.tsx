@@ -25,8 +25,9 @@ import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
 
-export const ModalUpdate = () => {
-  const {user} = useContext(AuthContext)
+export const ModalUpdateMusician = ({setUser}: any) => {
+
+  const id = localStorage.getItem("@id_CSB")
 
   const {
     register,
@@ -60,10 +61,10 @@ export const ModalUpdate = () => {
       username,
       skill_level,
     };
-    console.log(dataMusician)
     try {
-      const { data } = await api.patch<iDataMusician>(`/users/${user?.id}` , dataMusician);
+      await api.patch<iDataMusician>(`/users/${id}` , dataMusician);
       toast.success("Cadastro Atualizado com sucesso!");
+      setUser(dataMusician)
       
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
@@ -76,7 +77,7 @@ export const ModalUpdate = () => {
 
   return (
     <styled.DivContainer>
-      <Form onSubmit={handleForm}>
+      <form onSubmit={handleForm}>
         <h1>Complete seu cadastro</h1>
 
         <Input
@@ -211,7 +212,8 @@ export const ModalUpdate = () => {
         </Select> */}
 
         <Button type="submit">Atualizar dados</Button>
-      </Form>
+
+      </form>
     </styled.DivContainer>
   );
 };

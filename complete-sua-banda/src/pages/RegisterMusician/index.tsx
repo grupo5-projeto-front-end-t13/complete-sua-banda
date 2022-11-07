@@ -11,8 +11,7 @@ import { Error } from "../../components/Error";
 import * as styled from "./style";
 import { Select } from "../../components/Select";
 import { Button } from "../../components/Button";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useMusicianContext } from "../../context/MusicianContext";
 import {
   AnimatedEntranceBottom,
   AnimatedEntrancePopIn,
@@ -27,7 +26,7 @@ interface iFormRegisterMusician {
 }
 
 export const RegisterMusician = () => {
-  const { submitRegisterMusicians } = useContext(AuthContext);
+  const { submitMusician } = useMusicianContext();
 
   const {
     register,
@@ -37,7 +36,7 @@ export const RegisterMusician = () => {
     resolver: yupResolver(formSchemaMusician),
   });
 
-  const handleForm = handleSubmit((data) => submitRegisterMusicians(data));
+  const handleForm = handleSubmit((data) => submitMusician(data));
 
   return (
     <>
