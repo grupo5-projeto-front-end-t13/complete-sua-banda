@@ -13,6 +13,7 @@ export interface iRegisterMusician {
   username?: string;
   skill: string;
   skill_level?: string;
+  searched?: string[] | undefined;
 }
 
 export interface iDataMusician {
