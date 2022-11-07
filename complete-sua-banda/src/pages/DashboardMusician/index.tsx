@@ -8,7 +8,7 @@ import { ModalRemove } from "../../components/ModalRemove";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
-import * as styled from "./style"
+import * as styled from "./style";
 
 export const DashboardMusician = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
@@ -40,6 +40,29 @@ export const DashboardMusician = () => {
     }
   }
 
+  const invite = async () => {
+    const info = {
+      userId: cardBand.id,
+      email: user?.email,
+      bio: user?.bio,
+      state: user?.state,
+      social_media: user?.social_media,
+      image: user?.image,
+      name: user?.name,
+      username: user?.username,
+      skill: user?.skill,
+      skill_level: user?.skill_level,
+    };
+    try {
+      await api.post("/members_invites", info);
+      toast.success("Convite enviado");
+      setOpenModal(false);
+    } catch (error) {
+      toast.error("Ops... tente novamente!");
+      console.log(error);
+    }
+  };
+
   const remove = async (idUser: number): Promise<void> => {
     try {
       await api.delete(`/users/${idUser}`);
@@ -54,7 +77,6 @@ export const DashboardMusician = () => {
 
   return (
     <div>
-      <button onClick={() => setOpenModalRemove(true)}>Abrir Modal</button>
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
@@ -73,10 +95,18 @@ export const DashboardMusician = () => {
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
         >
-          {/* <ModalCard imagePerfil="" name={cardBand.name} /> */}
+          <ModalCard
+            imagePerfil={cardBand.image}
+            name={cardBand.name}
+            email={cardBand.email}
+            bio={cardBand.bio}
+            invite={invite}
+            type={cardBand.type}
+          />
         </Modal>
       )}
-      <NavDashBoard>
+
+      <NavDashBoard image={user?.image}>
         <styled.ContainerUlMusician>
           <ul>
             {bands &&
@@ -86,7 +116,7 @@ export const DashboardMusician = () => {
                   getCardProps={getCardProps}
                   key={band.id}
                   name={band.name}
-                  image={band?.image}
+                  image={band.image}
                   type="banda"
                   state={band.state}
                   genre={band.genre}

@@ -3,7 +3,7 @@ import * as styled from "./style"
 import { CgAdd } from 'react-icons/cg';
 
 interface iCardProps{
-  name: string;
+  name?: string;
   image?: string;
   state?: string;
   skill?: string;
@@ -14,7 +14,7 @@ interface iCardProps{
   id?: number;
 }
 
-export const Card = ({name, image, state, skill, type, genre, requirement, getCardProps, id }: iCardProps) => {
+export const Card = ({name, image, state, skill, type, genre, requirement, getCardProps, id}: iCardProps) => {
   return (
     <styled.Card onClick={()=>getCardProps(id)}>
         <div>
