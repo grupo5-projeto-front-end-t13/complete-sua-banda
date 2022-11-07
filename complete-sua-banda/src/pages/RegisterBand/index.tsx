@@ -8,13 +8,12 @@ import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import { Button } from "../../components/Button";
 import {
   AnimatedEntranceBottom,
   AnimatedEntrancePopIn,
 } from "../../routes/AnimatedTransition";
+import { useBandContext } from "../../context/BandContext";
 
 interface iFormRegisterBand {
   name: string;
@@ -24,7 +23,7 @@ interface iFormRegisterBand {
 }
 
 export const RegisterBand = () => {
-  const { submitRegisterBand } = useContext(AuthContext);
+  const { submitRegisterBand } = useBandContext();
 
   const {
     register,

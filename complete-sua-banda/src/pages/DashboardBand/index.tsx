@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
-import { AuthContext, iRegisterMusician } from "../../context/AuthContext";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { iRegisterMusician } from "../../services/RegisterMusician";
 import { ModalCard } from "../../components/ModalCard";
 import { Modal } from "../../components/Modal";
 import { api } from "../../services/ApiRequest";
 import { Card } from "../../components/Card";
 import { toast } from "react-toastify";
 import { NavDashBoard } from "../../components/NavDashBoard";
-import * as styled from "./style"
+import * as styled from "./style";
 
 export const DashboardBand = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
-    useContext(AuthContext);
+    useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -86,8 +87,8 @@ export const DashboardBand = () => {
       <NavDashBoard>
         <styled.ContainerUl>
           <ul>
-          {musicians &&
-            musicians.map((musician) => (
+            {musicians &&
+              musicians.map((musician) => (
                 <Card
                   id={musician.id}
                   getCardProps={getCardProps}

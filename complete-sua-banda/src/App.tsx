@@ -1,9 +1,8 @@
-// import { RegisterBand } from "./pages/RegisterBand";
 import { AllRoutes } from "./routes/AllRoutes";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthProvider } from "./context/AuthContext";
+import { Providers } from "./context/Providers";
 
 const App = () => {
   return (
@@ -18,9 +17,9 @@ const App = () => {
         draggable={true}
         theme="colored"
       />
-      <AuthProvider>
+      <Providers>
         <AllRoutes />
-      </AuthProvider>
+      </Providers>
     </>
   );
 };

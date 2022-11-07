@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import { Loading } from "../Loading";
 
 export const ProtectedRoutes = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useGlobalContext();
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
 
   return user ? <Outlet /> : <Navigate to="/" replace />;
 };
