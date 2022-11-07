@@ -35,7 +35,8 @@ export const BandProvider = ({ children }: iBandContextProps) => {
     };
 
     try {
-      await RegisterBand(dataBand);
+      const data = await RegisterBand(dataBand);
+      console.log(data);
       toast.success("Cadastro realizado com sucesso!");
       navigate("/login");
     } catch (error) {

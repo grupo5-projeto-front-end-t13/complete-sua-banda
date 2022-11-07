@@ -12,6 +12,7 @@ export interface iRegisterBand {
   type?: string;
   name: string;
   requirement?: string[];
+  searched?: iRegisterBand[];
 }
 
 export interface iDataBand {
