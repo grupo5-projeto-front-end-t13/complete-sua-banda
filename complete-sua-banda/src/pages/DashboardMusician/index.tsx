@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext, iRegisterBand } from "../../context/AuthContext";
+import React, { useEffect, useState } from "react";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { iRegisterBand } from "../../services/RegisterBand";
 import { ModalCard } from "../../components/ModalCard";
 import { Modal } from "../../components/Modal";
 import { api } from "../../services/ApiRequest";
@@ -12,7 +13,7 @@ import * as styled from "./style";
 
 export const DashboardMusician = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
-    useContext(AuthContext);
+    useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();

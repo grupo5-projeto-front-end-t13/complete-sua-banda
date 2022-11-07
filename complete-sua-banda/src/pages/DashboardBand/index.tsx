@@ -1,23 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
-import { AuthContext, iRegisterMusician } from "../../context/AuthContext";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { iRegisterMusician } from "../../services/RegisterMusician";
 import { ModalCard } from "../../components/ModalCard";
 import { Modal } from "../../components/Modal";
 import { api } from "../../services/ApiRequest";
 import { Card } from "../../components/Card";
 import { toast } from "react-toastify";
 import { NavDashBoard } from "../../components/NavDashBoard";
-import * as styled from "./style"
+import * as styled from "./style";
 import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
 
 export const DashboardBand = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
-    useContext(AuthContext);
+    useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getMusicians() {
@@ -91,7 +92,10 @@ export const DashboardBand = () => {
         </Modal>
       )}
       {openModal && (
-        <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove}>
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+        >
           <ModalCard
             imagePerfil={cardMusician?.image}
             name={cardMusician.username}
@@ -105,8 +109,8 @@ export const DashboardBand = () => {
       <NavDashBoard image={user?.image}>
         <styled.ContainerUl>
           <ul>
-          {musicians &&
-            musicians.map((musician) => (
+            {musicians &&
+              musicians.map((musician) => (
                 <Card
                   id={musician.id}
                   getCardProps={getCardProps}

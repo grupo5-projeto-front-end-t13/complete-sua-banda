@@ -8,8 +8,7 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { LinkComponent } from "../../components/Links";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useGlobalContext } from "../../context/GlobalContext";
 import { Button } from "../../components/Button";
 import {
   AnimatedEntranceBottom,
@@ -21,7 +20,7 @@ interface iFormLoginProps {
   password: string;
 }
 export const LoginPage = () => {
-  const { submitLogin } = useContext(AuthContext);
+  const { submitLogin } = useGlobalContext();
 
   const {
     register,
