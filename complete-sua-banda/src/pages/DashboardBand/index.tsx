@@ -8,6 +8,8 @@ import { Card } from "../../components/Card";
 import { toast } from "react-toastify";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style"
+import { ModalRemove } from "../../components/ModalRemove";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardBand = () => {
   const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
@@ -15,6 +17,7 @@ export const DashboardBand = () => {
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getMusicians() {
@@ -49,16 +52,6 @@ export const DashboardBand = () => {
       genre: user?.genre,
       image: user?.image,
       name: user?.name,
-      // userId: cardBand.id
-      // email: cardBand.email,
-      // bio: cardBand.bio,
-      // state: cardBand.state,
-      // social_media: cardBand.social_media,
-      // image: cardBand.image,
-      // name: cardBand.name,
-      // username: cardBand.username,
-      // skill: cardBand.skill,
-      // skill_level: cardBand.skill_level,
     };
     try {
       await api.post("/bands_invites", info);
@@ -70,20 +63,46 @@ export const DashboardBand = () => {
     }
   };
 
+  const remove = async (idUser: number): Promise<void> => {
+    try {
+      await api.delete(`/users/${idUser}`);
+      toast.success("Cadastro removido!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      {/* {openModal && (
-        <Modal setOpenModal={setOpenModal}>
+      {openModalRemove && (
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+        >
+          <ModalRemove
+            image={user?.image}
+            name={user?.name}
+            id={user?.id}
+            remove={remove}
+          />
+        </Modal>
+      )}
+      {openModal && (
+        <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove}>
           <ModalCard
             imagePerfil={cardMusician?.image}
-            name={cardMusician.name}
+            name={cardMusician.username}
             email={cardMusician.email}
             bio={cardMusician.bio}
+            type={cardMusician.type}
             invite={invite}
           ></ModalCard>
         </Modal>
-      )} */}
-      <NavDashBoard>
+      )}
+      <NavDashBoard image={user?.image}>
         <styled.ContainerUl>
           <ul>
           {musicians &&

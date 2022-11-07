@@ -21,9 +21,6 @@ export const ModalDefault = styled.div`
     padding: 0px 0;
     position: relative;
 
-    @media (max-width: 400px) {
-      width: 300px;
-    }
   }
   .btn {
     font-weight: 600;
@@ -34,15 +31,11 @@ export const ModalDefault = styled.div`
     background: transparent;
     cursor: pointer;
     position: absolute;
-    right: 40px;
+    right: 10px;
     top: 8px;
 
-    @media (min-width: 440px) {
-      right: 50px;
-      top: 8px;
-    }
-    @media (min-width: 540px) {
-      right: 60px;
+    @media (min-width: 400px) {
+      right: 0px;
       top: 8px;
     }
     @media (min-width: 768px) {

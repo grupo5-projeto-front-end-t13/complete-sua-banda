@@ -4,8 +4,13 @@ export const Container = styled.div`
   background: #4c4948;
   border-radius: 4px;
   padding: 16px 19px;
-  width: 80%;
+  width: 280px;
   max-width: 600px;
+
+  @media (min-width: 600px) {
+    width: 380px;
+  }
+
 
   .divBtn {
     margin-top: 35px;
