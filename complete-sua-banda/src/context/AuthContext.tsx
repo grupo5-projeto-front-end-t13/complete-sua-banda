@@ -86,7 +86,7 @@ export interface iRegisterMusician {
   skill: string;
   skill_level?: string;
 }
-interface iDataMusician {
+export interface iDataMusician {
   user: iRegisterMusician;
 }
 

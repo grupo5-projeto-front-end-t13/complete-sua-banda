@@ -89,7 +89,6 @@ export const RegisterMusician = () => {
                 <option value="Teclado">Teclado</option>
                 <option value="Bateria">Bateria</option>
                 <option value="Vocal">Vocal</option>
-                <option value="Outro">Outro</option>
               </Select>
               <div className="redirect">
                 <p>Já possui cadastro?</p>
