@@ -12,8 +12,14 @@ import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 
 export const DashboardMusician = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove } =
-    useGlobalContext();
+  const {
+    user,
+    setOpenModal,
+    setOpenModalRemove,
+    openModal,
+    openModalRemove,
+    filteredBands,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
@@ -107,24 +113,43 @@ export const DashboardMusician = () => {
         </Modal>
       )}
 
-      <NavDashBoard image={user?.image}>
+      <NavDashBoard image={user?.image} bands={bands}>
         <styled.ContainerUlMusician>
-          <ul>
-            {bands &&
-              bands.map((band) => (
-                <Card
-                  id={band.id}
-                  getCardProps={getCardProps}
-                  key={band.id}
-                  name={band.name}
-                  image={band.image}
-                  type="banda"
-                  state={band.state}
-                  genre={band.genre}
-                  requirement={band.requirement}
-                />
-              ))}
-          </ul>
+          {filteredBands?.length === 0 ? (
+            <ul>
+              {bands &&
+                bands.map((band) => (
+                  <Card
+                    id={band.id}
+                    getCardProps={getCardProps}
+                    key={band.id}
+                    name={band.name}
+                    image={band.image}
+                    type="banda"
+                    state={band.state}
+                    genre={band.genre}
+                    requirement={band.requirement}
+                  />
+                ))}
+            </ul>
+          ) : (
+            <ul>
+              {filteredBands &&
+                filteredBands?.map((filteredBand) => (
+                  <Card
+                    id={filteredBand.id}
+                    getCardProps={getCardProps}
+                    key={filteredBand.id}
+                    name={filteredBand.name}
+                    image={filteredBand.image}
+                    type="banda"
+                    state={filteredBand.state}
+                    genre={filteredBand.genre}
+                    requirement={filteredBand.requirement}
+                  />
+                ))}
+            </ul>
+          )}
         </styled.ContainerUlMusician>
       </NavDashBoard>
     </div>

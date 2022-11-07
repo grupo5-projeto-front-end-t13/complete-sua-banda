@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/ApiRequest";
 import { toast } from "react-toastify";
 import { iLogin, Login } from "../services/Login";
+import { iRegisterMusician } from "../services/RegisterMusician";
+import { iRegisterBand } from "../services/RegisterBand";
 
 interface iGlobalContext {
   user: iUser | null;
@@ -20,6 +22,14 @@ interface iGlobalContext {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openModalRemove: boolean;
   setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
+  filteredMusicians: iRegisterMusician[] | undefined;
+  setFilteredMusicians: React.Dispatch<
+    React.SetStateAction<iRegisterMusician[] | undefined>
+  >;
+  filteredBands: iRegisterBand[] | undefined;
+  setFilteredBands: React.Dispatch<
+    React.SetStateAction<iRegisterBand[] | undefined>
+  >;
 }
 
 interface iGlobalContextProps {
@@ -79,6 +89,12 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
+  const [filteredMusicians, setFilteredMusicians] = useState<
+    iRegisterMusician[] | undefined
+  >([]);
+  const [filteredBands, setFilteredBands] = useState<
+    iRegisterBand[] | undefined
+  >([]);
 
   const navigate = useNavigate();
 
@@ -92,6 +108,11 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
+          if (data.type === "musico") {
+            navigate("/dashboardMusician", { replace: true });
+          } else {
+            navigate("/dashboardBand", { replace: true });
+          }
         } catch (error) {
           console.error(error);
           clearStorage();
@@ -145,6 +166,10 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         setOpenModal,
         openModalRemove,
         setOpenModalRemove,
+        filteredMusicians,
+        setFilteredMusicians,
+        filteredBands,
+        setFilteredBands,
       }}
     >
       {children}

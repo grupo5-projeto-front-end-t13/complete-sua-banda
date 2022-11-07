@@ -49,7 +49,7 @@ export const LoginPage = () => {
               <Input
                 name="email"
                 title="Email"
-                type="email"
+                type="text"
                 register={register}
                 icon={<AiOutlineMail />}
               />
