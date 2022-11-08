@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../../components/Button";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { iRegisterMusician } from "../../services/RegisterMusician";
 import { ModalCard } from "../../components/ModalCard";
@@ -11,10 +10,21 @@ import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
+import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 
 export const DashboardBand = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove, setOpenModalUpdateM, openModalUpdateM, filteredMusicians } =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    openModal,
+    openModalRemove,
+    setOpenModalUpdateM,
+    setOpenModalUpdateB,
+    filteredMusicians,  
+    openModalUpdateB,
+  } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -78,11 +88,23 @@ export const DashboardBand = () => {
 
   return (
     <div>
+      {openModalUpdateB && (
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
+        >
+          <ModalUpdateBand setUser={setUser} />
+        </Modal>
+      )}
+
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalRemove
             image={user?.image}
@@ -97,6 +119,7 @@ export const DashboardBand = () => {
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
             imagePerfil={cardMusician?.image}

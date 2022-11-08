@@ -8,18 +8,21 @@ interface iModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenModalUpdateM: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenModalUpdateB: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Modal = ({
   children,
   setOpenModal,
   setOpenModalRemove,
-  setOpenModalUpdateM
+  setOpenModalUpdateM,
+  setOpenModalUpdateB
 }: iModalProps) => {
   const modalRef = useOutsideClick(() => {
     setOpenModal(false);
     setOpenModalRemove(false);
     setOpenModalUpdateM(false);
+    setOpenModalUpdateB(false);
 
   });
 
@@ -27,6 +30,7 @@ export const Modal = ({
     setOpenModal(false);
     setOpenModalRemove(false);
     setOpenModalUpdateM(false);
+    setOpenModalUpdateB(false);
 
   };
 

@@ -32,6 +32,13 @@ interface iGlobalContext {
   setFilteredBands: React.Dispatch<
     React.SetStateAction<iRegisterBand[] | undefined>
   >;
+  openModalUpdateB: boolean;
+  setOpenModalUpdateB: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface iApiError {
+  status: string;
+  message?: string;
 }
 
 interface iGlobalContextProps {
@@ -77,7 +84,7 @@ export interface iUser {
   skill?: string;
   skill_level?: string;
   genre?: string;
-  requirement?: string[];
+  requirement?: string;
   bands_invites?: iBandsInvites[];
   member_invites?: iMemberInvites[];
 }
@@ -98,6 +105,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [filteredBands, setFilteredBands] = useState<
     iRegisterBand[] | undefined
   >([]);
+  const [openModalUpdateB, setOpenModalUpdateB] = useState(false);
 
   const navigate = useNavigate();
 
@@ -186,7 +194,9 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         openModalRemove,
         setOpenModalRemove,
         setOpenModalUpdateM,
-        openModalUpdateM
+        openModalUpdateM,
+        setOpenModalUpdateB,
+        openModalUpdateB,
         filteredMusicians,
         setFilteredMusicians,
         filteredBands,

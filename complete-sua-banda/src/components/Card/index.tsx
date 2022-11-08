@@ -9,7 +9,7 @@ interface iCardProps{
   skill?: string;
   type: string;
   genre?: string;
-  requirement?: string[];
+  requirement?: string;
   getCardProps: Function;
   id?: number;
 }
@@ -19,7 +19,7 @@ export const Card = ({name, image, state, skill, type, genre, requirement, getCa
     <styled.Card onClick={()=>getCardProps(id)}>
         <div>
             <h2>{name}</h2>
-            {type === "musico"? <h2>{state}</h2> : requirement && <h2>Procura-se um {requirement[0]}</h2>  }
+            {type === "musico"? <h2>{state}</h2> : requirement && <h2>Procura-se um {requirement}</h2>  }
             {type === "musico"? <h2>{skill}</h2> : <h2>{genre}</h2> }
         </div>
         <figure>
