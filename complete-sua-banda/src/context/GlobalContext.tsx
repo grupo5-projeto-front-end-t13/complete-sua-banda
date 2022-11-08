@@ -120,15 +120,19 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
           if (data.type === "musico") {
-            const { data } = await api.get<iUser>(`/users/${id}?_embed=bands_invites`);
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=bands_invites`
+            );
             setUser(data);
             navigate("/dashboardMusician", { replace: true });
           } else {
-            const { data } = await api.get<iUser>(`/users/${id}?_embed=members_invites`);
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=members_invites`
+            );
             setUser(data);
             navigate("/dashboardBand", { replace: true });
           }
-          toastOfUpdateProfile(data)
+          toastOfUpdateProfile(data);
         } catch (error) {
           console.error(error);
           clearStorage();
@@ -140,18 +144,22 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
     loadUser();
   }, []);
 
-  const toastOfUpdateProfile = (data:iUser) => {
-
-    if(data.bio === '' || data.image === '' || data.skill_level
-    === '' || data.social_media === '' || data.state === '' || data.username === '' ){
-      toast.error("Complete o seu cadastro",{
-        toastId: "custom-id-yes"
-      })
-    }else{
-      console.log('Não funcionou')
+  const toastOfUpdateProfile = (data: iUser) => {
+    if (
+      data.bio === "" ||
+      data.image === "" ||
+      data.skill_level === "" ||
+      data.social_media === "" ||
+      data.state === "" ||
+      data.username === ""
+    ) {
+      toast.info("Complete o seu cadastro", {
+        toastId: "custom-id-yes",
+      });
+    } else {
+      console.log("Não funcionou");
     }
-
-  }
+  };
 
   const clearStorage = () => {
     localStorage.removeItem("@id_CSB");
@@ -174,10 +182,10 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
 
       if (data.user.type === "musico") {
         navigate("/dashboardMusician", { replace: true });
-        toastOfUpdateProfile(data.user)
+        toastOfUpdateProfile(data.user);
       } else {
         navigate("/dashboardBand", { replace: true });
-        toastOfUpdateProfile(data.user)
+        toastOfUpdateProfile(data.user);
       }
     } catch (error) {
       toast.error("Usuário inválido! Faça seu cadastro.");
