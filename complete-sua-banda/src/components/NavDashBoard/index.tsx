@@ -1,12 +1,16 @@
 import { Input } from "../Input";
 import { CiSearch } from "react-icons/ci";
 import * as styled from "./style";
+import { Profile } from "../../components/Profile";
 import logo from "../../assets/Logo-CSB.png";
 import { ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { iRegisterBand } from "../../services/RegisterBand";
 import { iRegisterMusician } from "../../services/RegisterMusician";
-import { iBandsInvites, iMemberInvites, useGlobalContext } from "../../context/GlobalContext";
+import {
+  iBandsInvites,
+  iMemberInvites,
+  useGlobalContext,
+} from "../../context/GlobalContext";
 import { FiBell } from "react-icons/fi";
 import { VscBellDot } from "react-icons/vsc";
 
@@ -25,17 +29,20 @@ export const NavDashBoard = ({
   bands,
   musicians,
   inviteBands,
-  inviteMembers
+  inviteMembers,
 }: iNavDashBoard) => {
-  const { user, setFilteredMusicians, setFilteredBands } = useGlobalContext();
+  const {
+    user,
+    setFilteredMusicians,
+    setFilteredBands,
+    openMenu,
+    setOpenMenu,
+    setOpenModalRemove,
+    setOpenModalUpdateB,
+    setOpenModalUpdateM,
+  } = useGlobalContext();
   const [searchInput, setSearchInput] = useState("");
-  const [bellAlert, setBellAlert] = useState(false)
-
-  const navigate = useNavigate();
-  const home = () => {
-    localStorage.clear();
-    navigate("/");
-  };
+  const [bellAlert, setBellAlert] = useState(false);
 
   const searchOptions = () => {
     if (user?.type === "musico") {
@@ -56,27 +63,32 @@ export const NavDashBoard = ({
     }
   };
 
-  useEffect(()=>{
-    const alertBell = () =>{
-      if(inviteBands?.length || inviteMembers?.length){
-        setBellAlert(true)
+  useEffect(() => {
+    const alertBell = () => {
+      if (inviteBands?.length || inviteMembers?.length) {
+        setBellAlert(true);
       }
-    }
+    };
 
-    alertBell()
-  }, [])
-  
+    alertBell();
+  }, []);
+
   return (
     <>
       <styled.Nav>
         <styled.Container1>
-          <styled.ImgProfile>
+          <Profile
+            openMenu={openMenu}
+            setOpenMenu={setOpenMenu}
+            setOpenEditM={setOpenModalUpdateM}
+            setOpenEditB={setOpenModalUpdateB}
+            setOpenDelete={setOpenModalRemove}
+          >
             <img src={image} alt={"Imagem perfil"} />
-          </styled.ImgProfile>
+          </Profile>
           <styled.Icons>
-            <styled.Icon1 onClick={home} />
-            {bellAlert ? 
-          <VscBellDot size={35} /> : <FiBell size={35}/>}
+            <styled.Icon1 />
+            {bellAlert ? <VscBellDot size={35} /> : <FiBell size={35} />}
           </styled.Icons>
           <styled.InputSearch>
             <Input
@@ -99,13 +111,10 @@ export const NavDashBoard = ({
       </styled.Nav>
       {children}
       <styled.NavFooter>
-        <styled.Icon1 onClick={home} />
+        <styled.Icon1 />
         <img src={logo} alt="Logo CSB" />
-        {bellAlert ? 
-          <VscBellDot size={35} /> : <FiBell size={35}/>
-        }
+        {bellAlert ? <VscBellDot size={35} /> : <FiBell size={35} />}
       </styled.NavFooter>
     </>
   );
-;
-}
+};

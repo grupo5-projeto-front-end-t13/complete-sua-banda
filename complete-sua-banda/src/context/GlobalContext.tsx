@@ -18,6 +18,8 @@ interface iGlobalContext {
   loading: boolean;
   clearStorage: () => void;
   submitLogin({ email, password }: iLogin): void;
+  openMenu: boolean;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openModalRemove: boolean;
@@ -96,6 +98,7 @@ export const GlobalContext = createContext<iGlobalContext>(
 export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
   const [openModalUpdateM, setOpenModalUpdateM] = useState(false);
@@ -120,15 +123,19 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
           if (data.type === "musico") {
-            const { data } = await api.get<iUser>(`/users/${id}?_embed=bands_invites`);
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=bands_invites`
+            );
             setUser(data);
             navigate("/dashboardMusician", { replace: true });
           } else {
-            const { data } = await api.get<iUser>(`/users/${id}?_embed=members_invites`);
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=members_invites`
+            );
             setUser(data);
             navigate("/dashboardBand", { replace: true });
           }
-          toastOfUpdateProfile(data)
+          toastOfUpdateProfile(data);
         } catch (error) {
           console.error(error);
           clearStorage();
@@ -140,18 +147,22 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
     loadUser();
   }, []);
 
-  const toastOfUpdateProfile = (data:iUser) => {
-
-    if(data.bio === '' || data.image === '' || data.skill_level
-    === '' || data.social_media === '' || data.state === '' || data.username === '' ){
-      toast.error("Complete o seu cadastro",{
-        toastId: "custom-id-yes"
-      })
-    }else{
-      console.log('Não funcionou')
+  const toastOfUpdateProfile = (data: iUser) => {
+    if (
+      data.bio === "" ||
+      data.image === "" ||
+      data.skill_level === "" ||
+      data.social_media === "" ||
+      data.state === "" ||
+      data.username === ""
+    ) {
+      toast.error("Complete o seu cadastro", {
+        toastId: "custom-id-yes",
+      });
+    } else {
+      console.log("Não funcionou");
     }
-
-  }
+  };
 
   const clearStorage = () => {
     localStorage.removeItem("@id_CSB");
@@ -174,10 +185,10 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
 
       if (data.user.type === "musico") {
         navigate("/dashboardMusician", { replace: true });
-        toastOfUpdateProfile(data.user)
+        toastOfUpdateProfile(data.user);
       } else {
         navigate("/dashboardBand", { replace: true });
-        toastOfUpdateProfile(data.user)
+        toastOfUpdateProfile(data.user);
       }
     } catch (error) {
       toast.error("Usuário inválido! Faça seu cadastro.");
@@ -193,6 +204,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         loading,
         clearStorage,
         submitLogin,
+        openMenu,
+        setOpenMenu,
         openModal,
         setOpenModal,
         openModalRemove,

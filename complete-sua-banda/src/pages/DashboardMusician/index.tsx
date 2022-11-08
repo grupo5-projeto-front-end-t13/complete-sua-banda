@@ -12,10 +12,19 @@ import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 
-
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands } =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    setOpenModalUpdateM,
+    openModal,
+    openModalRemove,
+    openModalUpdateM,
+    setOpenModalUpdateB,
+    filteredBands,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
@@ -80,7 +89,6 @@ export const DashboardMusician = () => {
 
   return (
     <div>
-      
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
@@ -124,9 +132,12 @@ export const DashboardMusician = () => {
         </Modal>
       )}
 
-      <NavDashBoard image={user?.image} bands={bands} inviteBands={user?.bands_invites}>
+      <NavDashBoard
+        image={user?.image}
+        bands={bands}
+        inviteBands={user?.bands_invites}
+      >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
           {filteredBands?.length === 0 ? (
             <ul>
               {bands &&
