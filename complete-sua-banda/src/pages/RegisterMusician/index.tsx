@@ -81,13 +81,12 @@ export const RegisterMusician = () => {
               )}
               <Select name="skill" register={register} icon={GiGuitar}>
                 <option value="">Selecione um instrumento</option>
-                <option value="Guitarra">Guitarra</option>
-                <option value="Baixo">Baixo</option>
-                <option value="Violão">Violão</option>
-                <option value="Piano">Piano</option>
-                <option value="Teclado">Teclado</option>
-                <option value="Bateria">Bateria</option>
-                <option value="Vocal">Vocal</option>
+                <option value="Guitarra">Guitarrista</option>
+                <option value="Baixo">Baixista</option>
+                <option value="Violão">Violonista</option>
+                <option value="Piano">Pianista</option>
+                <option value="Bateria">Baterista</option>
+                <option value="Vocal">Vocalista</option>
               </Select>
               <div className="redirect">
                 <p>Já possui cadastro?</p>

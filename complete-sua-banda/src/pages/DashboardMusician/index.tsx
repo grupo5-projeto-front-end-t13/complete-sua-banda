@@ -11,20 +11,32 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
-
+import imgDefault from "../../assets/default.jpg";
 
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands } =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    setOpenModalUpdateM,
+    openModal,
+    openModalRemove,
+    openModalUpdateM,
+    setOpenModalUpdateB,
+    filteredBands,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
-  const [cardBand, setCardBand] = useState<any>(null);
-  const [idBand, setIdBand] = useState<number | undefined>();
+  const [cardBand, setCardBand] = useState<iRegisterBand>();
+  const [cardsFiltred, setCardsFiltred] = useState([] as iRegisterBand[]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getBands() {
       try {
-        const { data } = await api.get<iRegisterBand[]>("/users?type=banda");
+        const { data } = await api.get<iRegisterBand[]>(
+          "/users?type=banda&_embed=members_invites"
+        );
         setBands(data);
       } catch (error) {
         console.log(error);
@@ -32,6 +44,26 @@ export const DashboardMusician = () => {
     }
     getBands();
   }, []);
+
+  useEffect(() => {
+    const filter = () => {
+      setCardsFiltred(
+        bands.filter((band) => {
+          if (band.members_invites) {
+            const filtered = band.members_invites.map((obj2) => {
+              if (obj2.email === user?.email) {
+                return obj2;
+              }
+            });
+            if (filtered.length === 0) {
+              return band;
+            }
+          }
+        })
+      );
+    };
+    filter();
+  }, [bands]);
 
   async function getCardProps(idBand: number) {
     try {
@@ -45,7 +77,7 @@ export const DashboardMusician = () => {
 
   const invite = async () => {
     const info = {
-      userId: cardBand.id,
+      userId: cardBand?.id,
       email: user?.email,
       bio: user?.bio,
       state: user?.state,
@@ -57,9 +89,22 @@ export const DashboardMusician = () => {
       skill_level: user?.skill_level,
     };
     try {
-      await api.post("/members_invites", info);
-      toast.success("Convite enviado");
-      setOpenModal(false);
+      if (
+        user?.bio !== "" ||
+        user?.skill_level !== "" ||
+        user?.image !== "" ||
+        user?.username !== "" ||
+        user?.social_media !== "" ||
+        user?.state !== ""
+      ) {
+        await api.post("/members_invites", info);
+        toast.success("Convite enviado");
+        setOpenModal(false);
+      } else {
+        toast.warning("Para participar da banda complete seu cadastro");
+        setOpenModal(false);
+        setOpenModalUpdateM(true);
+      }
     } catch (error) {
       toast.error("Ops... tente novamente!");
       console.log(error);
@@ -80,7 +125,6 @@ export const DashboardMusician = () => {
 
   return (
     <div>
-      
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
@@ -89,7 +133,7 @@ export const DashboardMusician = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalRemove
-            image={user?.image}
+            image={user?.image ? user?.image : imgDefault}
             name={user?.name}
             id={user?.id}
             remove={remove}
@@ -104,12 +148,12 @@ export const DashboardMusician = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
-            imagePerfil={cardBand.image}
-            name={cardBand.name}
-            email={cardBand.email}
-            bio={cardBand.bio}
+            imagePerfil={cardBand?.image ? cardBand?.image : imgDefault}
+            name={cardBand?.name}
+            email={cardBand?.email}
+            bio={cardBand?.bio}
             invite={invite}
-            type={cardBand.type}
+            type={cardBand?.type}
           />
         </Modal>
       )}
@@ -124,19 +168,24 @@ export const DashboardMusician = () => {
         </Modal>
       )}
 
-      <NavDashBoard image={user?.image} bands={bands}>
+      <NavDashBoard
+        image={user?.image ? user?.image : imgDefault}
+        bands={bands}
+      >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          <button onClick={() => setOpenModalUpdateM(true)}>
+            Atualizar Perfil
+          </button>
           {filteredBands?.length === 0 ? (
             <ul>
-              {bands &&
-                bands.map((band) => (
+              {cardsFiltred &&
+                cardsFiltred.map((band) => (
                   <Card
                     id={band.id}
                     getCardProps={getCardProps}
                     key={band.id}
                     name={band.name}
-                    image={band.image}
+                    image={band.image ? band.image : imgDefault}
                     type="banda"
                     state={band.state}
                     genre={band.genre}
@@ -153,7 +202,7 @@ export const DashboardMusician = () => {
                     getCardProps={getCardProps}
                     key={filteredBand.id}
                     name={filteredBand.name}
-                    image={filteredBand.image}
+                    image={filteredBand.image ? filteredBand.image : imgDefault}
                     type="banda"
                     state={filteredBand.state}
                     genre={filteredBand.genre}

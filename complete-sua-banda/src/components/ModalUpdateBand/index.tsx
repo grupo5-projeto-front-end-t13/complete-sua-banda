@@ -20,7 +20,6 @@ import { iDataBand, iRegisterBand } from "../../services/RegisterBand";
 
 export const ModalUpdateBand = ({ setUser }: any) => {
   const id = localStorage.getItem("@id_CSB");
-  console.log(id);
   const {
     register,
     handleSubmit,
@@ -30,8 +29,6 @@ export const ModalUpdateBand = ({ setUser }: any) => {
   });
 
   const updateBand = async ({
-    // name,
-    // email,
     genre,
     state,
     bio,
@@ -40,8 +37,6 @@ export const ModalUpdateBand = ({ setUser }: any) => {
     requirement,
   }: iRegisterBand) => {
     const dataBand = {
-      // name,
-      // email,
       genre,
       state,
       bio,
@@ -50,9 +45,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
       requirement,
     };
 
-    console.log(dataBand);
     try {
-      console.log(dataBand);
       await api.patch<iDataBand>(`/users/${id}`, dataBand);
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataBand);
@@ -69,33 +62,6 @@ export const ModalUpdateBand = ({ setUser }: any) => {
     <styled.DivContainer>
       <form onSubmit={handleForm}>
         <h1>Complete seu cadastro</h1>
-
-        {/* <Input
-          title="Nome"
-          register={register}
-          type="text"
-          name="name"
-          icon={<AiOutlineUser />}
-        />
-        {errors.name && <Error>{errors.name.message}</Error>}
-
-        <Input
-          name="email"
-          title="Email"
-          type="email"
-          register={register}
-          icon={<AiOutlineMail />}
-        />
-        {errors.email && <Error>{errors.email.message}</Error>} */}
-
-        {/* <Input
-          name="password"
-          title="Senha"
-          type="password"
-          register={register}
-          icon={<AiOutlineLock />}
-        />
-        {errors.password && <Error>{errors.password.message}</Error>} */}
 
         <Input
           title="Bio"
@@ -156,24 +122,6 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           <option value="RG">Rio Grande do sul</option>
         </Select>
 
-        {/* <Select name="skill" register={register} icon={GiGuitar}>
-          <option value="">Selecione um instrumento</option>
-          <option value="Guitarra">Guitarra</option>
-          <option value="Baixo">Baixo</option>
-          <option value="Violão">Violão</option>
-          <option value="Piano">Piano</option>
-          <option value="Teclado">Teclado</option>
-          <option value="Bateria">Bateria</option>
-          <option value="Vocal">Vocal</option>
-        </Select>
-
-        <Select name="skill_level" register={register} icon={AiOutlineArrowUp}>
-          <option value="">Nível de habilidade</option>
-          <option value="Iniciante">Iniciante</option>
-          <option value="Intermediário">Intermediário</option>
-          <option value="Avançado">Avançado</option>
-        </Select> */}
-
         <Input
           title="Genêro musical"
           register={register}
@@ -185,13 +133,12 @@ export const ModalUpdateBand = ({ setUser }: any) => {
 
         <Select name="requirement" register={register} icon={GiGuitar}>
           <option value="">Selecione o que procura</option>
-          <option value="Guitarra">Guitarra</option>
-          <option value="Baixo">Baixo</option>
-          <option value="Violão">Violão</option>
-          <option value="Piano">Piano</option>
-          <option value="Teclado">Teclado</option>
-          <option value="Bateria">Bateria</option>
-          <option value="Vocal">Vocal</option>
+          <option value="Guitarra">Guitarrista</option>
+          <option value="Baixo">Baixista</option>
+          <option value="Violão">Violonista</option>
+          <option value="Piano">Pianista</option>
+          <option value="Bateria">Baterista</option>
+          <option value="Vocal">Vocalista</option>
         </Select>
 
         <Button type="submit">Atualizar dados</Button>

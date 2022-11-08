@@ -11,6 +11,7 @@ import * as styled from "./style";
 import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
 import { ModalUpdateBand } from "../../components/ModalUpdateBand";
+import imgDefault from "../../assets/default.jpg";
 
 export const DashboardBand = () => {
   const {
@@ -22,12 +23,11 @@ export const DashboardBand = () => {
     openModalRemove,
     setOpenModalUpdateM,
     setOpenModalUpdateB,
-    filteredMusicians,  
+    filteredMusicians,
     openModalUpdateB,
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
-  const [idMusician, setIdMusician] = useState<number | undefined>();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,10 +64,24 @@ export const DashboardBand = () => {
       image: user?.image,
       name: user?.name,
     };
+
     try {
-      await api.post("/bands_invites", info);
-      toast.success("Convite enviado");
-      setOpenModal(false);
+      if (
+        user?.bio !== "" ||
+        user?.genre !== "" ||
+        user?.image !== "" ||
+        user?.requirement !== "" ||
+        user?.social_media !== "" ||
+        user?.state !== ""
+      ) {
+        await api.post("/bands_invites", info);
+        toast.success("Convite enviado");
+        setOpenModal(false);
+      } else {
+        toast.warning("Para convidar um músico complete seu cadastro!");
+        setOpenModal(false);
+        setOpenModalUpdateB(true);
+      }
     } catch (error) {
       toast.error("Ops... tente novamente!");
       console.log(error);
@@ -85,6 +99,8 @@ export const DashboardBand = () => {
       console.log(error);
     }
   };
+
+  console.log(musicians);
 
   return (
     <div>
@@ -122,7 +138,7 @@ export const DashboardBand = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
-            imagePerfil={cardMusician?.image}
+            imagePerfil={cardMusician?.image ? cardMusician?.image : imgDefault}
             name={cardMusician.username}
             email={cardMusician.email}
             bio={cardMusician.bio}
@@ -131,7 +147,10 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
-      <NavDashBoard image={user?.image} musicians={musicians}>
+      <NavDashBoard
+        image={user?.image ? user?.image : imgDefault}
+        musicians={musicians}
+      >
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 ? (
             <ul>
@@ -142,7 +161,7 @@ export const DashboardBand = () => {
                     getCardProps={getCardProps}
                     key={musician.id}
                     name={musician.name}
-                    image={musician?.image}
+                    image={musician?.image ? musician?.image : imgDefault}
                     type="musico"
                     state={musician.state}
                     skill={musician.skill}
@@ -158,7 +177,11 @@ export const DashboardBand = () => {
                     getCardProps={getCardProps}
                     key={filteredMusician.id}
                     name={filteredMusician.name}
-                    image={filteredMusician?.image}
+                    image={
+                      filteredMusician?.image
+                        ? filteredMusician?.image
+                        : imgDefault
+                    }
                     type="musico"
                     state={filteredMusician.state}
                     skill={filteredMusician.skill}
