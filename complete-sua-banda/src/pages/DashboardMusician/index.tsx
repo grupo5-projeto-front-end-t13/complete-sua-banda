@@ -50,9 +50,9 @@ export const DashboardMusician = () => {
       setCardsFiltred(
         bands.filter((band) => {
           if (band.members_invites) {
-            const filtered = band.members_invites.map((obj2) => {
-              if (obj2.email === user?.email) {
-                return obj2;
+            const filtered = band.members_invites.map((member) => {
+              if (member.email === user?.email) {
+                return member;
               }
             });
             if (filtered.length === 0) {
@@ -148,7 +148,7 @@ export const DashboardMusician = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
-            imagePerfil={cardBand?.image ? cardBand?.image : imgDefault}
+            imageProfile={cardBand?.image ? cardBand?.image : imgDefault}
             name={cardBand?.name}
             email={cardBand?.email}
             bio={cardBand?.bio}

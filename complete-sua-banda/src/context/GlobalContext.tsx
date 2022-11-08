@@ -45,7 +45,7 @@ interface iGlobalContextProps {
   children: ReactNode;
 }
 
-interface iBandsInvites {
+export interface iBandsInvites {
   bio: string;
   state: string;
   social_media: string;
@@ -57,17 +57,17 @@ interface iBandsInvites {
 }
 
 export interface iMemberInvites {
-  id?: number;
-  userId?: number;
-  email?: string;
-  bio?: string;
-  estate?: string;
-  social_media?: string;
-  image?: string;
-  name?: string;
-  username?: string;
-  skill?: string;
-  skill_level?: string;
+  id: number;
+  userId: number;
+  email: string;
+  bio: string;
+  estate: string;
+  social_media: string;
+  image: string;
+  name: string;
+  username: string;
+  skill: string;
+  skill_level: string;
 }
 
 export interface iUser {
@@ -86,7 +86,7 @@ export interface iUser {
   genre?: string;
   requirement?: string;
   bands_invites?: iBandsInvites[];
-  member_invites?: iMemberInvites[];
+  members_invites?: iMemberInvites[];
 }
 
 export const GlobalContext = createContext<iGlobalContext>(
@@ -120,8 +120,16 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
           if (data.type === "musico") {
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=bands_invites`
+            );
+            setUser(data);
             navigate("/dashboardMusician", { replace: true });
           } else {
+            const { data } = await api.get<iUser>(
+              `/users/${id}?_embed=members_invites`
+            );
+            setUser(data);
             navigate("/dashboardBand", { replace: true });
           }
           toastOfUpdateProfile(data);

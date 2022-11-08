@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { iRegisterMusician } from "../../services/RegisterMusician";
 import { ModalCard } from "../../components/ModalCard";
@@ -100,8 +100,6 @@ export const DashboardBand = () => {
     }
   };
 
-  console.log(musicians);
-
   return (
     <div>
       {openModalUpdateB && (
@@ -138,7 +136,9 @@ export const DashboardBand = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
-            imagePerfil={cardMusician?.image ? cardMusician?.image : imgDefault}
+            imageProfile={
+              cardMusician?.image ? cardMusician?.image : imgDefault
+            }
             name={cardMusician.username}
             email={cardMusician.email}
             bio={cardMusician.bio}

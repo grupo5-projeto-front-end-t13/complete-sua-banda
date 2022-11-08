@@ -2,7 +2,7 @@ import Logo from "../../assets/Logo-CSB.png";
 import * as styled from "./style";
 
 interface iModalProps {
-  imagePerfil: string | undefined;
+  imageProfile: string | undefined;
   name: string | undefined;
   email: string | undefined;
   bio: string | undefined;
@@ -11,7 +11,7 @@ interface iModalProps {
 }
 
 export const ModalCard = ({
-  imagePerfil,
+  imageProfile,
   name,
   email,
   bio,
@@ -21,7 +21,7 @@ export const ModalCard = ({
   return (
     <styled.Container>
       <styled.DivImg>
-        <img src={imagePerfil} alt="imagem Perfil" />
+        <img src={imageProfile} alt="imagem Perfil" />
         <img src={Logo} alt="imagem Logo" />
       </styled.DivImg>
       <styled.DivInfo>

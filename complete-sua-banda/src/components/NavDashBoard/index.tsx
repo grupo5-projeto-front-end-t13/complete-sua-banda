@@ -2,17 +2,21 @@ import { Input } from "../Input";
 import { CiSearch } from "react-icons/ci";
 import * as styled from "./style";
 import logo from "../../assets/Logo-CSB.png";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iRegisterBand } from "../../services/RegisterBand";
 import { iRegisterMusician } from "../../services/RegisterMusician";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { iBandsInvites, iMemberInvites, useGlobalContext } from "../../context/GlobalContext";
+import { FiBell } from "react-icons/fi";
+import { VscBellDot } from "react-icons/vsc";
 
 interface iNavDashBoard {
   children: ReactNode;
   image?: string;
   bands?: iRegisterBand[];
   musicians?: iRegisterMusician[];
+  inviteBands?: iBandsInvites[];
+  inviteMembers?: iMemberInvites[];
 }
 
 export const NavDashBoard = ({
@@ -20,9 +24,12 @@ export const NavDashBoard = ({
   image,
   bands,
   musicians,
+  inviteBands,
+  inviteMembers
 }: iNavDashBoard) => {
   const { user, setFilteredMusicians, setFilteredBands } = useGlobalContext();
   const [searchInput, setSearchInput] = useState("");
+  const [bellAlert, setBellAlert] = useState(false)
 
   const navigate = useNavigate();
   const home = () => {
@@ -49,6 +56,16 @@ export const NavDashBoard = ({
     }
   };
 
+  useEffect(()=>{
+    const alertBell = () =>{
+      if(inviteBands?.length || inviteMembers?.length){
+        setBellAlert(true)
+      }
+    }
+
+    alertBell()
+  }, [])
+  
   return (
     <>
       <styled.Nav>
@@ -58,7 +75,8 @@ export const NavDashBoard = ({
           </styled.ImgProfile>
           <styled.Icons>
             <styled.Icon1 onClick={home} />
-            <styled.Icon2 />
+            {bellAlert ? 
+          <VscBellDot size={35} /> : <FiBell size={35}/>}
           </styled.Icons>
           <styled.InputSearch>
             <Input
@@ -83,8 +101,11 @@ export const NavDashBoard = ({
       <styled.NavFooter>
         <styled.Icon1 onClick={home} />
         <img src={logo} alt="Logo CSB" />
-        <styled.Icon2 />
+        {bellAlert ? 
+          <VscBellDot size={35} /> : <FiBell size={35}/>
+        }
       </styled.NavFooter>
     </>
   );
-};
+;
+}
