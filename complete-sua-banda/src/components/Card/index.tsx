@@ -1,8 +1,8 @@
-import React from 'react'
-import * as styled from "./style"
-import { CgAdd } from 'react-icons/cg';
+import React, { ReactNode } from "react";
+import * as styled from "./style";
+import { CgAdd } from "react-icons/cg";
 
-interface iCardProps{
+interface iCardProps {
   name?: string;
   image?: string;
   state?: string;
@@ -14,19 +14,54 @@ interface iCardProps{
   id?: number;
 }
 
-export const Card = ({name, image, state, skill, type, genre, requirement, getCardProps, id}: iCardProps) => {
-  return (
-    <styled.Card onClick={()=>getCardProps(id)}>
-        <div>
-            <h2>{name}</h2>
-            {type === "musico"? <h2>{state}</h2> : requirement && <h2>Procura-se um {requirement}</h2>  }
-            {type === "musico"? <h2>{skill}</h2> : <h2>{genre}</h2> }
-        </div>
-        <figure>
-            <img src={image} alt="foto perfil" />
+export const Card = ({
+  name,
+  image,
+  state,
+  skill,
+  type,
+  genre,
+  requirement,
+  getCardProps,
+  id,
+}: iCardProps) => {
+  const firstUpper = (str: string | undefined) => {
+    if (str) {
+      const arr = str.split("");
+      arr[0] = arr[0].toUpperCase();
+      return arr.join("");
+    }
+  };
 
-            <button> <CgAdd/> </button>
-        </figure>
+  return (
+    <styled.Card onClick={() => getCardProps(id)}>
+      <div>
+        <h2>{name}</h2>
+        <div className="cardDescription">
+          {type === "musico" ? (
+            <p>{state}</p>
+          ) : (
+            requirement && (
+              <p>
+                Procura-se um <span>{requirement}</span>
+              </p>
+            )
+          )}
+          {type === "musico" ? (
+            <span>{firstUpper(skill)}</span>
+          ) : (
+            <span>{firstUpper(genre)}</span>
+          )}
+        </div>
+      </div>
+      <figure>
+        <img src={image} alt="foto perfil" />
+
+        <button>
+          {" "}
+          <CgAdd />{" "}
+        </button>
+      </figure>
     </styled.Card>
-  )
-}
+  );
+};

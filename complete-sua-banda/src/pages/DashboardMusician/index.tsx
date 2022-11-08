@@ -14,11 +14,22 @@ import * as styled from "./style";
 import imgDefault from "../../assets/default.jpg";
 
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands} =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    setOpenModalUpdateM,
+    openModal,
+    openModalRemove,
+    openModalUpdateM,
+    setOpenModalUpdateB,
+    filteredBands,
+    setFilteredBands,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
-  const [loadingPageBands, setLoadingPageBands] = useState(true)
+  const [loadingPageBands, setLoadingPageBands] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +40,7 @@ export const DashboardMusician = () => {
         );
         setBands(data);
         setFilteredBands(data);
-        setLoadingPageBands(false)
+        setLoadingPageBands(false);
       } catch (error) {
         console.log(error);
       }
@@ -115,7 +126,7 @@ export const DashboardMusician = () => {
     }
   };
 
-  console.log(filteredBands)
+  console.log(filteredBands);
 
   return (
     <div>
@@ -167,7 +178,9 @@ export const DashboardMusician = () => {
         bands={bands}
       >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          <button onClick={() => setOpenModalUpdateM(true)}>
+            Atualizar Perfil
+          </button>
           {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
               <p>Aqui vai a página de não encontrado</p>
