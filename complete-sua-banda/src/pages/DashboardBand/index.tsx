@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "../../components/Button";
 import { useGlobalContext } from "../../context/GlobalContext";
 import { iRegisterMusician } from "../../services/RegisterMusician";
 import { ModalCard } from "../../components/ModalCard";
@@ -23,6 +22,7 @@ export const DashboardBand = () => {
     openModalRemove,
     setOpenModalUpdateM,
     setOpenModalUpdateB,
+    filteredMusicians,  
     openModalUpdateB,
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
@@ -131,24 +131,41 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
-      <NavDashBoard image={user?.image}>
+      <NavDashBoard image={user?.image} musicians={musicians}>
         <styled.ContainerUl>
-          <button onClick={() => setOpenModalUpdateB(true)}>Abrir Modal</button>
-          <ul>
-            {musicians &&
-              musicians.map((musician) => (
-                <Card
-                  id={musician.id}
-                  getCardProps={getCardProps}
-                  key={musician.id}
-                  name={musician.name}
-                  image={musician?.image}
-                  type="musico"
-                  state={musician.state}
-                  skill={musician.skill}
-                />
-              ))}
-          </ul>
+          {filteredMusicians?.length === 0 ? (
+            <ul>
+              {musicians &&
+                musicians.map((musician) => (
+                  <Card
+                    id={musician.id}
+                    getCardProps={getCardProps}
+                    key={musician.id}
+                    name={musician.name}
+                    image={musician?.image}
+                    type="musico"
+                    state={musician.state}
+                    skill={musician.skill}
+                  />
+                ))}
+            </ul>
+          ) : (
+            <ul>
+              {filteredMusicians &&
+                filteredMusicians?.map((filteredMusician) => (
+                  <Card
+                    id={filteredMusician.id}
+                    getCardProps={getCardProps}
+                    key={filteredMusician.id}
+                    name={filteredMusician.name}
+                    image={filteredMusician?.image}
+                    type="musico"
+                    state={filteredMusician.state}
+                    skill={filteredMusician.skill}
+                  />
+                ))}
+            </ul>
+          )}
         </styled.ContainerUl>
       </NavDashBoard>
     </div>

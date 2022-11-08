@@ -3,16 +3,11 @@ import * as styled from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormSchemaUpdate } from "./formSchema";
-import {
-  AiOutlineMail,
-  AiOutlineLock,
-  AiOutlineUser,
-  AiOutlineArrowUp,
-} from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError, iRegisterBand, iDataBand } from "../../context/GlobalContext";
+import { iApiError } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { BsPencil } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -21,10 +16,11 @@ import { FiMap } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
+import { iDataBand, iRegisterBand } from "../../services/RegisterBand";
 
-export const ModalUpdateBand = ({setUser}: any) => {
-  const id = localStorage.getItem("@id_CSB")
-  console.log(id)
+export const ModalUpdateBand = ({ setUser }: any) => {
+  const id = localStorage.getItem("@id_CSB");
+  console.log(id);
   const {
     register,
     handleSubmit,
@@ -41,7 +37,7 @@ export const ModalUpdateBand = ({setUser}: any) => {
     bio,
     social_media,
     image,
-    requirement
+    requirement,
   }: iRegisterBand) => {
     const dataBand = {
       // name,
@@ -54,13 +50,12 @@ export const ModalUpdateBand = ({setUser}: any) => {
       requirement,
     };
 
-    console.log(dataBand)
+    console.log(dataBand);
     try {
-      console.log(dataBand)
-      await api.patch<iDataBand>(`/users/${id}` , dataBand);
+      console.log(dataBand);
+      await api.patch<iDataBand>(`/users/${id}`, dataBand);
       toast.success("Cadastro Atualizado com sucesso!");
-      setUser(dataBand)
-      
+      setUser(dataBand);
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
@@ -200,7 +195,6 @@ export const ModalUpdateBand = ({setUser}: any) => {
         </Select>
 
         <Button type="submit">Atualizar dados</Button>
-
       </form>
     </styled.DivContainer>
   );

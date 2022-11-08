@@ -12,7 +12,7 @@ import {
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError, iRegisterMusician, iDataMusician} from "../../context/GlobalContext";
+import { iApiError} from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { BsPencil } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -21,6 +21,7 @@ import { FiMap } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
+import { iDataMusician, iRegisterMusician } from "../../services/RegisterMusician";
 
 export const ModalUpdateMusician = ({setUser}: any) => {
 
