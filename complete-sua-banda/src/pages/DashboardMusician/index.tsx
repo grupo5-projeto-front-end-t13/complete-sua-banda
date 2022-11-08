@@ -14,21 +14,11 @@ import * as styled from "./style";
 import imgDefault from "../../assets/default.jpg";
 
 export const DashboardMusician = () => {
-  const {
-    user,
-    setUser,
-    setOpenModal,
-    setOpenModalRemove,
-    setOpenModalUpdateM,
-    openModal,
-    openModalRemove,
-    openModalUpdateM,
-    setOpenModalUpdateB,
-    filteredBands,
-  } = useGlobalContext();
+  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands} =
+    useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
-  const [cardBand, setCardBand] = useState<iRegisterBand>();
-  const [cardsFiltred, setCardsFiltred] = useState([] as iRegisterBand[]);
+  const [cardBand, setCardBand] = useState<any>(null);
+  const [loadingPageBands, setLoadingPageBands] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +28,8 @@ export const DashboardMusician = () => {
           "/users?type=banda&_embed=members_invites"
         );
         setBands(data);
+        setFilteredBands(data);
+        setLoadingPageBands(false)
       } catch (error) {
         console.log(error);
       }
@@ -123,6 +115,8 @@ export const DashboardMusician = () => {
     }
   };
 
+  console.log(filteredBands)
+
   return (
     <div>
       {openModalRemove && (
@@ -173,30 +167,15 @@ export const DashboardMusician = () => {
         bands={bands}
       >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>
-            Atualizar Perfil
-          </button>
-          {filteredBands?.length === 0 ? (
+          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
-              {cardsFiltred &&
-                cardsFiltred.map((band) => (
-                  <Card
-                    id={band.id}
-                    getCardProps={getCardProps}
-                    key={band.id}
-                    name={band.name}
-                    image={band.image ? band.image : imgDefault}
-                    type="banda"
-                    state={band.state}
-                    genre={band.genre}
-                    requirement={band.requirement}
-                  />
-                ))}
+              <p>Aqui vai a página de não encontrado</p>
             </ul>
           ) : (
             <ul>
               {filteredBands &&
-                filteredBands?.map((filteredBand) => (
+                filteredBands.map((filteredBand) => (
                   <Card
                     id={filteredBand.id}
                     getCardProps={getCardProps}
