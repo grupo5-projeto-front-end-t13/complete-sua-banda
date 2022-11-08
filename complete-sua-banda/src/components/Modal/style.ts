@@ -38,9 +38,9 @@ export const ModalDefault = styled.div`
       right: 0px;
       top: 8px;
     }
-    @media (min-width: 768px) {
+    /* @media (min-width: 768px) {
       display:none;
-    }
+    } */
    
   }
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InputDiv = styled.div`
-  width: 100%;
+  width: 240px;
   position: relative;
   display: flex;
   justify-content: center;

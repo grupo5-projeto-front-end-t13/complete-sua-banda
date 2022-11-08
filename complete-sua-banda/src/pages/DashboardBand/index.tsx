@@ -13,14 +13,8 @@ import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
 
 export const DashboardBand = () => {
-  const {
-    user,
-    setOpenModal,
-    setOpenModalRemove,
-    openModal,
-    openModalRemove,
-    filteredMusicians,
-  } = useGlobalContext();
+  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove, setOpenModalUpdateM, openModalUpdateM, filteredMusicians } =
+    useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -88,6 +82,7 @@ export const DashboardBand = () => {
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
         >
           <ModalRemove
             image={user?.image}
@@ -101,6 +96,7 @@ export const DashboardBand = () => {
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
         >
           <ModalCard
             imagePerfil={cardMusician?.image}

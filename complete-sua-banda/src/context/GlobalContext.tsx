@@ -22,6 +22,8 @@ interface iGlobalContext {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openModalRemove: boolean;
   setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalUpdateM: boolean;
+  setOpenModalUpdateM: React.Dispatch<React.SetStateAction<boolean>>;
   filteredMusicians: iRegisterMusician[] | undefined;
   setFilteredMusicians: React.Dispatch<
     React.SetStateAction<iRegisterMusician[] | undefined>
@@ -89,6 +91,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
+  const [openModalUpdateM, setOpenModalUpdateM] = useState(false);
   const [filteredMusicians, setFilteredMusicians] = useState<
     iRegisterMusician[] | undefined
   >([]);
@@ -182,6 +185,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         setOpenModal,
         openModalRemove,
         setOpenModalRemove,
+        setOpenModalUpdateM,
+        openModalUpdateM
         filteredMusicians,
         setFilteredMusicians,
         filteredBands,
