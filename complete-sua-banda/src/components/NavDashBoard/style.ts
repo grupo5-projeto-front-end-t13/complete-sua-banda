@@ -35,13 +35,13 @@ export const ImgProfile = styled.div`
   width: 72px;
   img {
     cursor: pointer;
-    width: 60px;
+    width: 50px;
     border-radius: 50%;
   }
 
   @media (min-width: 768px) {
     img {
-      width: 70px;
+      width: 60px;
     }
   }
 `;
