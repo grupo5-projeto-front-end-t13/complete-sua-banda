@@ -23,11 +23,13 @@ export const DashboardBand = () => {
     setOpenModalUpdateM,
     setOpenModalUpdateB,
     filteredMusicians,  
+    setFilteredMusicians,
     openModalUpdateB,
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
+  const [loadingPageMusician, setLoadingPageMusician] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +39,8 @@ export const DashboardBand = () => {
           "/users?type=musico"
         );
         setMusicians(data);
+        setFilteredMusicians(data);
+        setLoadingPageMusician(false)
       } catch (error) {
         console.log(error);
       }
@@ -133,21 +137,9 @@ export const DashboardBand = () => {
       )}
       <NavDashBoard image={user?.image} musicians={musicians} inviteMembers={user?.members_invites}>
         <styled.ContainerUl>
-          {filteredMusicians?.length === 0 ? (
+          {filteredMusicians?.length === 0 && loadingPageMusician === false ? (
             <ul>
-              {musicians &&
-                musicians.map((musician) => (
-                  <Card
-                    id={musician.id}
-                    getCardProps={getCardProps}
-                    key={musician.id}
-                    name={musician.name}
-                    image={musician?.image}
-                    type="musico"
-                    state={musician.state}
-                    skill={musician.skill}
-                  />
-                ))}
+              <p>Aqui vai a pagina onde fala que não foi encontrado</p>
             </ul>
           ) : (
             <ul>

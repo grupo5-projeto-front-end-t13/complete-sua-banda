@@ -14,11 +14,12 @@ import * as styled from "./style";
 
 
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands } =
+  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands} =
     useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
+  const [loadingPageBands, setLoadingPageBands] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +27,8 @@ export const DashboardMusician = () => {
       try {
         const { data } = await api.get<iRegisterBand[]>("/users?type=banda");
         setBands(data);
+        setFilteredBands(data);
+        setLoadingPageBands(false)
       } catch (error) {
         console.log(error);
       }
@@ -78,6 +81,8 @@ export const DashboardMusician = () => {
     }
   };
 
+  console.log(filteredBands)
+
   return (
     <div>
       
@@ -127,27 +132,14 @@ export const DashboardMusician = () => {
       <NavDashBoard image={user?.image} bands={bands} inviteBands={user?.bands_invites}>
         <styled.ContainerUlMusician>
           <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
-          {filteredBands?.length === 0 ? (
+          {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
-              {bands &&
-                bands.map((band) => (
-                  <Card
-                    id={band.id}
-                    getCardProps={getCardProps}
-                    key={band.id}
-                    name={band.name}
-                    image={band.image}
-                    type="banda"
-                    state={band.state}
-                    genre={band.genre}
-                    requirement={band.requirement}
-                  />
-                ))}
+              <p>Aqui vai a página de não encontrado</p>
             </ul>
           ) : (
             <ul>
               {filteredBands &&
-                filteredBands?.map((filteredBand) => (
+                filteredBands.map((filteredBand) => (
                   <Card
                     id={filteredBand.id}
                     getCardProps={getCardProps}
