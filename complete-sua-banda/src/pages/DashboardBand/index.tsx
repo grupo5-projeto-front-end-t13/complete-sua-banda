@@ -131,7 +131,7 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
-      <NavDashBoard image={user?.image} musicians={musicians}>
+      <NavDashBoard image={user?.image} musicians={musicians} inviteMembers={user?.members_invites}>
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 ? (
             <ul>
