@@ -84,6 +84,7 @@ export const NavFooter = styled.nav`
   bottom: 0px;
   position: fixed;
   background-color: var(--color-grey-4);
+  color: var(--color-brand);
 
   img {
     width: 100px;

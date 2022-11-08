@@ -124,7 +124,7 @@ export const DashboardMusician = () => {
         </Modal>
       )}
 
-      <NavDashBoard image={user?.image} bands={bands}>
+      <NavDashBoard image={user?.image} bands={bands} inviteBands={user?.bands_invites}>
         <styled.ContainerUlMusician>
           <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
           {filteredBands?.length === 0 ? (
