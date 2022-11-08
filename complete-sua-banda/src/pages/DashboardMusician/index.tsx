@@ -12,13 +12,25 @@ import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 import imgDefault from "../../assets/default.jpg";
+import noResults from "../../assets/NoResults.png";
 
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands} =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    setOpenModalUpdateM,
+    openModal,
+    openModalRemove,
+    openModalUpdateM,
+    setOpenModalUpdateB,
+    filteredBands,
+    setFilteredBands,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
-  const [loadingPageBands, setLoadingPageBands] = useState(true)
+  const [loadingPageBands, setLoadingPageBands] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +41,7 @@ export const DashboardMusician = () => {
         );
         setBands(data);
         setFilteredBands(data);
-        setLoadingPageBands(false)
+        setLoadingPageBands(false);
       } catch (error) {
         console.log(error);
       }
@@ -37,25 +49,25 @@ export const DashboardMusician = () => {
     getBands();
   }, []);
 
-  useEffect(() => {
-    const filter = () => {
-      setCardsFiltred(
-        bands.filter((band) => {
-          if (band.members_invites) {
-            const filtered = band.members_invites.map((member) => {
-              if (member.email === user?.email) {
-                return member;
-              }
-            });
-            if (filtered.length === 0) {
-              return band;
-            }
-          }
-        })
-      );
-    };
-    filter();
-  }, [bands]);
+  // useEffect(() => {
+  //   const filter = () => {
+  //     setCardsFiltred(
+  //       bands.filter((band) => {
+  //         if (band.members_invites) {
+  //           const filtered = band.members_invites.map((member) => {
+  //             if (member.email === user?.email) {
+  //               return member;
+  //             }
+  //           });
+  //           if (filtered.length === 0) {
+  //             return band;
+  //           }
+  //         }
+  //       })
+  //     );
+  //   };
+  //   filter();
+  // }, [bands]);
 
   async function getCardProps(idBand: number) {
     try {
@@ -115,7 +127,7 @@ export const DashboardMusician = () => {
     }
   };
 
-  console.log(filteredBands)
+  console.log(filteredBands);
 
   return (
     <div>
@@ -167,10 +179,15 @@ export const DashboardMusician = () => {
         bands={bands}
       >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          <button onClick={() => setOpenModalUpdateM(true)}>
+            Atualizar Perfil
+          </button>
           {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
-              <p>Aqui vai a página de não encontrado</p>
+              <div className="noResults">
+                <img src={noResults} alt="Não há resultados" />
+                <p>Nenhuma correspondência para sua pesquisa.</p>
+              </div>
             </ul>
           ) : (
             <ul>
