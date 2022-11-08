@@ -30,7 +30,7 @@ export const BandProvider = ({ children }: iBandContextProps) => {
       social_media: "",
       image: "",
       genre: "",
-      requirement: [],
+      requirement: "",
       type: "banda",
     };
 

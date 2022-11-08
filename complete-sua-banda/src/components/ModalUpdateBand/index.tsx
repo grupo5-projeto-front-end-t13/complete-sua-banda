@@ -12,7 +12,7 @@ import {
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError, iRegisterMusician, iDataMusician} from "../../context/GlobalContext";
+import { iApiError, iRegisterBand, iDataBand } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { BsPencil } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -22,46 +22,44 @@ import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
 
-export const ModalUpdateMusician = ({setUser}: any) => {
-
+export const ModalUpdateBand = ({setUser}: any) => {
   const id = localStorage.getItem("@id_CSB")
-
+  console.log(id)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iRegisterMusician>({
+  } = useForm<iRegisterBand>({
     resolver: yupResolver(FormSchemaUpdate),
   });
 
-  const updateMusician = async ({
+  const updateBand = async ({
     // name,
     // email,
-    // password,
-    skill,
+    genre,
     state,
     bio,
     social_media,
     image,
-    username,
-    skill_level
-  }: iRegisterMusician) => {
-    const dataMusician = {
+    requirement
+  }: iRegisterBand) => {
+    const dataBand = {
       // name,
       // email,
-      // password,
-      skill,
+      genre,
       state,
       bio,
       social_media,
       image,
-      username,
-      skill_level,
+      requirement,
     };
+
+    console.log(dataBand)
     try {
-      await api.patch<iDataMusician>(`/users/${id}` , dataMusician);
+      console.log(dataBand)
+      await api.patch<iDataBand>(`/users/${id}` , dataBand);
       toast.success("Cadastro Atualizado com sucesso!");
-      setUser(dataMusician)
+      setUser(dataBand)
       
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
@@ -70,7 +68,7 @@ export const ModalUpdateMusician = ({setUser}: any) => {
     }
   };
 
-  const handleForm = handleSubmit((data) => updateMusician(data));
+  const handleForm = handleSubmit((data) => updateBand(data));
 
   return (
     <styled.DivContainer>
@@ -93,9 +91,9 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           register={register}
           icon={<AiOutlineMail />}
         />
-        {errors.email && <Error>{errors.email.message}</Error>}
+        {errors.email && <Error>{errors.email.message}</Error>} */}
 
-        <Input
+        {/* <Input
           name="password"
           title="Senha"
           type="password"
@@ -103,15 +101,6 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           icon={<AiOutlineLock />}
         />
         {errors.password && <Error>{errors.password.message}</Error>} */}
-
-        <Input
-          title="Username"
-          register={register}
-          type="text"
-          name="username"
-          icon={<AiOutlineUser />}
-        />
-        {errors.username && <Error>{errors.username.message}</Error>}
 
         <Input
           title="Bio"
@@ -172,7 +161,7 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           <option value="RG">Rio Grande do sul</option>
         </Select>
 
-        <Select name="skill" register={register} icon={GiGuitar}>
+        {/* <Select name="skill" register={register} icon={GiGuitar}>
           <option value="">Selecione um instrumento</option>
           <option value="Guitarra">Guitarra</option>
           <option value="Baixo">Baixo</option>
@@ -188,16 +177,16 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           <option value="Iniciante">Iniciante</option>
           <option value="Intermediário">Intermediário</option>
           <option value="Avançado">Avançado</option>
-        </Select>
+        </Select> */}
 
-        {/* <Input
+        <Input
           title="Genêro musical"
           register={register}
           type="text"
           name="genre"
           icon={<AiOutlineUser />}
         />
-        {errors.name && <Error>{errors.name.message}</Error>}
+        {errors.genre && <Error>{errors.genre.message}</Error>}
 
         <Select name="requirement" register={register} icon={GiGuitar}>
           <option value="">Selecione o que procura</option>
@@ -208,7 +197,7 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           <option value="Teclado">Teclado</option>
           <option value="Bateria">Bateria</option>
           <option value="Vocal">Vocal</option>
-        </Select> */}
+        </Select>
 
         <Button type="submit">Atualizar dados</Button>
 

@@ -12,9 +12,19 @@ import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 
+
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM } =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    setOpenModalUpdateM,
+    openModal,
+    openModalRemove,
+    openModalUpdateM,
+    setOpenModalUpdateB,
+  } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [idBand, setIdBand] = useState<number | undefined>();
@@ -79,11 +89,13 @@ export const DashboardMusician = () => {
 
   return (
     <div>
+      
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalRemove
             image={user?.image}
@@ -98,6 +110,7 @@ export const DashboardMusician = () => {
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
             imagePerfil={cardBand.image}
@@ -109,17 +122,22 @@ export const DashboardMusician = () => {
           />
         </Modal>
       )}
-      {
-        openModalUpdateM && (
-          <Modal setOpenModal={setOpenModal} setOpenModalRemove={setOpenModalRemove} setOpenModalUpdateM={setOpenModalUpdateM}>
-              <ModalUpdateMusician setUser={setUser} />
-          </Modal>
-        )
-      }
+      {openModalUpdateM && (
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
+        >
+          <ModalUpdateMusician setUser={setUser} />
+        </Modal>
+      )}
 
       <NavDashBoard image={user?.image}>
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          <button onClick={() => setOpenModalUpdateM(true)}>
+            Atualizar Perfil
+          </button>
           <ul>
             {bands &&
               bands.map((band) => (

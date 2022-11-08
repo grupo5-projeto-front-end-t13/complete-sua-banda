@@ -11,10 +11,20 @@ import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
+import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 
 export const DashboardBand = () => {
-  const { user, setOpenModal, setOpenModalRemove, openModal, openModalRemove, setOpenModalUpdateM, openModalUpdateM } =
-    useGlobalContext();
+  const {
+    user,
+    setUser,
+    setOpenModal,
+    setOpenModalRemove,
+    openModal,
+    openModalRemove,
+    setOpenModalUpdateM,
+    setOpenModalUpdateB,
+    openModalUpdateB,
+  } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [idMusician, setIdMusician] = useState<number | undefined>();
@@ -78,11 +88,23 @@ export const DashboardBand = () => {
 
   return (
     <div>
+      {openModalUpdateB && (
+        <Modal
+          setOpenModal={setOpenModal}
+          setOpenModalRemove={setOpenModalRemove}
+          setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
+        >
+          <ModalUpdateBand setUser={setUser} />
+        </Modal>
+      )}
+
       {openModalRemove && (
         <Modal
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalRemove
             image={user?.image}
@@ -97,6 +119,7 @@ export const DashboardBand = () => {
           setOpenModal={setOpenModal}
           setOpenModalRemove={setOpenModalRemove}
           setOpenModalUpdateM={setOpenModalUpdateM}
+          setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
             imagePerfil={cardMusician?.image}
@@ -110,6 +133,7 @@ export const DashboardBand = () => {
       )}
       <NavDashBoard image={user?.image}>
         <styled.ContainerUl>
+          <button onClick={() => setOpenModalUpdateB(true)}>Abrir Modal</button>
           <ul>
             {musicians &&
               musicians.map((musician) => (

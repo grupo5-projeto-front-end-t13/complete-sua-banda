@@ -22,6 +22,50 @@ interface iGlobalContext {
   setOpenModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
   openModalUpdateM: boolean;
   setOpenModalUpdateM: React.Dispatch<React.SetStateAction<boolean>>;
+  openModalUpdateB: boolean;
+  setOpenModalUpdateB: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface iRegisterBand {
+  id?: number | undefined;
+  email: string;
+  password: string;
+  bio?: string;
+  state?: string;
+  social_media?: string;
+  genre?: string;
+  image?: string;
+  type?: "musico" | "banda";
+  name: string;
+  requirement?: string;
+}
+
+export interface iDataBand {
+  user: iRegisterBand;
+}
+
+export interface iDataMusician {
+  user: iRegisterMusician;
+}
+
+export interface iRegisterMusician {
+  id?: number;
+  email: string;
+  password: string;
+  bio?: string;
+  state?: string;
+  social_media?: string;
+  image?: string;
+  type?: "musico" | "banda";
+  name: string;
+  username?: string;
+  skill: string;
+  skill_level?: string
+}
+
+export interface iApiError {
+  status: string;
+  message?: string;
 }
 
 interface iGlobalContextProps {
@@ -67,7 +111,7 @@ export interface iUser {
   skill?: string;
   skill_level?: string;
   genre?: string;
-  requirement?: string[];
+  requirement?: string;
   bands_invites?: iBandsInvites[];
   member_invites?: iMemberInvites[];
 }
@@ -82,6 +126,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
   const [openModalUpdateM, setOpenModalUpdateM] = useState(false);
+  const [openModalUpdateB, setOpenModalUpdateB] = useState(false);
 
   const navigate = useNavigate();
 
@@ -149,7 +194,9 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         openModalRemove,
         setOpenModalRemove,
         setOpenModalUpdateM,
-        openModalUpdateM
+        openModalUpdateM,
+        setOpenModalUpdateB,
+        openModalUpdateB
       }}
     >
       {children}

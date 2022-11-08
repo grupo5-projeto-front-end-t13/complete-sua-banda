@@ -11,7 +11,7 @@ export interface iRegisterBand {
   image?: string;
   type?: string;
   name: string;
-  requirement?: string[];
+  requirement?: string;
 }
 
 export interface iDataBand {
