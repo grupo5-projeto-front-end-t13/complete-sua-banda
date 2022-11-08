@@ -1,3 +1,4 @@
+import { iMemberInvites } from "../context/GlobalContext";
 import { api } from "./ApiRequest";
 
 export interface iRegisterBand {
@@ -9,9 +10,10 @@ export interface iRegisterBand {
   social_media?: string;
   genre?: string;
   image?: string;
-  type?: string;
+  type?: any;
   name: string;
   requirement?: string;
+  members_invites?: iMemberInvites[];
 }
 
 export interface iDataBand {

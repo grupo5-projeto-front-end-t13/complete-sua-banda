@@ -41,23 +41,23 @@ export const NavDashBoard = ({
     setOpenModalUpdateB,
     setOpenModalUpdateM,
   } = useGlobalContext();
-  const [searchInput, setSearchInput] = useState("");
   const [bellAlert, setBellAlert] = useState(false);
 
-  const searchOptions = () => {
+  const searchOptions = (inputText: string) => {
     if (user?.type === "musico") {
-      const searched = bands?.filter(
-        (band) =>
-          band.name.toLowerCase().includes(searchInput) ||
-          band.genre?.toLowerCase().includes(searchInput)
-      );
+      const searched = bands?.filter((band) => {
+        return (
+          band.name.toLowerCase().trim().includes(inputText) ||
+          band.genre?.toLowerCase().trim().includes(inputText)
+        );
+      });
 
       setFilteredBands(searched);
     } else {
       const searched = musicians?.filter(
         (musician) =>
-          musician.name.toLowerCase().includes(searchInput) ||
-          musician.skill.toLowerCase().includes(searchInput)
+          musician.name.toLowerCase().includes(inputText.toLowerCase()) ||
+          musician.skill.toLowerCase().includes(inputText.toLowerCase())
       );
       setFilteredMusicians(searched);
     }
@@ -97,10 +97,8 @@ export const NavDashBoard = ({
               icon={<CiSearch />}
               title="Pesquisar"
               register={() => {}}
-              value={searchInput}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setSearchInput(e.target.value);
-                searchOptions();
+                searchOptions(e.target.value);
               }}
             />
           </styled.InputSearch>

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
+import imgDefault from "../../assets/default.jpg";
 
 export const DashboardMusician = () => {
   const {
@@ -24,23 +25,49 @@ export const DashboardMusician = () => {
     openModalUpdateM,
     setOpenModalUpdateB,
     filteredBands,
+    setFilteredBands,
+    setCardsBandsFiltred,
   } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
-  const [idBand, setIdBand] = useState<number | undefined>();
+  const [loadingPageBands, setLoadingPageBands] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getBands() {
       try {
-        const { data } = await api.get<iRegisterBand[]>("/users?type=banda");
+        const { data } = await api.get<iRegisterBand[]>(
+          "/users?type=banda&_embed=members_invites"
+        );
         setBands(data);
+        setFilteredBands(data);
+        setLoadingPageBands(false);
       } catch (error) {
         console.log(error);
       }
     }
     getBands();
   }, []);
+
+  useEffect(() => {
+    const filter = () => {
+      setCardsBandsFiltred(
+        bands.filter((band) => {
+          if (band.members_invites) {
+            const filtered = band.members_invites.map((member) => {
+              if (member.email === user?.email) {
+                return member;
+              }
+            });
+            if (filtered.length === 0) {
+              return band;
+            }
+          }
+        })
+      );
+    };
+    filter();
+  }, [bands]);
 
   async function getCardProps(idBand: number) {
     try {
@@ -54,7 +81,7 @@ export const DashboardMusician = () => {
 
   const invite = async () => {
     const info = {
-      userId: cardBand.id,
+      userId: cardBand?.id,
       email: user?.email,
       bio: user?.bio,
       state: user?.state,
@@ -66,9 +93,22 @@ export const DashboardMusician = () => {
       skill_level: user?.skill_level,
     };
     try {
-      await api.post("/members_invites", info);
-      toast.success("Convite enviado");
-      setOpenModal(false);
+      if (
+        user?.bio !== "" ||
+        user?.skill_level !== "" ||
+        user?.image !== "" ||
+        user?.username !== "" ||
+        user?.social_media !== "" ||
+        user?.state !== ""
+      ) {
+        await api.post("/members_invites", info);
+        toast.success("Convite enviado");
+        setOpenModal(false);
+      } else {
+        toast.warning("Para participar da banda complete seu cadastro");
+        setOpenModal(false);
+        setOpenModalUpdateM(true);
+      }
     } catch (error) {
       toast.error("Ops... tente novamente!");
       console.log(error);
@@ -87,6 +127,8 @@ export const DashboardMusician = () => {
     }
   };
 
+  console.log(filteredBands);
+
   return (
     <div>
       {openModalRemove && (
@@ -97,7 +139,7 @@ export const DashboardMusician = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalRemove
-            image={user?.image}
+            image={user?.image ? user?.image : imgDefault}
             name={user?.name}
             id={user?.id}
             remove={remove}
@@ -112,12 +154,12 @@ export const DashboardMusician = () => {
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
           <ModalCard
-            imagePerfil={cardBand.image}
-            name={cardBand.name}
-            email={cardBand.email}
-            bio={cardBand.bio}
+            imageProfile={cardBand?.image ? cardBand?.image : imgDefault}
+            name={cardBand?.name}
+            email={cardBand?.email}
+            bio={cardBand?.bio}
             invite={invite}
-            type={cardBand.type}
+            type={cardBand?.type}
           />
         </Modal>
       )}
@@ -133,38 +175,24 @@ export const DashboardMusician = () => {
       )}
 
       <NavDashBoard
-        image={user?.image}
+        image={user?.image ? user?.image : imgDefault}
         bands={bands}
-        inviteBands={user?.bands_invites}
       >
         <styled.ContainerUlMusician>
-          {filteredBands?.length === 0 ? (
+          {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
-              {bands &&
-                bands.map((band) => (
-                  <Card
-                    id={band.id}
-                    getCardProps={getCardProps}
-                    key={band.id}
-                    name={band.name}
-                    image={band.image}
-                    type="banda"
-                    state={band.state}
-                    genre={band.genre}
-                    requirement={band.requirement}
-                  />
-                ))}
+              <p>Aqui vai a página de não encontrado</p>
             </ul>
           ) : (
             <ul>
               {filteredBands &&
-                filteredBands?.map((filteredBand) => (
+                filteredBands.map((filteredBand) => (
                   <Card
                     id={filteredBand.id}
                     getCardProps={getCardProps}
                     key={filteredBand.id}
                     name={filteredBand.name}
-                    image={filteredBand.image}
+                    image={filteredBand.image ? filteredBand.image : imgDefault}
                     type="banda"
                     state={filteredBand.state}
                     genre={filteredBand.genre}

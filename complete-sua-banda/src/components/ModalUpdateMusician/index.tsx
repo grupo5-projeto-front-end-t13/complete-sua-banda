@@ -12,7 +12,7 @@ import {
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError} from "../../context/GlobalContext";
+import { iApiError } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { BsPencil } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
@@ -21,11 +21,13 @@ import { FiMap } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
-import { iDataMusician, iRegisterMusician } from "../../services/RegisterMusician";
+import {
+  iDataMusician,
+  iRegisterMusician,
+} from "../../services/RegisterMusician";
 
-export const ModalUpdateMusician = ({setUser}: any) => {
-
-  const id = localStorage.getItem("@id_CSB")
+export const ModalUpdateMusician = ({ setUser }: any) => {
+  const id = localStorage.getItem("@id_CSB");
 
   const {
     register,
@@ -45,7 +47,7 @@ export const ModalUpdateMusician = ({setUser}: any) => {
     social_media,
     image,
     username,
-    skill_level
+    skill_level,
   }: iRegisterMusician) => {
     const dataMusician = {
       // name,
@@ -60,10 +62,9 @@ export const ModalUpdateMusician = ({setUser}: any) => {
       skill_level,
     };
     try {
-      await api.patch<iDataMusician>(`/users/${id}` , dataMusician);
+      await api.patch<iDataMusician>(`/users/${id}`, dataMusician);
       toast.success("Cadastro Atualizado com sucesso!");
-      setUser(dataMusician)
-      
+      setUser(dataMusician);
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);
@@ -77,33 +78,6 @@ export const ModalUpdateMusician = ({setUser}: any) => {
     <styled.DivContainer>
       <form onSubmit={handleForm}>
         <h1>Complete seu cadastro</h1>
-
-        {/* <Input
-          title="Nome"
-          register={register}
-          type="text"
-          name="name"
-          icon={<AiOutlineUser />}
-        />
-        {errors.name && <Error>{errors.name.message}</Error>}
-
-        <Input
-          name="email"
-          title="Email"
-          type="email"
-          register={register}
-          icon={<AiOutlineMail />}
-        />
-        {errors.email && <Error>{errors.email.message}</Error>}
-
-        <Input
-          name="password"
-          title="Senha"
-          type="password"
-          register={register}
-          icon={<AiOutlineLock />}
-        />
-        {errors.password && <Error>{errors.password.message}</Error>} */}
 
         <Input
           title="Username"
@@ -175,13 +149,12 @@ export const ModalUpdateMusician = ({setUser}: any) => {
 
         <Select name="skill" register={register} icon={GiGuitar}>
           <option value="">Selecione um instrumento</option>
-          <option value="Guitarra">Guitarra</option>
-          <option value="Baixo">Baixo</option>
-          <option value="Violão">Violão</option>
-          <option value="Piano">Piano</option>
-          <option value="Teclado">Teclado</option>
-          <option value="Bateria">Bateria</option>
-          <option value="Vocal">Vocal</option>
+          <option value="Guitarra">Guitarrista</option>
+          <option value="Baixo">Baixista</option>
+          <option value="Violão">Violonista</option>
+          <option value="Piano">Pianista</option>
+          <option value="Bateria">Baterista</option>
+          <option value="Vocal">Vocalista</option>
         </Select>
 
         <Select name="skill_level" register={register} icon={AiOutlineArrowUp}>
@@ -191,28 +164,7 @@ export const ModalUpdateMusician = ({setUser}: any) => {
           <option value="Avançado">Avançado</option>
         </Select>
 
-        {/* <Input
-          title="Genêro musical"
-          register={register}
-          type="text"
-          name="genre"
-          icon={<AiOutlineUser />}
-        />
-        {errors.name && <Error>{errors.name.message}</Error>}
-
-        <Select name="requirement" register={register} icon={GiGuitar}>
-          <option value="">Selecione o que procura</option>
-          <option value="Guitarra">Guitarra</option>
-          <option value="Baixo">Baixo</option>
-          <option value="Violão">Violão</option>
-          <option value="Piano">Piano</option>
-          <option value="Teclado">Teclado</option>
-          <option value="Bateria">Bateria</option>
-          <option value="Vocal">Vocal</option>
-        </Select> */}
-
         <Button type="submit">Atualizar dados</Button>
-
       </form>
     </styled.DivContainer>
   );

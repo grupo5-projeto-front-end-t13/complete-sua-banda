@@ -36,6 +36,10 @@ interface iGlobalContext {
   >;
   openModalUpdateB: boolean;
   setOpenModalUpdateB: React.Dispatch<React.SetStateAction<boolean>>;
+  cardsBandsFiltred: iRegisterBand[] | undefined;
+  setCardsBandsFiltred: React.Dispatch<
+    React.SetStateAction<iRegisterBand[] | undefined>
+  >;
 }
 
 export interface iApiError {
@@ -106,6 +110,9 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
     iRegisterMusician[] | undefined
   >([]);
   const [filteredBands, setFilteredBands] = useState<
+    iRegisterBand[] | undefined
+  >([]);
+  const [cardsBandsFiltred, setCardsBandsFiltred] = useState<
     iRegisterBand[] | undefined
   >([]);
   const [openModalUpdateB, setOpenModalUpdateB] = useState(false);
@@ -218,6 +225,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         setFilteredMusicians,
         filteredBands,
         setFilteredBands,
+        cardsBandsFiltred,
+        setCardsBandsFiltred,
       }}
     >
       {children}
