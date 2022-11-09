@@ -12,7 +12,8 @@ export const ContainerUlMusician = styled.ul`
         gap: 32px 96px;
 
         max-width: 912px;
-        height: 100%;
+        min-height: 200px;
+        max-height: 100%;
 
         margin: 40px auto;
     }
