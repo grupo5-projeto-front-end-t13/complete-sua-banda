@@ -57,28 +57,29 @@ interface iGlobalContextProps {
 }
 
 export interface iBandsInvites {
-  bio: string;
-  state: string;
-  social_media: string;
-  genre: string;
-  image: string;
-  name: string;
-  userId: number;
-  id: number;
+  bio?: string;
+  state?: string;
+  social_media?: string;
+  genre?: string;
+  image?: string;
+  name?: string;
+  userId?: number;
+  id?: number;
+  email?: string;
 }
 
 export interface iMemberInvites {
-  id: number;
-  userId: number;
-  email: string;
-  bio: string;
-  estate: string;
-  social_media: string;
-  image: string;
-  name: string;
-  username: string;
-  skill: string;
-  skill_level: string;
+  id?: number;
+  userId?: number;
+  email?: string;
+  bio?: string;
+  estate?: string;
+  social_media?: string;
+  image?: string;
+  name?: string;
+  username?: string;
+  skill?: string;
+  skill_level?: string;
 }
 
 export interface iUser {

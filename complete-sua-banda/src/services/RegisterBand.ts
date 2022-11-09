@@ -14,6 +14,8 @@ export interface iRegisterBand {
   name: string;
   requirement?: string;
   members_invites?: iMemberInvites[];
+  skill?: string;
+  searched?: string[] | undefined;
 }
 
 export interface iDataBand {
