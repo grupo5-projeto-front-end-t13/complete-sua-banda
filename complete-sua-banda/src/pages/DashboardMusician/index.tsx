@@ -11,10 +11,15 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
+import { Users } from "styled-icons/entypo";
+import { CgAdd } from 'react-icons/cg';
+import { DeclineAnInvitationBands } from "../../services/DeleteBands";
+
 
 
 export const DashboardMusician = () => {
-  const { user, setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands} =
+  const { user,
+         setUser, setOpenModal, setOpenModalRemove, setOpenModalUpdateM, openModal, openModalRemove, openModalUpdateM, setOpenModalUpdateB, filteredBands , setFilteredBands, setOpenModalNotification, openModalNotification} =
     useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
@@ -35,6 +40,7 @@ export const DashboardMusician = () => {
     }
     getBands();
   }, []);
+
 
   async function getCardProps(idBand: number) {
     try {
@@ -80,8 +86,6 @@ export const DashboardMusician = () => {
       console.log(error);
     }
   };
-
-  console.log(filteredBands)
 
   return (
     <div>
@@ -132,6 +136,31 @@ export const DashboardMusician = () => {
       <NavDashBoard image={user?.image} bands={bands} inviteBands={user?.bands_invites}>
         <styled.ContainerUlMusician>
           <button onClick={() => setOpenModalUpdateM(true)}>Atualizar Perfil</button>
+          {openModalNotification 
+          ? 
+          ( 
+          <styled.UlNotifications>
+            {user?.bands_invites?.map( invite => (
+
+              <styled.CardNotifications>
+                <figure>
+                  <img src={invite.image} alt="" />
+                </figure>
+                <div>
+                  <div>
+                    <h2>{invite.name}</h2>
+                    <p>{invite.genre} Rock</p>
+                  </div>
+                  <button onClick={async () => await DeclineAnInvitationBands(invite.id) }><CgAdd/></button>
+                </div>
+              </styled.CardNotifications>
+            )
+          
+          )}
+          </styled.UlNotifications>
+          ) : 
+          (<p></p>)
+            }
           {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
               <p>Aqui vai a página de não encontrado</p>

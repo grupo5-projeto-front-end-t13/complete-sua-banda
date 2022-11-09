@@ -106,3 +106,9 @@ export const Icon2 = styled(FiBell)`
   font-size: 35px;
   cursor: pointer;
 `;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  color: var(--color-brand)
+`

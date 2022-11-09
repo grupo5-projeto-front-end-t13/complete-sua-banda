@@ -89,7 +89,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   };
-
+ 
   return (
     <div>
       {openModalUpdateB && (
@@ -136,7 +136,7 @@ export const DashboardBand = () => {
         </Modal>
       )}
       <NavDashBoard image={user?.image} musicians={musicians} inviteMembers={user?.members_invites}>
-        <styled.ContainerUl>
+        <styled.ContainerUl>         
           {filteredMusicians?.length === 0 && loadingPageMusician === false ? (
             <ul>
               <p>Aqui vai a pagina onde fala que não foi encontrado</p>

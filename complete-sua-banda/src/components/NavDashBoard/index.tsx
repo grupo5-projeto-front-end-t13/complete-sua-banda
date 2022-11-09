@@ -27,7 +27,7 @@ export const NavDashBoard = ({
   inviteBands,
   inviteMembers
 }: iNavDashBoard) => {
-  const { user, setFilteredMusicians, setFilteredBands } = useGlobalContext();
+  const { user, setFilteredMusicians, setFilteredBands, setOpenModalNotification } = useGlobalContext();
   const [bellAlert, setBellAlert] = useState(false)
 
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export const NavDashBoard = ({
           <styled.Icons>
             <styled.Icon1 onClick={home} />
             {bellAlert ? 
-          <VscBellDot size={35} /> : <FiBell size={35}/>}
+          <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}><VscBellDot  size={35}/></styled.Button> :  <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}><FiBell  size={35}/></styled.Button>}
           </styled.Icons>
           <styled.InputSearch>
             <Input
@@ -100,7 +100,7 @@ export const NavDashBoard = ({
         <styled.Icon1 onClick={home} />
         <img src={logo} alt="Logo CSB" />
         {bellAlert ? 
-          <VscBellDot size={35} /> : <FiBell size={35}/>
+          <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}><VscBellDot  size={35}/></styled.Button> :  <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}><FiBell  size={35}/></styled.Button>
         }
       </styled.NavFooter>
     </>
