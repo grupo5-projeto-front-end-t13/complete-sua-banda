@@ -163,7 +163,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
       }
     }
     loadUser();
-  }, [navigate,updateNotification]);
+  }, [updateNotification]);
 
   const toastOfUpdateProfile = (data: iUser) => {
     if (

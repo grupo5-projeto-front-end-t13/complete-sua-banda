@@ -214,26 +214,6 @@ export const DashboardBand = () => {
               <p>Você não possui nenhuma notificação</p>
             </section>
           </styled.CardNotifications>)}
-
-
-
-          {/* {user?.members_invites?.map( invite => (
-
-            <styled.CardNotifications>
-              <figure>
-                <img src={invite.image} alt="" />
-              </figure>
-              <div>
-                <div>
-                  <h2>{invite.name}</h2>
-                  <p>{invite.skill} Rock</p>
-                </div>
-                <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
-              </div>
-            </styled.CardNotifications>
-          )
-        
-        )} */}
         </styled.DivNotifications>
         ) : 
         (<p></p>)
