@@ -192,9 +192,9 @@ export const DashboardMusician = () => {
         <styled.DivNotifications>
           {user?.bands_invites?.length?
            (
-            user?.bands_invites?.map( invite => (
+            user?.bands_invites?.map( (invite,index) => (
   
-              <styled.CardNotifications>
+              <styled.CardNotifications key={index}>
                 <figure>
                   <img src={invite.image} alt="" />
                 </figure>

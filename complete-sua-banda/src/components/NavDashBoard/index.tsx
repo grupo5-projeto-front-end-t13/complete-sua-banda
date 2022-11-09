@@ -95,11 +95,11 @@ export const NavDashBoard = ({
             </styled.Icon1>
             {bellAlert ? 
             <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-              <VscBellDot  size={35}/>
+              <VscBellDot  size={25}/>
             </styled.Button> 
             :  
             <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-              <FiBell  size={35}/>
+              <FiBell  size={25}/>
             </styled.Button>
             }
           </styled.Icons>
@@ -129,11 +129,11 @@ export const NavDashBoard = ({
         {
         bellAlert ? 
         <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-          <VscBellDot  size={35}/>
+          <VscBellDot  size={25}/>
         </styled.Button> 
         :  
         <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-          <FiBell  size={35}/>
+          <FiBell  size={25}/>
         </styled.Button>
         }
       </styled.NavFooter>

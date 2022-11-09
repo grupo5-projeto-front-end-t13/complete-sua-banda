@@ -26,12 +26,13 @@ export const ContainerUl = styled.ul`
 
     .noResults {
       height: 52vh;
+      width: 100vw;
       display: flex;
       justify-content: center;
       align-items: center;
 
       img {
-        width: 30%;
+        width: 182px;
         height: 131px;
       }
 

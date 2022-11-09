@@ -190,9 +190,9 @@ export const DashboardBand = () => {
         <styled.DivNotifications>
                     {user?.members_invites?.length?
            (
-            user?.members_invites?.map( invite => (
+            user?.members_invites?.map( (invite,index) => (
 
-              <styled.CardNotifications>
+              <styled.CardNotifications key={index}>
                 <figure>
                   <img src={invite.image} alt="" />
                 </figure>
