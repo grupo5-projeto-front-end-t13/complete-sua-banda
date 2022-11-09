@@ -31,7 +31,6 @@ export const DashboardBand = () => {
     setFilteredMusicians,
     openModalUpdateB,
     openModalNotification,
-    updateNotification,
     setUpdateNotification
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
@@ -112,7 +111,7 @@ export const DashboardBand = () => {
         await api.post("/bands_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
-        musiciansFiltred(cardMusician.i);
+        musiciansFiltred(cardMusician.id);
       } else {
         toast.warning("Para convidar um músico complete seu cadastro!");
         setOpenModal(false);
