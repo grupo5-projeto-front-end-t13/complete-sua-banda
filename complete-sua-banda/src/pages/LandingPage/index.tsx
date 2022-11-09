@@ -2,7 +2,6 @@ import logo from "../../assets/Logo-CSB.png";
 import brunoImg from "../../assets/bruno.jpg";
 import eltonImg from "../../assets/elton.jpg";
 import fernandoImg from "../../assets/fernando.jpg";
-import gabrielImg from "../../assets/gabriel.jpg";
 import juliaImg from "../../assets/julia.jpg";
 import matheusImg from "../../assets/matheus.jpg";
 import rogerImg from "../../assets/roger.jpg";
@@ -37,11 +36,6 @@ export const LandingPage = () => {
       name: "Fernando Junqueira",
       img: `${fernandoImg}`,
       link: "https://www.linkedin.com/in/fernando-luís-junqueira-lima-84ab2b218/",
-    },
-    {
-      name: "Gabriel Queiroz",
-      img: `${gabrielImg}`,
-      link: "https://www.linkedin.com/in/gabriel-costa-de-queiroz-0650b152/",
     },
     {
       name: "Julia Albuquerque",

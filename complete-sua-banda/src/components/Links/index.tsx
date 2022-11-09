@@ -9,7 +9,7 @@ interface iProps {
 export const LinkComponent = ({ link, name, type }: iProps) => {
   return (
     <styled.LinkTypes type={type} to={`${link}`}>
-      {name}
+      <span>{name}</span>
     </styled.LinkTypes>
   );
 };

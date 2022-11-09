@@ -62,15 +62,5 @@ export const DivContainer = styled.div`
       text-align: center;
       color: var(--color-brand);
     }
-
-    button {
-      color: var(--color-grey-1);
-      background: var(--color-brand);
-      border: none;
-      border-radius: 4px;
-      width: 230px;
-      height: 30px;
-      cursor: pointer;
-    }
   }
 `;
