@@ -12,6 +12,7 @@ import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
 import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 import imgDefault from "../../assets/default.jpg";
+import noResults from "../../assets/NoResults.png";
 
 export const DashboardBand = () => {
   const {
@@ -158,7 +159,10 @@ export const DashboardBand = () => {
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 && loadingPageMusician === false ? (
             <ul>
-              <p>Aqui vai a pagina onde fala que não foi encontrado</p>
+              <div className="noResults">
+                <img src={noResults} alt="Não há resultados" />
+                <p>Nenhuma correspondência para sua pesquisa.</p>
+              </div>
             </ul>
           ) : (
             <ul>
