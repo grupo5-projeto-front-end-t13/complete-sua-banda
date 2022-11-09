@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 import imgDefault from "../../assets/default.jpg";
+import noResults from "../../assets/NoResults.png";
 
 export const DashboardMusician = () => {
   const {
@@ -26,6 +27,8 @@ export const DashboardMusician = () => {
     setOpenModalUpdateB,
     filteredBands,
     setFilteredBands,
+    // setCardsBandsFiltred,
+
   } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
@@ -48,25 +51,25 @@ export const DashboardMusician = () => {
     getBands();
   }, []);
 
-  useEffect(() => {
-    const filter = () => {
-      setCardsFiltred(
-        bands.filter((band) => {
-          if (band.members_invites) {
-            const filtered = band.members_invites.map((member) => {
-              if (member.email === user?.email) {
-                return member;
-              }
-            });
-            if (filtered.length === 0) {
-              return band;
-            }
-          }
-        })
-      );
-    };
-    filter();
-  }, [bands]);
+  // useEffect(() => {
+  //   const filter = () => {
+  //     setCardsFiltred(
+  //       bands.filter((band) => {
+  //         if (band.members_invites) {
+  //           const filtered = band.members_invites.map((member) => {
+  //             if (member.email === user?.email) {
+  //               return member;
+  //             }
+  //           });
+  //           if (filtered.length === 0) {
+  //             return band;
+  //           }
+  //         }
+  //       })
+  //     );
+  //   };
+  //   filter();
+  // }, [bands]);
 
   async function getCardProps(idBand: number) {
     try {
@@ -183,7 +186,10 @@ export const DashboardMusician = () => {
           </button>
           {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
-              <p>Aqui vai a página de não encontrado</p>
+              <div className="noResults">
+                <img src={noResults} alt="Não há resultados" />
+                <p>Nenhuma correspondência para sua pesquisa.</p>
+              </div>
             </ul>
           ) : (
             <ul>

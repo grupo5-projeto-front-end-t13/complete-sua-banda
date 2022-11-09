@@ -18,6 +18,8 @@ interface iGlobalContext {
   loading: boolean;
   clearStorage: () => void;
   submitLogin({ email, password }: iLogin): void;
+  openMenu: boolean;
+  setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   openModalRemove: boolean;
@@ -34,6 +36,10 @@ interface iGlobalContext {
   >;
   openModalUpdateB: boolean;
   setOpenModalUpdateB: React.Dispatch<React.SetStateAction<boolean>>;
+  cardsBandsFiltred: iRegisterBand[] | undefined;
+  setCardsBandsFiltred: React.Dispatch<
+    React.SetStateAction<iRegisterBand[] | undefined>
+  >;
 }
 
 export interface iApiError {
@@ -96,6 +102,7 @@ export const GlobalContext = createContext<iGlobalContext>(
 export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
   const [openModalUpdateM, setOpenModalUpdateM] = useState(false);
@@ -103,6 +110,9 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
     iRegisterMusician[] | undefined
   >([]);
   const [filteredBands, setFilteredBands] = useState<
+    iRegisterBand[] | undefined
+  >([]);
+  const [cardsBandsFiltred, setCardsBandsFiltred] = useState<
     iRegisterBand[] | undefined
   >([]);
   const [openModalUpdateB, setOpenModalUpdateB] = useState(false);
@@ -153,7 +163,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
       data.state === "" ||
       data.username === ""
     ) {
-      toast.info("Complete o seu cadastro", {
+      toast.error("Complete o seu cadastro", {
         toastId: "custom-id-yes",
       });
     } else {
@@ -201,6 +211,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         loading,
         clearStorage,
         submitLogin,
+        openMenu,
+        setOpenMenu,
         openModal,
         setOpenModal,
         openModalRemove,
@@ -213,6 +225,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         setFilteredMusicians,
         filteredBands,
         setFilteredBands,
+        cardsBandsFiltred,
+        setCardsBandsFiltred,
       }}
     >
       {children}

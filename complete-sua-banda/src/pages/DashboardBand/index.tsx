@@ -12,6 +12,7 @@ import { ModalRemove } from "../../components/ModalRemove";
 import { useNavigate } from "react-router-dom";
 import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 import imgDefault from "../../assets/default.jpg";
+import noResults from "../../assets/NoResults.png";
 
 export const DashboardBand = () => {
   const {
@@ -23,13 +24,13 @@ export const DashboardBand = () => {
     openModalRemove,
     setOpenModalUpdateM,
     setOpenModalUpdateB,
-    filteredMusicians,  
+    filteredMusicians,
     setFilteredMusicians,
     openModalUpdateB,
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
-  const [loadingPageMusician, setLoadingPageMusician] = useState(true)
+  const [loadingPageMusician, setLoadingPageMusician] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const DashboardBand = () => {
         );
         setMusicians(data);
         setFilteredMusicians(data);
-        setLoadingPageMusician(false)
+        setLoadingPageMusician(false);
       } catch (error) {
         console.log(error);
       }
@@ -158,8 +159,10 @@ export const DashboardBand = () => {
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 && loadingPageMusician === false ? (
             <ul>
-              <p>Aqui vai a pagina onde fala que não foi encontrado</p>
-
+              <div className="noResults">
+                <img src={noResults} alt="Não há resultados" />
+                <p>Nenhuma correspondência para sua pesquisa.</p>
+              </div>
             </ul>
           ) : (
             <ul>
