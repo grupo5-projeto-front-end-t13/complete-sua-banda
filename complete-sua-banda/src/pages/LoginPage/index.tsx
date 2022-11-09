@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormSchemaLogin } from "./formSchema";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { VscLoading } from "react-icons/vsc";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { LinkComponent } from "../../components/Links";
@@ -20,7 +21,7 @@ interface iFormLoginProps {
   password: string;
 }
 export const LoginPage = () => {
-  const { submitLogin } = useGlobalContext();
+  const { submitLogin, buttonLoading, setButtonLoading } = useGlobalContext();
 
   const {
     register,
@@ -72,7 +73,14 @@ export const LoginPage = () => {
                   type="styledB"
                 />
               </p>
-              <Button type="submit">Entrar</Button>
+              {buttonLoading ? (
+                <Button disabled type="submit">
+                  <VscLoading />
+                  Entrando...
+                </Button>
+              ) : (
+                <Button type="submit">Entrar</Button>
+              )}
               <div className="divLink">
                 <LinkComponent link="/" name="Voltar" type="styledA" />
               </div>

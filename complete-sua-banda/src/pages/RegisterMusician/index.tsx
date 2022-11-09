@@ -5,6 +5,7 @@ import { LinkComponent } from "../../components/Links";
 import { formSchemaMusician } from "./schemaMusician";
 import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { VscLoading } from "react-icons/vsc";
 import { GiGuitar } from "react-icons/gi";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
@@ -26,7 +27,8 @@ interface iFormRegisterMusician {
 }
 
 export const RegisterMusician = () => {
-  const { submitMusician } = useMusicianContext();
+  const { submitMusician, buttonLoading, setButtonLoading } =
+    useMusicianContext();
 
   const {
     register,
@@ -99,7 +101,14 @@ export const RegisterMusician = () => {
                   <LinkComponent type="styledB" link="/login" name={"Login"} />
                 </p>
               </div>
-              <Button type="submit">Cadastre-se</Button>
+              {buttonLoading ? (
+                <Button disabled type="submit">
+                  <VscLoading />
+                  Cadastrando...
+                </Button>
+              ) : (
+                <Button type="submit">Cadastre-se</Button>
+              )}
             </Form>
           </AnimatedEntranceBottom>
         </div>

@@ -1,5 +1,3 @@
-import { BsHouseDoor } from "react-icons/bs";
-import { FiBell } from "react-icons/fi";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
@@ -97,13 +95,7 @@ export const NavFooter = styled.nav`
   }
 `;
 
-export const Icon1 = styled(BsHouseDoor)`
-  color: var(--color-brand);
-  font-size: 25px;
-  cursor: pointer;
-`;
-
-export const Icon2 = styled(FiBell)`
+export const Icon1 = styled.a`
   color: var(--color-brand);
   font-size: 25px;
   cursor: pointer;

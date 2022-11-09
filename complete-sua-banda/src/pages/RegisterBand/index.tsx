@@ -6,6 +6,7 @@ import * as styled from "./style";
 import { formSchemaBand } from "./schemaBand";
 import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { VscLoading } from "react-icons/vsc";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { Button } from "../../components/Button";
@@ -23,7 +24,8 @@ interface iFormRegisterBand {
 }
 
 export const RegisterBand = () => {
-  const { submitRegisterBand } = useBandContext();
+  const { submitRegisterBand, buttonLoading, setButtonLoading } =
+    useBandContext();
 
   const {
     register,
@@ -85,7 +87,14 @@ export const RegisterBand = () => {
                   <LinkComponent type="styledB" link="/login" name={"Login"} />
                 </p>
               </div>
-              <Button type="submit">Cadastre-se</Button>
+              {buttonLoading ? (
+                <Button disabled type="submit">
+                  <VscLoading />
+                  Cadastrando...
+                </Button>
+              ) : (
+                <Button type="submit">Cadastre-se</Button>
+              )}
             </Form>
           </AnimatedEntranceBottom>
         </div>

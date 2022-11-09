@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import { keyframes } from "styled-components";
+
+const Loading = keyframes`
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 
 export const Button = styled.button`
   display: flex;
@@ -19,11 +29,21 @@ export const Button = styled.button`
   }
 
   &:is(:active, :disabled) {
-    background-color: var(--color-brand-active);
+    background-color: var(--color-brand-opacity);
     box-shadow: 3px 3px 0px 0px var(--color-grey-5) inset;
   }
 
   &:is(:active, :disabled) > span {
     transform: translateX(3px) translateY(3px);
+  }
+
+  & > span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  & > span > svg {
+    animation: ${Loading} 1s infinite;
   }
 `;

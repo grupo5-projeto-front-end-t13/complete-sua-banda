@@ -18,7 +18,15 @@ import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
 import { iDataBand, iRegisterBand } from "../../services/RegisterBand";
 
-export const ModalUpdateBand = ({ setUser }: any) => {
+interface iModalUpdateBandProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: any;
+}
+
+export const ModalUpdateBand = ({
+  setModal,
+  setUser,
+}: iModalUpdateBandProps) => {
   const id = localStorage.getItem("@id_CSB");
   const {
     register,
@@ -49,6 +57,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
       await api.patch<iDataBand>(`/users/${id}`, dataBand);
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataBand);
+      setModal(false);
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);

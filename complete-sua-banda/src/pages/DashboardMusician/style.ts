@@ -19,6 +19,7 @@ export const ContainerUlMusician = styled.ul`
     padding: 5.5rem 0 5rem 0;
 
     @media (min-width: 768px) {
+      justify-content: initial;
       padding: 6rem 0 1.5rem 0;
       gap: 2rem 5rem;
     }

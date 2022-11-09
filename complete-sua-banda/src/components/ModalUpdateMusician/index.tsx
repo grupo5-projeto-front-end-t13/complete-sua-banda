@@ -7,7 +7,7 @@ import { AiOutlineUser, AiOutlineArrowUp } from "react-icons/ai";
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError } from "../../context/GlobalContext";
+import { iApiError, iUser } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { ImImage } from "react-icons/im";
@@ -21,7 +21,15 @@ import {
 } from "../../services/RegisterMusician";
 import { TextArea } from "../TextArea";
 
-export const ModalUpdateMusician = ({ setUser }: any) => {
+interface iModalUpdateMusicianProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: any;
+}
+
+export const ModalUpdateMusician = ({
+  setModal,
+  setUser,
+}: iModalUpdateMusicianProps) => {
   const id = localStorage.getItem("@id_CSB");
 
   const {
@@ -54,6 +62,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
       await api.patch<iDataMusician>(`/users/${id}`, dataMusician);
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataMusician);
+      setModal(false);
     } catch (error) {
       const requestError = error as AxiosError<iApiError>;
       console.error(requestError.response?.data.message);

@@ -1,13 +1,21 @@
 import * as styled from "./style";
+import { Button } from "../Button";
 
 interface iModalRemoveProps {
   image?: string;
   name?: string;
   id?: number;
   remove: Function;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ModalRemove = ({ image, name, id, remove }: iModalRemoveProps) => {
+export const ModalRemove = ({
+  image,
+  name,
+  id,
+  remove,
+  setModal,
+}: iModalRemoveProps) => {
   return (
     <styled.Container>
       <img src={image} alt="Imagem perfil" />
@@ -15,9 +23,9 @@ export const ModalRemove = ({ image, name, id, remove }: iModalRemoveProps) => {
       <p>
         Deseja <strong>realmente</strong> excluir sua conta?
       </p>
-      <button type="button" onClick={() => remove(id)}>
+      <Button type="button" remove={remove} id={id} closeModal={setModal}>
         Confirmar
-      </button>
+      </Button>
     </styled.Container>
   );
 };
