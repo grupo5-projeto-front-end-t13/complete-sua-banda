@@ -43,6 +43,7 @@ export const NavDashBoard = ({
     setOpenModalRemove,
     setOpenModalUpdateB,
     setOpenModalUpdateM,
+    setOpenModalNotification
   } = useGlobalContext();
   const [bellAlert, setBellAlert] = useState(false);
 
@@ -65,7 +66,7 @@ export const NavDashBoard = ({
       setFilteredMusicians(searched);
     }
   };
-
+console.log(inviteBands,inviteMembers)
   useEffect(() => {
     const alertBell = () => {
       if (inviteBands?.length || inviteMembers?.length) {
@@ -93,7 +94,15 @@ export const NavDashBoard = ({
             <styled.Icon1 href="#top">
               <BsHouseDoor />
             </styled.Icon1>
-            {bellAlert ? <VscBellDot size={20} /> : <FiBell size={25} />}
+            {bellAlert ? 
+            <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+              <VscBellDot  size={35}/>
+            </styled.Button> 
+            :  
+            <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+              <FiBell  size={35}/>
+            </styled.Button>
+            }
           </styled.Icons>
           <styled.InputSearch>
             <Input
@@ -118,7 +127,16 @@ export const NavDashBoard = ({
           <BsHouseDoor />
         </styled.Icon1>
         <img src={logo} alt="Logo CSB" />
-        {bellAlert ? <VscBellDot size={20} /> : <FiBell size={25} />}
+        {
+        bellAlert ? 
+        <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+          <VscBellDot  size={35}/>
+        </styled.Button> 
+        :  
+        <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+          <FiBell  size={35}/>
+        </styled.Button>
+        }
       </styled.NavFooter>
     </>
   );

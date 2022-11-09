@@ -100,3 +100,11 @@ export const Icon1 = styled.a`
   font-size: 25px;
   cursor: pointer;
 `;
+
+export const Button = styled.button`
+  background: transparent;
+  color: var(--color-brand);
+  border: none;
+  
+ 
+`

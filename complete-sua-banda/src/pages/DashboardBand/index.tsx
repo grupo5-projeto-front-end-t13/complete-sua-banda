@@ -13,6 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 import imgDefault from "../../assets/default.jpg";
 import noResults from "../../assets/NoResults.png";
+import { DeclineAnInvitationMusician } from "../../services/DeleteInvite";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { BiNotificationOff } from "react-icons/bi";
 
 export const DashboardBand = () => {
   const {
@@ -27,6 +30,9 @@ export const DashboardBand = () => {
     filteredMusicians,
     setFilteredMusicians,
     openModalUpdateB,
+    openModalNotification,
+    updateNotification,
+    setUpdateNotification
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
@@ -43,7 +49,7 @@ export const DashboardBand = () => {
         setMusicians(data);
         setLoadingPageMusician(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     getMusicians();
@@ -56,14 +62,12 @@ export const DashboardBand = () => {
           if (
             musician.bands_invites.every(({ email }) => email !== user?.email)
           ) {
-            // console.log(user?.id)
             return musician;
           }
         }
       });
       setFiltredCardsM(newMusicians);
       setFilteredMusicians(newMusicians);
-      // console.log(newMusicians);
     };
     filter();
   }, [musicians]);
@@ -80,7 +84,7 @@ export const DashboardBand = () => {
       setCardMusicians(data);
       setOpenModal(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -116,10 +120,9 @@ export const DashboardBand = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.log(error);
+      console.error(error);
     }
   };
-
   const remove = async (idUser: number): Promise<void> => {
     try {
       await api.delete(`/users/${idUser}`);
@@ -128,9 +131,10 @@ export const DashboardBand = () => {
         navigate("/");
       }, 2000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+ 
 
   return (
     <div>
@@ -180,10 +184,67 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
+      {
+        openModalNotification 
+        ? 
+        ( 
+        <styled.DivNotifications>
+                    {user?.members_invites?.length?
+           (
+            user?.members_invites?.map( invite => (
+
+              <styled.CardNotifications>
+                <figure>
+                  <img src={invite.image} alt="" />
+                </figure>
+                <div>
+                  <div>
+                    <h2>{invite.name}</h2>
+                    <p>{invite.skill} Rock</p>
+                  </div>
+                  <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+                </div>
+              </styled.CardNotifications>
+            )
+          
+          ))
+           : 
+           (<styled.CardNotifications>
+            <section>
+              <BiNotificationOff/>
+              <p>Você não possui nenhuma notificação</p>
+            </section>
+          </styled.CardNotifications>)}
+
+
+
+          {/* {user?.members_invites?.map( invite => (
+
+            <styled.CardNotifications>
+              <figure>
+                <img src={invite.image} alt="" />
+              </figure>
+              <div>
+                <div>
+                  <h2>{invite.name}</h2>
+                  <p>{invite.skill} Rock</p>
+                </div>
+                <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+              </div>
+            </styled.CardNotifications>
+          )
+        
+        )} */}
+        </styled.DivNotifications>
+        ) : 
+        (<p></p>)
+
+      }
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}
         musicians={musicians}
         filtredCardsM={filtredCardsM}
+        inviteMembers={user?.members_invites}
       >
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 && loadingPageMusician === false ? (

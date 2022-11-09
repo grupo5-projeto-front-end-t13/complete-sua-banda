@@ -42,6 +42,11 @@ interface iGlobalContext {
   setCardsBandsFiltred: React.Dispatch<
     React.SetStateAction<iRegisterBand[] | undefined>
   >;
+  openModalNotification: boolean;
+  setOpenModalNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  updateNotification: boolean;
+  setUpdateNotification: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 export interface iApiError {
@@ -110,6 +115,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
   const [openModalUpdateM, setOpenModalUpdateM] = useState(false);
+  const [openModalNotification, setOpenModalNotification] = useState(false);
+  const [updateNotification, setUpdateNotification] = useState(false);
   const [filteredMusicians, setFilteredMusicians] = useState<
     iRegisterMusician[] | undefined
   >([]);
@@ -133,6 +140,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
+          console.log('renderizou')
           if (data.type === "musico") {
             const { data } = await api.get<iUser>(
               `/users/${id}?_embed=bands_invites`
@@ -156,7 +164,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
       }
     }
     loadUser();
-  }, []);
+  }, [navigate,updateNotification]);
 
   const toastOfUpdateProfile = (data: iUser) => {
     if (
@@ -235,6 +243,11 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         setFilteredBands,
         cardsBandsFiltred,
         setCardsBandsFiltred,
+        setOpenModalNotification,
+  	    openModalNotification,
+        updateNotification,
+        setUpdateNotification
+
       }}
     >
       {children}
