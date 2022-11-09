@@ -27,6 +27,8 @@ export const DashboardMusician = () => {
     setOpenModalUpdateB,
     filteredBands,
     setFilteredBands,
+    // setCardsBandsFiltred,
+
   } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
