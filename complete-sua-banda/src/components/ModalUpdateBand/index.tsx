@@ -18,7 +18,15 @@ import { AxiosError } from "axios";
 import { api } from "../../services/ApiRequest";
 import { iDataBand, iRegisterBand } from "../../services/RegisterBand";
 
-export const ModalUpdateBand = ({ setUser }: any) => {
+interface iModalUpdateBandProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: any;
+}
+
+export const ModalUpdateBand = ({
+  setModal,
+  setUser,
+}: iModalUpdateBandProps) => {
   const id = localStorage.getItem("@id_CSB");
   const {
     register,
@@ -49,6 +57,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
       await api.patch<iDataBand>(`/users/${id}`, dataBand);
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataBand);
+      setModal(false);
     } catch (error) {
       toast.error("Ops... Aconteceu um erro!");
     }
@@ -68,6 +77,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Mídia Social"
           register={register}
           type="text"
+          placeholder="Link de rede social..."
           name="social_media"
           icon={<IoShareSocialSharp />}
         />
@@ -77,6 +87,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Imagem Perfil"
           register={register}
           type="text"
+          placeholder="Link da foto de perfil..."
           name="image"
           icon={<ImImage />}
         />
@@ -118,6 +129,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Genêro musical"
           register={register}
           type="text"
+          placeholder="Gênero musical da banda..."
           name="genre"
           icon={<AiOutlineUser />}
         />

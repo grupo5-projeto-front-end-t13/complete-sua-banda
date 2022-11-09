@@ -6,6 +6,7 @@ import * as styled from "./style";
 import { formSchemaBand } from "./schemaBand";
 import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { VscLoading } from "react-icons/vsc";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
 import { Button } from "../../components/Button";
@@ -23,7 +24,8 @@ interface iFormRegisterBand {
 }
 
 export const RegisterBand = () => {
-  const { submitRegisterBand } = useBandContext();
+  const { submitRegisterBand, buttonLoading, setButtonLoading } =
+    useBandContext();
 
   const {
     register,
@@ -44,6 +46,7 @@ export const RegisterBand = () => {
                 title="Banda"
                 register={register}
                 type="text"
+                placeholder="Digite o nome da banda..."
                 name="name"
                 icon={<AiOutlineUser />}
               />
@@ -52,6 +55,7 @@ export const RegisterBand = () => {
                 title="Email"
                 register={register}
                 type="email"
+                placeholder="Digite o email da banda..."
                 name="email"
                 icon={<AiOutlineMail />}
               />
@@ -60,6 +64,7 @@ export const RegisterBand = () => {
                 title="Senha"
                 register={register}
                 type="password"
+                placeholder="Digite sua senha..."
                 name="password"
                 icon={<AiOutlineLock />}
               />
@@ -68,6 +73,7 @@ export const RegisterBand = () => {
                 title="Repita a senha"
                 register={register}
                 type="password"
+                placeholder="Confirme a senha..."
                 name="passwordConfirm"
                 icon={<AiOutlineLock />}
               />
@@ -81,7 +87,14 @@ export const RegisterBand = () => {
                   <LinkComponent type="styledB" link="/login" name={"Login"} />
                 </p>
               </div>
-              <Button type="submit">Cadastre-se</Button>
+              {buttonLoading ? (
+                <Button disabled type="submit">
+                  <VscLoading />
+                  Cadastrando...
+                </Button>
+              ) : (
+                <Button type="submit">Cadastre-se</Button>
+              )}
             </Form>
           </AnimatedEntranceBottom>
         </div>

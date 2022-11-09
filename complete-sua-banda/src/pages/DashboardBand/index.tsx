@@ -60,7 +60,7 @@ export const DashboardBand = () => {
       const newMusicians = musicians.filter((musician) => {
         if (musician.bands_invites) {
           if (
-            musician.bands_invites.every(({ email}) => email !== user?.email)
+            musician.bands_invites.every(({ email }) => email !== user?.email)
           ) {
             return musician;
           }
@@ -97,7 +97,7 @@ export const DashboardBand = () => {
       genre: user?.genre,
       image: user?.image,
       name: user?.name,
-      email: user?.email
+      email: user?.email,
     };
 
     try {
@@ -112,7 +112,7 @@ export const DashboardBand = () => {
         await api.post("/bands_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
-        musiciansFiltred(cardMusician.id)
+        musiciansFiltred(cardMusician.i);
       } else {
         toast.warning("Para convidar um músico complete seu cadastro!");
         setOpenModal(false);
@@ -135,7 +135,6 @@ export const DashboardBand = () => {
   };
  
 
-
   return (
     <div>
       {openModalUpdateB && (
@@ -145,7 +144,7 @@ export const DashboardBand = () => {
           setOpenModalUpdateM={setOpenModalUpdateM}
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
-          <ModalUpdateBand setUser={setUser} />
+          <ModalUpdateBand setModal={setOpenModalUpdateB} setUser={setUser} />
         </Modal>
       )}
 
@@ -161,6 +160,7 @@ export const DashboardBand = () => {
             name={user?.name}
             id={user?.id}
             remove={remove}
+            setModal={setOpenModalRemove}
           />
         </Modal>
       )}

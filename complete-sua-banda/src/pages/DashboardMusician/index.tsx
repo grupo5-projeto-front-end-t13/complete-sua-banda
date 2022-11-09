@@ -58,23 +58,24 @@ export const DashboardMusician = () => {
 
   useEffect(() => {
     const filter = () => {
-      const newBands = bands.filter((band)=>{
-        if(band.members_invites){
-         if(band.members_invites.every(({email})=> email !== user?.email )){
-          return band
-         }
+      const newBands = bands.filter((band) => {
+        if (band.members_invites) {
+          if (
+            band.members_invites.every(({ email }) => email !== user?.email)
+          ) {
+            return band;
+          }
         }
-      })
-      setFiltredCards(newBands)
+      });
+      setFiltredCards(newBands);
       setFilteredBands(newBands);
-
     };
     filter();
   }, [bands]);
 
   const bandsFiltred = (idCardBand: number) => {
     const newBands = bands.filter(({ id }) => id !== idCardBand);
-    setBands(newBands)
+    setBands(newBands);
     setFilteredBands(newBands);
   };
 
@@ -113,7 +114,7 @@ export const DashboardMusician = () => {
         await api.post("/members_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
-        bandsFiltred(cardBand.id)
+        bandsFiltred(cardBand.id);
       } else {
         toast.warning("Para participar da banda complete seu cadastro");
         setOpenModal(false);
@@ -150,6 +151,7 @@ export const DashboardMusician = () => {
             name={user?.name}
             id={user?.id}
             remove={remove}
+            setModal={setOpenModalRemove}
           />
         </Modal>
       )}
@@ -177,7 +179,10 @@ export const DashboardMusician = () => {
           setOpenModalUpdateM={setOpenModalUpdateM}
           setOpenModalUpdateB={setOpenModalUpdateB}
         >
-          <ModalUpdateMusician setUser={setUser} />
+          <ModalUpdateMusician
+            setModal={setOpenModalUpdateM}
+            setUser={setUser}
+          />
         </Modal>
       )}
 
@@ -252,7 +257,8 @@ export const DashboardMusician = () => {
             </ul>
           ) : (
             <ul>
-              {(filteredBands? filteredBands : filtredCards).map((filteredBand) => (
+              {(filteredBands ? filteredBands : filtredCards).map(
+                (filteredBand) => (
                   <Card
                     id={filteredBand.id}
                     getCardProps={getCardProps}
@@ -264,7 +270,8 @@ export const DashboardMusician = () => {
                     genre={filteredBand.genre}
                     requirement={filteredBand.requirement}
                   />
-                ))}
+                )
+              )}
             </ul>
           )}
         </styled.ContainerUlMusician>

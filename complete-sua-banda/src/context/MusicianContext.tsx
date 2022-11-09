@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -8,6 +8,8 @@ import {
 
 interface iMusicianContext {
   submitMusician: ({ name, email, password, skill }: iRegisterMusician) => void;
+  buttonLoading: boolean;
+  setButtonLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface iMusicianContextProps {
@@ -19,6 +21,7 @@ export const MusicianContext = createContext<iMusicianContext>(
 );
 
 export const MusicianProvider = ({ children }: iMusicianContextProps) => {
+  const [buttonLoading, setButtonLoading] = useState(false);
   const navigate = useNavigate();
 
   const submitMusician = async ({
@@ -42,16 +45,21 @@ export const MusicianProvider = ({ children }: iMusicianContextProps) => {
     };
 
     try {
+      setButtonLoading(true);
       await RegisterMusician(dataMusician);
       toast.success("Cadastro realizado com sucesso!");
       navigate("/login");
     } catch (error) {
       toast.error("Cadastro não realizado");
+    } finally {
+      setButtonLoading(false);
     }
   };
 
   return (
-    <MusicianContext.Provider value={{ submitMusician }}>
+    <MusicianContext.Provider
+      value={{ submitMusician, buttonLoading, setButtonLoading }}
+    >
       {children}
     </MusicianContext.Provider>
   );

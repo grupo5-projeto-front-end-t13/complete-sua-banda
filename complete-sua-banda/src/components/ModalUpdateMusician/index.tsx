@@ -7,7 +7,7 @@ import { AiOutlineUser, AiOutlineArrowUp } from "react-icons/ai";
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
-import { iApiError } from "../../context/GlobalContext";
+import { iApiError, iUser } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { ImImage } from "react-icons/im";
@@ -21,7 +21,15 @@ import {
 } from "../../services/RegisterMusician";
 import { TextArea } from "../TextArea";
 
-export const ModalUpdateMusician = ({ setUser }: any) => {
+interface iModalUpdateMusicianProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: any;
+}
+
+export const ModalUpdateMusician = ({
+  setModal,
+  setUser,
+}: iModalUpdateMusicianProps) => {
   const id = localStorage.getItem("@id_CSB");
 
   const {
@@ -54,6 +62,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
       await api.patch<iDataMusician>(`/users/${id}`, dataMusician);
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataMusician);
+      setModal(false);
     } catch (error) {
       toast.error("Ops... Aconteceu um erro!");
     }
@@ -70,6 +79,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Username"
           register={register}
           type="text"
+          placeholder="Nome de usuário..."
           name="username"
           icon={<AiOutlineUser />}
         />
@@ -82,6 +92,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Mídia Social"
           register={register}
           type="text"
+          placeholder="Link de rede social..."
           name="social_media"
           icon={<IoShareSocialSharp />}
         />
@@ -91,6 +102,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Imagem Perfil"
           register={register}
           type="text"
+          placeholder="Link da foto de perfil..."
           name="image"
           icon={<ImImage />}
         />
@@ -129,7 +141,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
         </Select>
 
         <Select name="skill" register={register} icon={GiGuitar}>
-          <option value="">Selecione um instrumento</option>
+          <option value="">Selecione uma posição</option>
           <option value="Guitarra">Guitarrista</option>
           <option value="Baixo">Baixista</option>
           <option value="Violão">Violonista</option>

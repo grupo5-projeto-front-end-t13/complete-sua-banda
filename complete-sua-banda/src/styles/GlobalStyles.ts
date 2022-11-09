@@ -40,7 +40,8 @@ ul,li {
 	--color-grey-1: #FFF5F1;
 	--color-grey-2: #999390;
 	--color-grey-3: #4C4948;
-	--color-grey-4: #191818;
+	--color-grey-4: #0c0c0c;
+	--color-grey-5: #080808;
 	
 	/*Typography  */
 	--title-size-1: 24px;
