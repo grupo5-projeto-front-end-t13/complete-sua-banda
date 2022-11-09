@@ -27,8 +27,6 @@ export const DashboardMusician = () => {
     setOpenModalUpdateB,
     filteredBands,
     setFilteredBands,
-    // setCardsBandsFiltred,
-
   } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
@@ -181,9 +179,6 @@ export const DashboardMusician = () => {
         bands={bands}
       >
         <styled.ContainerUlMusician>
-          <button onClick={() => setOpenModalUpdateM(true)}>
-            Atualizar Perfil
-          </button>
           {filteredBands?.length === 0 && loadingPageBands === false ? (
             <ul>
               <div className="noResults">

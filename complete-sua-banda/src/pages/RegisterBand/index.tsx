@@ -44,6 +44,7 @@ export const RegisterBand = () => {
                 title="Banda"
                 register={register}
                 type="text"
+                placeholder="Digite o nome da banda..."
                 name="name"
                 icon={<AiOutlineUser />}
               />
@@ -52,6 +53,7 @@ export const RegisterBand = () => {
                 title="Email"
                 register={register}
                 type="email"
+                placeholder="Digite o email da banda..."
                 name="email"
                 icon={<AiOutlineMail />}
               />
@@ -60,6 +62,7 @@ export const RegisterBand = () => {
                 title="Senha"
                 register={register}
                 type="password"
+                placeholder="Digite sua senha..."
                 name="password"
                 icon={<AiOutlineLock />}
               />
@@ -68,6 +71,7 @@ export const RegisterBand = () => {
                 title="Repita a senha"
                 register={register}
                 type="password"
+                placeholder="Confirme a senha..."
                 name="passwordConfirm"
                 icon={<AiOutlineLock />}
               />

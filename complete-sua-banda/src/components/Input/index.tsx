@@ -5,6 +5,7 @@ interface iInputProps {
   title: string;
   register: Function;
   type: "email" | "text" | "password";
+  placeholder?: string;
   icon: any;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
@@ -15,22 +16,23 @@ export const Input = ({
   title,
   register,
   type,
+  placeholder,
   icon,
   onChange,
   value,
 }: iInputProps) => {
   return (
     <styled.InputDiv>
+      <label htmlFor={name}>{title}</label>
       <input
         id={name}
         {...register(name)}
         type={type}
-        required
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
       {icon}
-      <label htmlFor={name}>{title}</label>
     </styled.InputDiv>
   );
 };

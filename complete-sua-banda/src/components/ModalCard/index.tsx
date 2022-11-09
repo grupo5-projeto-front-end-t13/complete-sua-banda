@@ -1,5 +1,6 @@
 import Logo from "../../assets/Logo-CSB.png";
 import * as styled from "./style";
+import { AiOutlineFileText } from "react-icons/ai";
 
 interface iModalProps {
   imageProfile: string | undefined;
@@ -21,27 +22,20 @@ export const ModalCard = ({
   return (
     <styled.Container>
       <styled.DivImg>
-        <img src={imageProfile} alt="imagem Perfil" />
-        <img src={Logo} alt="imagem Logo" />
+        <img src={imageProfile} alt="Imagem Perfil" />
       </styled.DivImg>
       <styled.DivInfo>
         <h2>{name}</h2>
-        <h2>Bio</h2>
+        <h3>Bio</h3>
         {bio ? (
           <p>{bio}</p>
         ) : (
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad eaque
-            quia quasi voluptas reprehenderit, cumque autem sed veritatis
-            similique eligendi corporis enim doloribus accusantium nobis
-            perferendis? Expedita quasi optio odio. Lorem, ipsum dolor sit amet
-            consectetur adipisicing elit. Non laudantium nostrum id deleniti
-            perspiciatis impedit dolor minima sint incidunt magni fugiat, quae
-            aliquam odit distinctio, ratione saepe! Inventore, incidunt
-            expedita.
+            <AiOutlineFileText />
+            Ainda não possui bio!
           </p>
         )}
-        <h2>Contato</h2>
+        <h3>Contato</h3>
         <p>{email}</p>
       </styled.DivInfo>
       <div className="divBtn">
@@ -49,6 +43,7 @@ export const ModalCard = ({
           {type === "musico" ? "Convidar músico" : "Partipar da Banda"}
         </button>
       </div>
+      <img className="logo" src={Logo} alt="Imagem Logo" />
     </styled.Container>
   );
 };

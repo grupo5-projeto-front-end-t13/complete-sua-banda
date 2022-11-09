@@ -1,9 +1,8 @@
-import React, { ReactNode } from "react";
 import * as styled from "./style";
 import { CgAdd } from "react-icons/cg";
 
 interface iCardProps {
-  name?: string;
+  name?: string | null;
   image?: string;
   state?: string;
   skill?: string;
@@ -36,7 +35,9 @@ export const Card = ({
   return (
     <styled.Card onClick={() => getCardProps(id)}>
       <div>
-        <h2>{name}</h2>
+        {name && (
+          <h2>{name.length > 17 ? `${name.substring(0, 17)}...` : name}</h2>
+        )}
         <div className="cardDescription">
           {type === "musico" ? (
             <p>{state}</p>
@@ -57,7 +58,7 @@ export const Card = ({
       <figure>
         <img src={image} alt="foto perfil" />
 
-        <button>
+        <button type="button">
           {" "}
           <CgAdd />{" "}
         </button>

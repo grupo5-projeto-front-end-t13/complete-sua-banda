@@ -76,6 +76,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Mídia Social"
           register={register}
           type="text"
+          placeholder="Link de rede social..."
           name="social_media"
           icon={<SlSocialLinkedin />}
         />
@@ -85,6 +86,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Imagem Perfil"
           register={register}
           type="text"
+          placeholder="Link da foto de perfil..."
           name="image"
           icon={<ImImage />}
         />
@@ -126,6 +128,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           title="Genêro musical"
           register={register}
           type="text"
+          placeholder="Gênero musical da banda..."
           name="genre"
           icon={<AiOutlineUser />}
         />

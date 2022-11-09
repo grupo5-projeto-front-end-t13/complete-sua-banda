@@ -1,20 +1,27 @@
 import styled from "styled-components";
 
 export const ContainerUl = styled.ul`
-  background-color: #4c4948;
-  overflow: auto;
-  height: 100vh;
+  background-color: var(--color-grey-3);
+  min-height: 100vh;
+  height: 100%;
 
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 32px 96px;
+    gap: 1rem 5rem;
 
+    width: 100vw;
     max-width: 912px;
     height: 100%;
 
-    margin: 40px auto;
+    margin: 0 auto;
+    padding: 5.5rem 0 5rem 0;
+
+    @media (min-width: 768px) {
+      padding: 6rem 0 1.5rem 0;
+      gap: 2rem 5rem;
+    }
 
     .noResults {
       height: 20%;

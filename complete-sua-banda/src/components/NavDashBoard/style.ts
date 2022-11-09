@@ -3,14 +3,15 @@ import { FiBell } from "react-icons/fi";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  /* z-index: 101; */
+  z-index: 101;
   background-color: var(--color-grey-4);
-  width: 100%;
+  height: 75px;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 5%;
-  /* position: fixed; */
+  position: fixed;
 
   @media (min-width: 768px) {
     flex-direction: row-reverse;
@@ -49,7 +50,7 @@ export const ImgProfile = styled.div`
 export const Icons = styled.div`
   display: none;
   color: var(--color-brand);
-  font-size: 40px;
+  font-size: 30px;
 
   @media (min-width: 768px) {
     display: flex;
@@ -70,7 +71,7 @@ export const ImgLogo = styled.div`
     display: inline-block;
     width: 50%;
     img {
-      width: 70px;
+      width: 50px;
     }
   }
 `;
@@ -80,14 +81,15 @@ export const NavFooter = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  height: 60px;
+  width: 100vw;
   bottom: 0px;
   position: fixed;
   background-color: var(--color-grey-4);
   color: var(--color-brand);
 
   img {
-    width: 100px;
+    width: 60px;
   }
 
   @media (min-width: 768px) {
@@ -97,12 +99,12 @@ export const NavFooter = styled.nav`
 
 export const Icon1 = styled(BsHouseDoor)`
   color: var(--color-brand);
-  font-size: 35px;
+  font-size: 25px;
   cursor: pointer;
 `;
 
 export const Icon2 = styled(FiBell)`
   color: var(--color-brand);
-  font-size: 35px;
+  font-size: 25px;
   cursor: pointer;
 `;

@@ -19,7 +19,7 @@ export const Form = styled.form`
   @media (min-width: 768px) {
     margin-top: 0px;
     background: var(--color-grey-4);
-    box-shadow: 5px 4px 0px var(--color-brand);
+    box-shadow: 4px 4px 0px var(--color-brand);
     border-radius: 8px;
     padding: 39px 19px 35px 19px;
   }

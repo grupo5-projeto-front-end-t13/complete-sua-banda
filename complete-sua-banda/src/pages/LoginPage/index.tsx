@@ -49,7 +49,8 @@ export const LoginPage = () => {
               <Input
                 name="email"
                 title="Email"
-                type="text"
+                type="email"
+                placeholder="Digite seu email..."
                 register={register}
                 icon={<AiOutlineMail />}
               />
@@ -58,9 +59,11 @@ export const LoginPage = () => {
                 name="password"
                 title="Senha"
                 type="password"
+                placeholder="Digite sua senha..."
                 register={register}
                 icon={<AiOutlineLock />}
               />
+              {errors.password && <Error>{errors.password.message}</Error>}
               <p>
                 Ainda não possui cadastro?<br></br>
                 <LinkComponent

@@ -3,12 +3,7 @@ import * as styled from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormSchemaUpdate } from "./formSchema";
-import {
-  AiOutlineMail,
-  AiOutlineLock,
-  AiOutlineUser,
-  AiOutlineArrowUp,
-} from "react-icons/ai";
+import { AiOutlineUser, AiOutlineArrowUp } from "react-icons/ai";
 import { Error } from "../Error";
 import { Button } from "../Button";
 import { Select } from "../Select";
@@ -83,6 +78,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Username"
           register={register}
           type="text"
+          placeholder="Nome de usuário..."
           name="username"
           icon={<AiOutlineUser />}
         />
@@ -101,6 +97,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Mídia Social"
           register={register}
           type="text"
+          placeholder="Link de rede social..."
           name="social_media"
           icon={<SlSocialLinkedin />}
         />
@@ -110,6 +107,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           title="Imagem Perfil"
           register={register}
           type="text"
+          placeholder="Link da foto de perfil..."
           name="image"
           icon={<ImImage />}
         />
@@ -148,7 +146,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
         </Select>
 
         <Select name="skill" register={register} icon={GiGuitar}>
-          <option value="">Selecione um instrumento</option>
+          <option value="">Selecione uma posição</option>
           <option value="Guitarra">Guitarrista</option>
           <option value="Baixo">Baixista</option>
           <option value="Violão">Violonista</option>

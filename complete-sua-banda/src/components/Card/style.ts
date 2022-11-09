@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Card = styled.li`
   height: 146px;
-  width: 240px;
+  width: 250px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -20,6 +20,10 @@ export const Card = styled.li`
   & button {
     background: transparent;
     border: none;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
 
   & figure {
@@ -34,7 +38,9 @@ export const Card = styled.li`
   & > div {
     height: 100%;
     display: flex;
+    padding: 10px 0;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   & .cardDescription {
@@ -45,7 +51,9 @@ export const Card = styled.li`
   }
 
   & h2 {
+    width: 100%;
     font-size: var(--title-size-2);
+    word-wrap: break-word;
   }
 
   & p,
