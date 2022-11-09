@@ -21,6 +21,8 @@ interface iNavDashBoard {
   musicians?: iRegisterMusician[];
   inviteBands?: iBandsInvites[];
   inviteMembers?: iMemberInvites[];
+  filtredCards?: iRegisterBand[];
+  filtredCardsM?: iRegisterMusician[];
 }
 
 export const NavDashBoard = ({
@@ -30,6 +32,8 @@ export const NavDashBoard = ({
   musicians,
   inviteBands,
   inviteMembers,
+  filtredCards,
+  filtredCardsM,
 }: iNavDashBoard) => {
   const {
     user,
@@ -45,7 +49,7 @@ export const NavDashBoard = ({
 
   const searchOptions = (inputText: string) => {
     if (user?.type === "musico") {
-      const searched = bands?.filter((band) => {
+      const searched = filtredCards?.filter((band) => {
         return (
           band.name.toLowerCase().trim().includes(inputText) ||
           band.genre?.toLowerCase().trim().includes(inputText)
@@ -54,10 +58,10 @@ export const NavDashBoard = ({
 
       setFilteredBands(searched);
     } else {
-      const searched = musicians?.filter(
+      const searched = filtredCardsM?.filter(
         (musician) =>
           musician.name.toLowerCase().includes(inputText.toLowerCase()) ||
-          musician.skill.toLowerCase().includes(inputText.toLowerCase())
+          musician.skill?.toLowerCase().includes(inputText.toLowerCase())
       );
       setFilteredMusicians(searched);
     }
