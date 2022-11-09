@@ -32,15 +32,15 @@ export const DashboardBand = () => {
   const [cardMusician, setCardMusicians] = useState<any>(null);
   const [loadingPageMusician, setLoadingPageMusician] = useState(true);
   const navigate = useNavigate();
+  const [filtredCardsM, setFiltredCardsM] = useState([] as iRegisterMusician[]);
 
   useEffect(() => {
     async function getMusicians() {
       try {
         const { data } = await api.get<iRegisterMusician[]>(
-          "/users?type=musico"
+          "/users?type=musico&_embed=bands_invites"
         );
         setMusicians(data);
-        setFilteredMusicians(data);
         setLoadingPageMusician(false);
       } catch (error) {
         console.log(error);
@@ -48,6 +48,32 @@ export const DashboardBand = () => {
     }
     getMusicians();
   }, []);
+
+  useEffect(() => {
+    const filter = () => {
+      const newMusicians = musicians.filter((musician) => {
+        if (musician.bands_invites) {
+          console.log(musician.bands_invites)
+          if (
+            musician.bands_invites.every(({ email}) => email !== user?.email)
+          ) {
+            // console.log(user?.id)
+            return musician;
+          }
+        }
+      });
+      setFiltredCardsM(newMusicians);
+      setFilteredMusicians(newMusicians);
+      // console.log(newMusicians);
+    };
+    filter();
+  }, [musicians]);
+
+  const musiciansFiltred = (idCardMusician: number) => {
+    const newMusicians = musicians.filter(({ id }) => id !== idCardMusician);
+    setMusicians(newMusicians);
+    setFilteredMusicians(newMusicians);
+  };
 
   async function getCardProps(idMusician: number) {
     try {
@@ -68,6 +94,7 @@ export const DashboardBand = () => {
       genre: user?.genre,
       image: user?.image,
       name: user?.name,
+      email: user?.email
     };
 
     try {
@@ -82,6 +109,7 @@ export const DashboardBand = () => {
         await api.post("/bands_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
+        musiciansFiltred(cardMusician.id)
       } else {
         toast.warning("Para convidar um músico complete seu cadastro!");
         setOpenModal(false);
@@ -104,6 +132,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   };
+
 
   return (
     <div>
@@ -155,6 +184,7 @@ export const DashboardBand = () => {
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}
         musicians={musicians}
+        filtredCardsM={filtredCardsM}
       >
         <styled.ContainerUl>
           {filteredMusicians?.length === 0 && loadingPageMusician === false ? (
