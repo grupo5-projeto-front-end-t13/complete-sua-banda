@@ -31,6 +31,7 @@ export const DashboardMusician = () => {
   const [bands, setBands] = useState([] as iRegisterBand[]);
   const [cardBand, setCardBand] = useState<any>(null);
   const [loadingPageBands, setLoadingPageBands] = useState(true);
+  const [filtredCards, setFiltredCards] = useState([] as iRegisterBand[]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +41,6 @@ export const DashboardMusician = () => {
           "/users?type=banda&_embed=members_invites"
         );
         setBands(data);
-        setFilteredBands(data);
         setLoadingPageBands(false);
       } catch (error) {
         console.log(error);
@@ -49,25 +49,27 @@ export const DashboardMusician = () => {
     getBands();
   }, []);
 
-  // useEffect(() => {
-  //   const filter = () => {
-  //     setCardsFiltred(
-  //       bands.filter((band) => {
-  //         if (band.members_invites) {
-  //           const filtered = band.members_invites.map((member) => {
-  //             if (member.email === user?.email) {
-  //               return member;
-  //             }
-  //           });
-  //           if (filtered.length === 0) {
-  //             return band;
-  //           }
-  //         }
-  //       })
-  //     );
-  //   };
-  //   filter();
-  // }, [bands]);
+  useEffect(() => {
+    const filter = () => {
+      const newBands = bands.filter((band)=>{
+        if(band.members_invites){
+         if(band.members_invites.every(({email})=> email !== user?.email )){
+          return band
+         }
+        }
+      })
+      setFiltredCards(newBands)
+      setFilteredBands(newBands);
+      console.log(newBands)
+    };
+    filter();
+  }, [bands]);
+
+  const bandsFiltred = (idCardBand: number) => {
+    const newBands = bands.filter(({ id }) => id !== idCardBand);
+    setBands(newBands)
+    setFilteredBands(newBands);
+  };
 
   async function getCardProps(idBand: number) {
     try {
@@ -104,6 +106,7 @@ export const DashboardMusician = () => {
         await api.post("/members_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
+        bandsFiltred(cardBand.id)
       } else {
         toast.warning("Para participar da banda complete seu cadastro");
         setOpenModal(false);
@@ -126,8 +129,6 @@ export const DashboardMusician = () => {
       console.log(error);
     }
   };
-
-  console.log(filteredBands);
 
   return (
     <div>
@@ -177,6 +178,7 @@ export const DashboardMusician = () => {
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}
         bands={bands}
+        filtredCards = {filtredCards}
       >
         <styled.ContainerUlMusician>
           {filteredBands?.length === 0 && loadingPageBands === false ? (
@@ -188,8 +190,7 @@ export const DashboardMusician = () => {
             </ul>
           ) : (
             <ul>
-              {filteredBands &&
-                filteredBands.map((filteredBand) => (
+              {(filteredBands? filteredBands : filtredCards).map((filteredBand) => (
                   <Card
                     id={filteredBand.id}
                     getCardProps={getCardProps}

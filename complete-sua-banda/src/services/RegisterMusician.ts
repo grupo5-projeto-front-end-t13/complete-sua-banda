@@ -1,3 +1,4 @@
+import { iBandsInvites } from "../context/GlobalContext";
 import { api } from "./ApiRequest";
 
 export interface iRegisterMusician {
@@ -14,6 +15,8 @@ export interface iRegisterMusician {
   skill: string;
   skill_level?: string;
   searched?: string[] | undefined;
+  bands_invites?: iBandsInvites[];
+  
 }
 
 export interface iDataMusician {

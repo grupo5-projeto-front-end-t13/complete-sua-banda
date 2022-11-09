@@ -9,8 +9,7 @@ import { Button } from "../Button";
 import { Select } from "../Select";
 import { iApiError } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
-import { BsPencil } from "react-icons/bs";
-import { SlSocialLinkedin } from "react-icons/sl";
+import { IoShareSocialSharp } from "react-icons/io5";
 import { ImImage } from "react-icons/im";
 import { FiMap } from "react-icons/fi";
 import { toast } from "react-toastify";
@@ -20,6 +19,7 @@ import {
   iDataMusician,
   iRegisterMusician,
 } from "../../services/RegisterMusician";
+import { TextArea } from "../TextArea";
 
 export const ModalUpdateMusician = ({ setUser }: any) => {
   const id = localStorage.getItem("@id_CSB");
@@ -33,9 +33,6 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
   });
 
   const updateMusician = async ({
-    // name,
-    // email,
-    // password,
     skill,
     state,
     bio,
@@ -45,9 +42,6 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
     skill_level,
   }: iRegisterMusician) => {
     const dataMusician = {
-      // name,
-      // email,
-      // password,
       skill,
       state,
       bio,
@@ -84,13 +78,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
         />
         {errors.username && <Error>{errors.username.message}</Error>}
 
-        <Input
-          title="Bio"
-          register={register}
-          type="text"
-          name="bio"
-          icon={<BsPencil />}
-        />
+        <TextArea title="Bio" register={register} name="bio" />
         {errors.bio && <Error>{errors.bio.message}</Error>}
 
         <Input
@@ -99,7 +87,7 @@ export const ModalUpdateMusician = ({ setUser }: any) => {
           type="text"
           placeholder="Link de rede social..."
           name="social_media"
-          icon={<SlSocialLinkedin />}
+          icon={<IoShareSocialSharp />}
         />
         {errors.social_media && <Error>{errors.social_media.message}</Error>}
 

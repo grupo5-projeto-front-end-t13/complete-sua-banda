@@ -1,4 +1,5 @@
 import { Input } from "../Input";
+import { TextArea } from "../TextArea";
 import * as styled from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,8 +10,7 @@ import { Button } from "../Button";
 import { Select } from "../Select";
 import { iApiError } from "../../context/GlobalContext";
 import { GiGuitar } from "react-icons/gi";
-import { BsPencil } from "react-icons/bs";
-import { SlSocialLinkedin } from "react-icons/sl";
+import { IoShareSocialSharp } from "react-icons/io5";
 import { ImImage } from "react-icons/im";
 import { FiMap } from "react-icons/fi";
 import { toast } from "react-toastify";
@@ -63,13 +63,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
       <form onSubmit={handleForm}>
         <h1>Complete seu cadastro</h1>
 
-        <Input
-          title="Bio"
-          register={register}
-          type="text"
-          name="bio"
-          icon={<BsPencil />}
-        />
+        <TextArea title="Bio" register={register} name="bio" />
         {errors.bio && <Error>{errors.bio.message}</Error>}
 
         <Input
@@ -78,7 +72,7 @@ export const ModalUpdateBand = ({ setUser }: any) => {
           type="text"
           placeholder="Link de rede social..."
           name="social_media"
-          icon={<SlSocialLinkedin />}
+          icon={<IoShareSocialSharp />}
         />
         {errors.social_media && <Error>{errors.social_media.message}</Error>}
 
