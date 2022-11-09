@@ -49,7 +49,7 @@ export const DashboardBand = () => {
         setMusicians(data);
         setLoadingPageMusician(false);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     getMusicians();
@@ -59,18 +59,15 @@ export const DashboardBand = () => {
     const filter = () => {
       const newMusicians = musicians.filter((musician) => {
         if (musician.bands_invites) {
-          console.log(musician.bands_invites)
           if (
             musician.bands_invites.every(({ email}) => email !== user?.email)
           ) {
-            // console.log(user?.id)
             return musician;
           }
         }
       });
       setFiltredCardsM(newMusicians);
       setFilteredMusicians(newMusicians);
-      // console.log(newMusicians);
     };
     filter();
   }, [musicians]);
@@ -87,7 +84,7 @@ export const DashboardBand = () => {
       setCardMusicians(data);
       setOpenModal(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -123,10 +120,9 @@ export const DashboardBand = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.log(error);
+      console.error(error);
     }
   };
-console.log(user)
   const remove = async (idUser: number): Promise<void> => {
     try {
       await api.delete(`/users/${idUser}`);
@@ -135,7 +131,7 @@ console.log(user)
         navigate("/");
       }, 2000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
  

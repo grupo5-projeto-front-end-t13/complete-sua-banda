@@ -49,9 +49,8 @@ export const DashboardMusician = () => {
         );
         setBands(data);
         setLoadingPageBands(false);
-        console.log('dashMusician')
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     getBands();
@@ -68,7 +67,7 @@ export const DashboardMusician = () => {
       })
       setFiltredCards(newBands)
       setFilteredBands(newBands);
-      console.log(newBands)
+
     };
     filter();
   }, [bands]);
@@ -85,7 +84,7 @@ export const DashboardMusician = () => {
       setCardBand(data);
       setOpenModal(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -122,7 +121,7 @@ export const DashboardMusician = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -134,7 +133,7 @@ export const DashboardMusician = () => {
         navigate("/");
       }, 2000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

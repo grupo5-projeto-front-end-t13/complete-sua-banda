@@ -17,13 +17,14 @@ export const ContainerUl = styled.ul`
     margin: 40px auto;
 
     .noResults {
-      height: 20%;
+      height: 52vh;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       img {
         width: 30%;
-        height: 80%;
+        height: 131px;
       }
 
       p {
@@ -31,6 +32,12 @@ export const ContainerUl = styled.ul`
         align-self: center;
         font-size: var(--title-size-2);
         color: var(--color-grey-4);
+        display: flex;
+        align-items: center;
+      }
+
+      @media (min-width: 768px){
+        height: 70vh;
       }
     }
   }

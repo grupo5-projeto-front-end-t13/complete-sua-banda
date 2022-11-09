@@ -17,13 +17,14 @@ export const ContainerUlMusician = styled.ul`
     margin: 40px auto;
 
     .noResults {
-      height: 20%;
+      height: 70vh;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       img {
         width: 30%;
-        height: 80%;
+        height: 131px;
       }
 
       p {
