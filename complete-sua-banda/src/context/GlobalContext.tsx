@@ -140,7 +140,6 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
           api.defaults.headers.common.authorization = `Bearer ${token}`;
           const { data } = await api.get<iUser>(`/users/${id}`);
           setUser(data);
-          console.log('renderizou')
           if (data.type === "musico") {
             const { data } = await api.get<iUser>(
               `/users/${id}?_embed=bands_invites`
@@ -178,8 +177,6 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
       toast.error("Complete o seu cadastro", {
         toastId: "custom-id-yes",
       });
-    } else {
-      console.log("Não funcionou");
     }
   };
 
@@ -211,7 +208,6 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
       }
     } catch (error) {
       toast.error("Usuário inválido! Faça seu cadastro.");
-      console.error(error);
     } finally {
       setButtonLoading(false);
     }

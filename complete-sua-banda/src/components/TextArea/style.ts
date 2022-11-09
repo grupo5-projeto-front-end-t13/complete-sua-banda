@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-// resize:none
-
 export const TextAreaDiv = styled.div`
   margin-top: 15px;
   width: 235px;

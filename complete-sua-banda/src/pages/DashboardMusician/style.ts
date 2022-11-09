@@ -57,7 +57,7 @@ export const DivNotifications = styled.div`
 
   overflow: auto;
 
-  position: absolute;
+  position: fixed;
   top: 97px;
   right: 72px;
 

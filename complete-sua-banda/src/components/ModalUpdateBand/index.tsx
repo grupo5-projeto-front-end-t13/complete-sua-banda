@@ -59,8 +59,6 @@ export const ModalUpdateBand = ({
       setUser(dataBand);
       setModal(false);
     } catch (error) {
-      const requestError = error as AxiosError<iApiError>;
-      console.error(requestError.response?.data.message);
       toast.error("Ops... Aconteceu um erro!");
     }
   };

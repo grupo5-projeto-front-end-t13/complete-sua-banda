@@ -51,7 +51,6 @@ export const MusicianProvider = ({ children }: iMusicianContextProps) => {
       navigate("/login");
     } catch (error) {
       toast.error("Cadastro não realizado");
-      console.error(error);
     } finally {
       setButtonLoading(false);
     }

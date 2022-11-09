@@ -66,7 +66,6 @@ export const NavDashBoard = ({
       setFilteredMusicians(searched);
     }
   };
-console.log(inviteBands,inviteMembers)
   useEffect(() => {
     const alertBell = () => {
       if (inviteBands?.length || inviteMembers?.length) {
@@ -96,11 +95,11 @@ console.log(inviteBands,inviteMembers)
             </styled.Icon1>
             {bellAlert ? 
             <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-              <VscBellDot  size={35}/>
+              <VscBellDot  size={25}/>
             </styled.Button> 
             :  
             <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-              <FiBell  size={35}/>
+              <FiBell  size={25}/>
             </styled.Button>
             }
           </styled.Icons>
@@ -130,11 +129,11 @@ console.log(inviteBands,inviteMembers)
         {
         bellAlert ? 
         <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-          <VscBellDot  size={35}/>
+          <VscBellDot  size={25}/>
         </styled.Button> 
         :  
         <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
-          <FiBell  size={35}/>
+          <FiBell  size={25}/>
         </styled.Button>
         }
       </styled.NavFooter>

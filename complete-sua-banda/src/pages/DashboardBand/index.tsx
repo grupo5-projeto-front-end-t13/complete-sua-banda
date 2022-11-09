@@ -31,7 +31,6 @@ export const DashboardBand = () => {
     setFilteredMusicians,
     openModalUpdateB,
     openModalNotification,
-    updateNotification,
     setUpdateNotification
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
@@ -112,7 +111,7 @@ export const DashboardBand = () => {
         await api.post("/bands_invites", info);
         toast.success("Convite enviado");
         setOpenModal(false);
-        musiciansFiltred(cardMusician.i);
+        musiciansFiltred(cardMusician.id);
       } else {
         toast.warning("Para convidar um músico complete seu cadastro!");
         setOpenModal(false);
@@ -120,7 +119,6 @@ export const DashboardBand = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.error(error);
     }
   };
   const remove = async (idUser: number): Promise<void> => {
@@ -191,9 +189,9 @@ export const DashboardBand = () => {
         <styled.DivNotifications>
                     {user?.members_invites?.length?
            (
-            user?.members_invites?.map( invite => (
+            user?.members_invites?.map( (invite,index) => (
 
-              <styled.CardNotifications>
+              <styled.CardNotifications key={index}>
                 <figure>
                   <img src={invite.image} alt="" />
                 </figure>
@@ -215,26 +213,6 @@ export const DashboardBand = () => {
               <p>Você não possui nenhuma notificação</p>
             </section>
           </styled.CardNotifications>)}
-
-
-
-          {/* {user?.members_invites?.map( invite => (
-
-            <styled.CardNotifications>
-              <figure>
-                <img src={invite.image} alt="" />
-              </figure>
-              <div>
-                <div>
-                  <h2>{invite.name}</h2>
-                  <p>{invite.skill} Rock</p>
-                </div>
-                <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
-              </div>
-            </styled.CardNotifications>
-          )
-        
-        )} */}
         </styled.DivNotifications>
         ) : 
         (<p></p>)

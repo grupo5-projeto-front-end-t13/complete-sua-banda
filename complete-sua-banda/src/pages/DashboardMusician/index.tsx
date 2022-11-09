@@ -32,7 +32,6 @@ export const DashboardMusician = () => {
     setFilteredBands,
     openModalNotification,
     setUpdateNotification
-    // setCardsBandsFiltred,
 
   } = useGlobalContext();
   const [bands, setBands] = useState([] as iRegisterBand[]);
@@ -122,7 +121,6 @@ export const DashboardMusician = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.error(error);
     }
   };
 
@@ -194,9 +192,9 @@ export const DashboardMusician = () => {
         <styled.DivNotifications>
           {user?.bands_invites?.length?
            (
-            user?.bands_invites?.map( invite => (
+            user?.bands_invites?.map( (invite,index) => (
   
-              <styled.CardNotifications>
+              <styled.CardNotifications key={index}>
                 <figure>
                   <img src={invite.image} alt="" />
                 </figure>
@@ -218,24 +216,6 @@ export const DashboardMusician = () => {
               <p>Você não possui nenhuma notificação</p>
             </section>
           </styled.CardNotifications>)}
-          {/* {
-          user?.bands_invites?.map( invite => (
-
-            <styled.CardNotifications>
-              <figure>
-                <img src={invite.image} alt="" />
-              </figure>
-              <div>
-                <div>
-                  <h2>{invite.name}</h2>
-                  <p>{invite.genre} Rock</p>
-                </div>
-                <button onClick={async () => await DeclineAnInvitationBands(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
-              </div>
-            </styled.CardNotifications>
-          )
-        
-        )} */}
         </styled.DivNotifications>
         ) : 
         (<p></p>)
