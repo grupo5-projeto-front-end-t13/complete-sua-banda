@@ -20,27 +20,23 @@ export const ModalDefault = styled.div`
     justify-content: center;
     padding: 0px 0;
     position: relative;
-
   }
   .btn {
+    padding: 0;
     font-weight: 600;
     font-size: 16px;
     line-height: 26px;
-    color: var(--color-grey-1);
+    color: var(--color-brand);
     border: none;
     background: transparent;
     cursor: pointer;
     position: absolute;
-    right: 10px;
-    top: 8px;
+    top: 2px;
+    left: 2px;
+    z-index: 1;
 
-    @media (min-width: 400px) {
-      right: 0px;
-      top: 8px;
-    }
     /* @media (min-width: 768px) {
       display:none;
     } */
-   
   }
 `;

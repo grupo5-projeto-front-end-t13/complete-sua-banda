@@ -5,6 +5,7 @@ import { LinkComponent } from "../../components/Links";
 import { formSchemaMusician } from "./schemaMusician";
 import { Input } from "../../components/Input";
 import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { VscLoading } from "react-icons/vsc";
 import { GiGuitar } from "react-icons/gi";
 import { Form } from "../../styles/FormStyle";
 import { Error } from "../../components/Error";
@@ -26,7 +27,8 @@ interface iFormRegisterMusician {
 }
 
 export const RegisterMusician = () => {
-  const { submitMusician } = useMusicianContext();
+  const { submitMusician, buttonLoading, setButtonLoading } =
+    useMusicianContext();
 
   const {
     register,
@@ -49,6 +51,7 @@ export const RegisterMusician = () => {
                 title="Nome"
                 register={register}
                 type="text"
+                placeholder="Digite seu nome..."
                 name="name"
                 icon={<AiOutlineUser />}
               />
@@ -57,6 +60,7 @@ export const RegisterMusician = () => {
                 title="Email"
                 register={register}
                 type="email"
+                placeholder="Digite seu email..."
                 name="email"
                 icon={<AiOutlineMail />}
               />
@@ -65,6 +69,7 @@ export const RegisterMusician = () => {
                 title="Senha"
                 register={register}
                 type="password"
+                placeholder="Digite sua senha..."
                 name="password"
                 icon={<AiOutlineLock />}
               />
@@ -73,6 +78,7 @@ export const RegisterMusician = () => {
                 title="Repita a senha"
                 register={register}
                 type="password"
+                placeholder="Confirme sua senha..."
                 name="passwordConfirm"
                 icon={<AiOutlineLock />}
               />
@@ -80,7 +86,7 @@ export const RegisterMusician = () => {
                 <Error>{errors.passwordConfirm.message}</Error>
               )}
               <Select name="skill" register={register} icon={GiGuitar}>
-                <option value="">Selecione um instrumento</option>
+                <option value="">Selecione uma posição</option>
                 <option value="Guitarra">Guitarrista</option>
                 <option value="Baixo">Baixista</option>
                 <option value="Violão">Violonista</option>
@@ -95,7 +101,14 @@ export const RegisterMusician = () => {
                   <LinkComponent type="styledB" link="/login" name={"Login"} />
                 </p>
               </div>
-              <Button type="submit">Cadastre-se</Button>
+              {buttonLoading ? (
+                <Button disabled type="submit">
+                  <VscLoading />
+                  Cadastrando...
+                </Button>
+              ) : (
+                <Button type="submit">Cadastre-se</Button>
+              )}
             </Form>
           </AnimatedEntranceBottom>
         </div>

@@ -16,6 +16,8 @@ interface iGlobalContext {
   user: iUser | null;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
   loading: boolean;
+  buttonLoading: boolean;
+  setButtonLoading: React.Dispatch<React.SetStateAction<boolean>>;
   clearStorage: () => void;
   submitLogin({ email, password }: iLogin): void;
   openMenu: boolean;
@@ -108,6 +110,7 @@ export const GlobalContext = createContext<iGlobalContext>(
 export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(false);
+  const [buttonLoading, setButtonLoading] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRemove, setOpenModalRemove] = useState(false);
@@ -188,8 +191,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
 
   const submitLogin = async ({ email, password }: iLogin) => {
     const userLogin = { email, password };
-
     try {
+      setButtonLoading(true);
       const data = await Login(userLogin);
 
       setUser(data.user);
@@ -209,6 +212,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
     } catch (error) {
       toast.error("Usuário inválido! Faça seu cadastro.");
       console.error(error);
+    } finally {
+      setButtonLoading(false);
     }
   };
 
@@ -218,6 +223,8 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
         user,
         setUser,
         loading,
+        buttonLoading,
+        setButtonLoading,
         clearStorage,
         submitLogin,
         openMenu,

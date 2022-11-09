@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #4c4948;
+  padding: 10px 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 36px;
   gap: 20px;
+  border-radius: 4px;
+  background-color: var(--color-grey-5);
 
   img {
     width: 56px;
@@ -14,7 +15,7 @@ export const Container = styled.div`
     border-radius: 50%;
   }
 
-  h2{
+  h2 {
     font-weight: 700;
     font-size: var(--title-size-2);
     line-height: 24px;
@@ -27,6 +28,9 @@ export const Container = styled.div`
     line-height: 24px;
     text-align: center;
     color: var(--color-grey-1);
+  }
+  strong {
+    font-weight: 700;
   }
 
   button {

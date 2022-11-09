@@ -13,6 +13,7 @@ import {
 } from "../../context/GlobalContext";
 import { FiBell } from "react-icons/fi";
 import { VscBellDot } from "react-icons/vsc";
+import { BsHouseDoor } from "react-icons/bs";
 
 interface iNavDashBoard {
   children: ReactNode;
@@ -28,8 +29,6 @@ interface iNavDashBoard {
 export const NavDashBoard = ({
   children,
   image,
-  bands,
-  musicians,
   inviteBands,
   inviteMembers,
   filtredCards,
@@ -92,7 +91,9 @@ console.log(inviteBands,inviteMembers)
             <img src={image} alt={"Imagem perfil"} />
           </Profile>
           <styled.Icons>
-            <styled.Icon1 />
+            <styled.Icon1 href="#top">
+              <BsHouseDoor />
+            </styled.Icon1>
             {bellAlert ? 
             <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
               <VscBellDot  size={35}/>
@@ -122,7 +123,9 @@ console.log(inviteBands,inviteMembers)
       </styled.Nav>
       {children}
       <styled.NavFooter>
-        <styled.Icon1 />
+        <styled.Icon1 href="#top">
+          <BsHouseDoor />
+        </styled.Icon1>
         <img src={logo} alt="Logo CSB" />
         {
         bellAlert ? 

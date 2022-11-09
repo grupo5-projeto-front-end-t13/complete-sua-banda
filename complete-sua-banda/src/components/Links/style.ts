@@ -10,23 +10,30 @@ export const LinkTypes = styled(Link)<iStyledLinkProps>`
     switch (props.type) {
       case "styledA":
         return css`
+          min-width: 80px;
+          padding: 8px;
           display: flex;
           justify-content: center;
-          box-sizing: border-box;
+          border: 1px solid var(--color-brand);
+          border-radius: 4px;
+          background-color: var(--color-grey-4);
           color: var(--color-brand);
           font-size: var(--text-size-1);
           font-weight: 400;
-          border: 1px solid var(--color-brand);
-          border-radius: 10px;
-          padding: 8px 13px;
-          min-width: 80px;
+          box-shadow: 3px 3px 0px 0px var(--color-brand);
           white-space: nowrap;
-          transition: 800ms;
 
           &:hover {
-            background-color: var(--color-brand);
-            color: var(--color-grey-1);
-            transition: 800ms;
+            background-color: var(--color-grey-3);
+          }
+
+          &:active {
+            background-color: var(--color-grey-3);
+            box-shadow: 3px 3px 0px 0px var(--color-grey-5) inset;
+          }
+
+          &:active > span {
+            transform: translateX(3px) translateY(3px);
           }
 
           @media (min-width: 768px) {

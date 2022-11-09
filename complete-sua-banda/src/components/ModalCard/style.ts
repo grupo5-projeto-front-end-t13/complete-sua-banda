@@ -1,16 +1,24 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: #4c4948;
-  border-radius: 4px;
   padding: 16px 19px;
   width: 280px;
   max-width: 600px;
+  position: relative;
+  border-radius: 4px;
+  background: var(--color-grey-5);
 
   @media (min-width: 600px) {
     width: 380px;
   }
 
+  & > .logo {
+    width: 63px;
+    height: 63px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   .divBtn {
     margin-top: 35px;
@@ -45,7 +53,6 @@ export const DivImg = styled.div`
   img {
     width: 63px;
     height: 63px;
-
     border-radius: 50%;
   }
 `;
@@ -54,17 +61,23 @@ export const DivInfo = styled.div`
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 
   h2 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: var(--title-size-2);
+    line-height: 24px;
+    color: var(--color-grey-1);
+    text-align: center;
+  }
+  h3 {
+    font-weight: 700;
     line-height: 24px;
     color: var(--color-grey-1);
   }
   p {
     font-weight: 400;
-    font-size: 10px;
+    font-size: var(--text-size-1);
     line-height: 12px;
     color: var(--color-grey-1);
   }
