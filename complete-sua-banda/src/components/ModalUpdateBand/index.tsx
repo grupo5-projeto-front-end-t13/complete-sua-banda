@@ -50,8 +50,6 @@ export const ModalUpdateBand = ({ setUser }: any) => {
       toast.success("Cadastro Atualizado com sucesso!");
       setUser(dataBand);
     } catch (error) {
-      const requestError = error as AxiosError<iApiError>;
-      console.error(requestError.response?.data.message);
       toast.error("Ops... Aconteceu um erro!");
     }
   };

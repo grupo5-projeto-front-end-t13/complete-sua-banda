@@ -121,7 +121,6 @@ export const DashboardMusician = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.error(error);
     }
   };
 

@@ -67,7 +67,6 @@ export const NavDashBoard = ({
       setFilteredMusicians(searched);
     }
   };
-console.log(inviteBands,inviteMembers)
   useEffect(() => {
     const alertBell = () => {
       if (inviteBands?.length || inviteMembers?.length) {

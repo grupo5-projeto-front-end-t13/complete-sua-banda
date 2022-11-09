@@ -120,7 +120,6 @@ export const DashboardBand = () => {
       }
     } catch (error) {
       toast.error("Ops... tente novamente!");
-      console.error(error);
     }
   };
   const remove = async (idUser: number): Promise<void> => {
