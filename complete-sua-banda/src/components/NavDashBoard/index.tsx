@@ -40,6 +40,7 @@ export const NavDashBoard = ({
     setOpenModalRemove,
     setOpenModalUpdateB,
     setOpenModalUpdateM,
+    setOpenModalNotification
   } = useGlobalContext();
   const [bellAlert, setBellAlert] = useState(false);
 
@@ -63,6 +64,7 @@ export const NavDashBoard = ({
     }
   };
 
+    console.log(inviteMembers)
   useEffect(() => {
     const alertBell = () => {
       if (inviteBands?.length || inviteMembers?.length) {
@@ -88,7 +90,15 @@ export const NavDashBoard = ({
           </Profile>
           <styled.Icons>
             <styled.Icon1 />
-            {bellAlert ? <VscBellDot size={35} /> : <FiBell size={35} />}
+            {bellAlert ? 
+            <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+              <VscBellDot  size={35}/>
+            </styled.Button> 
+            :  
+            <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+              <FiBell  size={35}/>
+            </styled.Button>
+            }
           </styled.Icons>
           <styled.InputSearch>
             <Input
@@ -111,7 +121,16 @@ export const NavDashBoard = ({
       <styled.NavFooter>
         <styled.Icon1 />
         <img src={logo} alt="Logo CSB" />
-        {bellAlert ? <VscBellDot size={35} /> : <FiBell size={35} />}
+        {
+        bellAlert ? 
+        <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+          <VscBellDot  size={35}/>
+        </styled.Button> 
+        :  
+        <styled.Button onClick={() => setOpenModalNotification((prev) => (!prev))}>
+          <FiBell  size={35}/>
+        </styled.Button>
+        }
       </styled.NavFooter>
     </>
   );

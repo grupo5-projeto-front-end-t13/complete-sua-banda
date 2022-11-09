@@ -13,6 +13,9 @@ import { NavDashBoard } from "../../components/NavDashBoard";
 import * as styled from "./style";
 import imgDefault from "../../assets/default.jpg";
 import noResults from "../../assets/NoResults.png";
+import { DeclineAnInvitationBands } from "../../services/DeleteInvite";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { BiNotificationOff } from "react-icons/bi";
 
 export const DashboardMusician = () => {
   const {
@@ -27,6 +30,8 @@ export const DashboardMusician = () => {
     setOpenModalUpdateB,
     filteredBands,
     setFilteredBands,
+    openModalNotification,
+    setUpdateNotification
     // setCardsBandsFiltred,
 
   } = useGlobalContext();
@@ -44,6 +49,7 @@ export const DashboardMusician = () => {
         setBands(data);
         setFilteredBands(data);
         setLoadingPageBands(false);
+        console.log('dashMusician')
       } catch (error) {
         console.log(error);
       }
@@ -129,7 +135,7 @@ export const DashboardMusician = () => {
     }
   };
 
-  console.log(filteredBands);
+  console.log();
 
   return (
     <div>
@@ -175,6 +181,61 @@ export const DashboardMusician = () => {
           <ModalUpdateMusician setUser={setUser} />
         </Modal>
       )}
+
+      {
+        openModalNotification 
+        ? 
+        ( 
+        <styled.DivNotifications>
+          {user?.bands_invites?.length?
+           (
+            user?.bands_invites?.map( invite => (
+  
+              <styled.CardNotifications>
+                <figure>
+                  <img src={invite.image} alt="" />
+                </figure>
+                <div>
+                  <div>
+                    <h2>{invite.name}</h2>
+                    <p>{invite.genre} Rock</p>
+                  </div>
+                  <button onClick={async () => await DeclineAnInvitationBands(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+                </div>
+              </styled.CardNotifications>
+            )
+          
+          ))
+           : 
+           (<styled.CardNotifications>
+            <section>
+              <BiNotificationOff/>
+              <p>Você não possui nenhuma notificação</p>
+            </section>
+          </styled.CardNotifications>)}
+          {/* {
+          user?.bands_invites?.map( invite => (
+
+            <styled.CardNotifications>
+              <figure>
+                <img src={invite.image} alt="" />
+              </figure>
+              <div>
+                <div>
+                  <h2>{invite.name}</h2>
+                  <p>{invite.genre} Rock</p>
+                </div>
+                <button onClick={async () => await DeclineAnInvitationBands(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+              </div>
+            </styled.CardNotifications>
+          )
+        
+        )} */}
+        </styled.DivNotifications>
+        ) : 
+        (<p></p>)
+
+      }
 
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}

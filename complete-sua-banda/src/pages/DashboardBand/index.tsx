@@ -13,6 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { ModalUpdateBand } from "../../components/ModalUpdateBand";
 import imgDefault from "../../assets/default.jpg";
 import noResults from "../../assets/NoResults.png";
+import { DeclineAnInvitationMusician } from "../../services/DeleteInvite";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { BiNotificationOff } from "react-icons/bi";
 
 export const DashboardBand = () => {
   const {
@@ -27,6 +30,9 @@ export const DashboardBand = () => {
     filteredMusicians,
     setFilteredMusicians,
     openModalUpdateB,
+    openModalNotification,
+    updateNotification,
+    setUpdateNotification
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
@@ -92,7 +98,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   };
-
+console.log(user)
   const remove = async (idUser: number): Promise<void> => {
     try {
       await api.delete(`/users/${idUser}`);
@@ -104,6 +110,7 @@ export const DashboardBand = () => {
       console.log(error);
     }
   };
+  console.log(user)
 
   return (
     <div>
@@ -152,6 +159,62 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
+      {
+        openModalNotification 
+        ? 
+        ( 
+        <styled.DivNotifications>
+                    {user?.members_invites?.length?
+           (
+            user?.members_invites?.map( invite => (
+
+              <styled.CardNotifications>
+                <figure>
+                  <img src={invite.image} alt="" />
+                </figure>
+                <div>
+                  <div>
+                    <h2>{invite.name}</h2>
+                    <p>{invite.skill} Rock</p>
+                  </div>
+                  <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+                </div>
+              </styled.CardNotifications>
+            )
+          
+          ))
+           : 
+           (<styled.CardNotifications>
+            <section>
+              <BiNotificationOff/>
+              <p>Você não possui nenhuma notificação</p>
+            </section>
+          </styled.CardNotifications>)}
+
+
+
+          {/* {user?.members_invites?.map( invite => (
+
+            <styled.CardNotifications>
+              <figure>
+                <img src={invite.image} alt="" />
+              </figure>
+              <div>
+                <div>
+                  <h2>{invite.name}</h2>
+                  <p>{invite.skill} Rock</p>
+                </div>
+                <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+              </div>
+            </styled.CardNotifications>
+          )
+        
+        )} */}
+        </styled.DivNotifications>
+        ) : 
+        (<p></p>)
+
+      }
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}
         musicians={musicians}
