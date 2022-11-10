@@ -52,7 +52,6 @@ export const DashboardMusician = () => {
           setLoadingPageBands(false);
         } catch (error) {
           console.error(error);
-          console.log("oi");
           navigate("/");
           clearStorage();
         }

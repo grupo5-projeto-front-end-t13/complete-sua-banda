@@ -32,7 +32,7 @@ export const DashboardBand = () => {
     openModalUpdateB,
     openModalNotification,
     setUpdateNotification,
-    clearStorage
+    clearStorage,
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
@@ -42,22 +42,21 @@ export const DashboardBand = () => {
 
   useEffect(() => {
     async function getMusicians() {
-      const token = localStorage.getItem("@token_CSB")
-      if(token){
-      try {
-        const { data } = await api.get<iRegisterMusician[]>(
-          "/users?type=musico&_embed=bands_invites"
-        );
-        setMusicians(data);
-        setLoadingPageMusician(false);
-      } catch (error) {
-        console.error(error);
-        console.log('oi')
-        clearStorage()
+      const token = localStorage.getItem("@token_CSB");
+      if (token) {
+        try {
+          const { data } = await api.get<iRegisterMusician[]>(
+            "/users?type=musico&_embed=bands_invites"
+          );
+          setMusicians(data);
+          setLoadingPageMusician(false);
+        } catch (error) {
+          console.error(error);
+          clearStorage();
+        }
+      } else {
+        navigate("/");
       }
-    }else{
-      navigate('/')
-    }
     }
     getMusicians();
   }, []);
@@ -140,7 +139,6 @@ export const DashboardBand = () => {
       console.error(error);
     }
   };
- 
 
   return (
     <div>
@@ -190,15 +188,10 @@ export const DashboardBand = () => {
           ></ModalCard>
         </Modal>
       )}
-      {
-        openModalNotification 
-        ? 
-        ( 
+      {openModalNotification ? (
         <styled.DivNotifications>
-                    {user?.members_invites?.length?
-           (
-            user?.members_invites?.map( (invite,index) => (
-
+          {user?.members_invites?.length ? (
+            user?.members_invites?.map((invite, index) => (
               <styled.CardNotifications key={index}>
                 <figure>
                   <img src={invite.image} alt="" />
@@ -208,26 +201,32 @@ export const DashboardBand = () => {
                     <h2>{invite.name}</h2>
                     <p>{invite.skill}</p>
                     <p>{invite.social_media}</p>
-                    
                   </div>
-                  <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
+                  <button
+                    onClick={async () =>
+                      await DeclineAnInvitationMusician(
+                        invite.id,
+                        setUpdateNotification
+                      )
+                    }
+                  >
+                    <AiOutlineCloseCircle />
+                  </button>
                 </div>
               </styled.CardNotifications>
-            )
-          
-          ))
-           : 
-           (<styled.CardNotifications>
-            <section>
-              <BiNotificationOff/>
-              <p>Você não possui nenhuma notificação</p>
-            </section>
-          </styled.CardNotifications>)}
+            ))
+          ) : (
+            <styled.CardNotifications>
+              <section>
+                <BiNotificationOff />
+                <p>Você não possui nenhuma notificação</p>
+              </section>
+            </styled.CardNotifications>
+          )}
         </styled.DivNotifications>
-        ) : 
-        (<p></p>)
-
-      }
+      ) : (
+        <p></p>
+      )}
       <NavDashBoard
         image={user?.image ? user?.image : imgDefault}
         musicians={musicians}
