@@ -7,6 +7,7 @@ import { RegisterMusician } from "../pages/RegisterMusician";
 import { DashboardBand } from "../pages/DashboardBand";
 import { DashboardMusician } from "../pages/DashboardMusician";
 import { ProtectedRoutes } from "../components/ProtectedRoutes";
+import { NotFound } from "../pages/NotFound";
 
 export const AllRoutes = () => {
   return (
@@ -20,7 +21,7 @@ export const AllRoutes = () => {
           <Route path="/dashboardBand" element={<DashboardBand />} />
           <Route path="/dashboardMusician" element={<DashboardMusician />} />
         </Route>
-        <Route path="*" element={<Navigate to={"/"} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
