@@ -18,7 +18,7 @@ export const ContainerUl = styled.ul`
     margin: 0 auto;
     padding: 5.5rem 0 5rem 0;
 
-    @media (min-width: 768px) {
+    @media (min-width: 996px) {
       justify-content: initial;
       padding: 6rem 0 1.5rem 0;
       gap: 2rem 5rem;
@@ -57,7 +57,9 @@ export const DivNotifications = styled.div`
   min-height: 80px;
   max-height: 500px;
 
-  background-color: var(--color-grey-4);
+  border-radius: 4px;
+  border: 1px solid var(--color-brand);
+  background-color: var(--color-grey-5);
 
   display: flex;
   flex-direction: column;

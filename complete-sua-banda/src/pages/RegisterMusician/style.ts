@@ -71,12 +71,4 @@ export const DivMainContainer = styled.div`
     color: var(--color-brand);
     font-size: var(--text-size-2);
   }
-  button {
-    color: var(--color-grey-1);
-    background: var(--color-brand);
-    border: none;
-    border-radius: 4px;
-    width: 240px;
-    height: 30px;
-  }
 `;
