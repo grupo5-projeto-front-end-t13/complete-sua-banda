@@ -46,7 +46,7 @@ export const ContainerUlMusician = styled.ul`
 `;
 
 export const DivNotifications = styled.div`
-  width: 320px ;
+  width: 316px ;
   min-height: 80px;
   max-height: 500px;
   
@@ -62,8 +62,8 @@ export const DivNotifications = styled.div`
   right: 72px;
 
   @media(width < 768px){
-    bottom: 106px;
-    right: 26px;
+    bottom: 74px;
+    right: 2px;
     top: unset;
   }
 `
@@ -110,6 +110,7 @@ export const CardNotifications = styled.li`
       background: transparent;
       border: none;
       color: white;
+      cursor: pointer;
     }
 
     svg{
