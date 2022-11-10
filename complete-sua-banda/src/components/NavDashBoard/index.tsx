@@ -14,6 +14,7 @@ import {
 import { FiBell } from "react-icons/fi";
 import { VscBellDot } from "react-icons/vsc";
 import { BsHouseDoor } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 interface iNavDashBoard {
   children: ReactNode;
@@ -51,8 +52,9 @@ export const NavDashBoard = ({
     if (user?.type === "musico") {
       const searched = filtredCards?.filter((band) => {
         return (
-          band.name.toLowerCase().trim().includes(inputText) ||
-          band.genre?.toLowerCase().trim().includes(inputText)
+          band.name.toLowerCase().trim().includes(inputText.toLowerCase()) ||
+          band.genre?.toLowerCase().trim().includes(inputText.toLowerCase()) ||
+          band.requirement?.toLowerCase().trim().includes(inputText.toLowerCase())
         );
       });
 
@@ -61,7 +63,7 @@ export const NavDashBoard = ({
       const searched = filtredCardsM?.filter(
         (musician) =>
           musician.name.toLowerCase().includes(inputText.toLowerCase()) ||
-          musician.skill?.toLowerCase().includes(inputText.toLowerCase())
+          musician.skill?.toLowerCase().includes(inputText.toLowerCase()) 
       );
       setFilteredMusicians(searched);
     }

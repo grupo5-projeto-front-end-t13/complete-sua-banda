@@ -31,7 +31,8 @@ export const DashboardBand = () => {
     setFilteredMusicians,
     openModalUpdateB,
     openModalNotification,
-    setUpdateNotification
+    setUpdateNotification,
+    clearStorage
   } = useGlobalContext();
   const [musicians, setMusicians] = useState([] as iRegisterMusician[]);
   const [cardMusician, setCardMusicians] = useState<any>(null);
@@ -41,6 +42,8 @@ export const DashboardBand = () => {
 
   useEffect(() => {
     async function getMusicians() {
+      const token = localStorage.getItem("@token_CSB")
+      if(token){
       try {
         const { data } = await api.get<iRegisterMusician[]>(
           "/users?type=musico&_embed=bands_invites"
@@ -49,7 +52,12 @@ export const DashboardBand = () => {
         setLoadingPageMusician(false);
       } catch (error) {
         console.error(error);
+        console.log('oi')
+        clearStorage()
       }
+    }else{
+      navigate('/')
+    }
     }
     getMusicians();
   }, []);
@@ -198,7 +206,9 @@ export const DashboardBand = () => {
                 <div>
                   <div>
                     <h2>{invite.name}</h2>
-                    <p>{invite.skill} Rock</p>
+                    <p>{invite.skill}</p>
+                    <p>{invite.social_media}</p>
+                    
                   </div>
                   <button onClick={async () => await DeclineAnInvitationMusician(invite.id,setUpdateNotification) }><AiOutlineCloseCircle/></button>
                 </div>

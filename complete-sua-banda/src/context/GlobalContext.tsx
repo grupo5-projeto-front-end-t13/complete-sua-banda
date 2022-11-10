@@ -181,8 +181,7 @@ export const GlobalProvider = ({ children }: iGlobalContextProps) => {
   };
 
   const clearStorage = () => {
-    localStorage.removeItem("@id_CSB");
-    localStorage.removeItem("@token_CSB");
+    localStorage.clear()
     setUser(null);
   };
 

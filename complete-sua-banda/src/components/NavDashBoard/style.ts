@@ -10,6 +10,7 @@ export const Nav = styled.nav`
   align-items: center;
   padding: 10px 5%;
   position: fixed;
+  border-bottom: 1px solid var(--color-brand);
 
   @media (min-width: 768px) {
     flex-direction: row-reverse;
@@ -85,6 +86,7 @@ export const NavFooter = styled.nav`
   position: fixed;
   background-color: var(--color-grey-4);
   color: var(--color-brand);
+  border-top: 1px solid var(--color-brand);
 
   img {
     width: 60px;
