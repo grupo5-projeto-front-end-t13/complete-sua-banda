@@ -108,5 +108,5 @@ export const Button = styled.button`
   color: var(--color-brand);
   border: none;
   
- 
+  cursor: pointer;
 `
